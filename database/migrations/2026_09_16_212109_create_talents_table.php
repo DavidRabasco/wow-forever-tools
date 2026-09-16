@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('talents', function (Blueprint $table) {
             $table->id();
-            $table->tree_id()->foreign('talent_trees');
-            $table->row(1, 2, 3, 4, 5, 6, 7);
-            $table->col(1, 2, 3, 4);
-            $table->name();
-            $table->max_rank()->default(5);
-            $table->is_gold()->default(false);
-            $table->requires_talent_id()->nullable()->foreign('talents');
-            $table->status('unchanged', 'new', 'changed', 'removed', 'now_baseline', 'moved');
-            $table->description();
-            $table->icon();
+            $table->foreignId('tree_id')->constrained('talent_trees')->cascadeOnDelete();
+            $table->integer('row');
+            $table->integer('col');
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->integer('max_rank')->default(5);
+            $table->boolean('is_gold')->default(false);
+            $table->foreignId('requires_talent_id')->nullable()->constrained('talents')->nullOnDelete();
+            $table->enum('status', ['unchanged', 'new', 'changed', 'removed', 'now_baseline', 'moved']);
+            $table->text('description')->nullable();
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }

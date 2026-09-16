@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('talent_trees', function (Blueprint $table) {
             $table->id();
-            $table->class_id()->foreign('classes');
-            $table->slug('holy', 'protection', 'retribution');
-            $table->name('Sagrado', 'Protección', 'Reprensión');
+            $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete();
+            $table->string('slug');
+            $table->string('name');
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }

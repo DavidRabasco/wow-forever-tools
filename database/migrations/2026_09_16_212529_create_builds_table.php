@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('builds', function (Blueprint $table) {
             $table->id();
+            $table->string('hash', 6)->unique();
+            $table->string('class_slug');
+            $table->json('data');
+            $table->string('version')->default('0.1');
             $table->timestamps();
         });
     }

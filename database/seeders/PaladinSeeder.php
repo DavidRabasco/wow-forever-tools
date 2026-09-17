@@ -38,19 +38,19 @@ class PaladinSeeder extends Seeder
         //3. Talentos de ejemplo (ahora solo Holy)
         $talents = [
             [
-                'tree_id' => $holyId, 'row' => 3, 'col' => 2,
+                'tree_id' => $holyId, 'row' => 1, 'col' => 1,
                 'slug' => 'bendicion-reyes', 'name' => 'Bendición de Reyes',
                 'max_rank' => 1, 'is_gold' => false, 'requires_talent_id' => null,
                 'status' => 'now_baseline', 'description' => 'Antes talento, ahora base en Forever.', 'icon' => null,
             ],
             [
-                'tree_id' => $holyId, 'row' => 4, 'col' => 2,
+                'tree_id' => $holyId, 'row' => 1, 'col' => 2,
                 'slug' => 'juicio-luz-16', 'name' => 'Juicio de Luz (16)',
                 'max_rank' => 1, 'is_gold' => true, 'requires_talent_id' => null,
                 'status' => 'new', 'description' => 'Nuevo dorado de 16 puntos.', 'icon' => null,
             ],
             [
-                'tree_id' => $holyId, 'row' => 5, 'col' => 1,
+                'tree_id' => $holyId, 'row' => 2, 'col' => 2,
                 'slug' => 'sello-verdad', 'name' => 'Sello de la Verdad',
                 'max_rank' => 5, 'is_gold' => false, 'requires_talent_id' => null,
                 'status' => 'moved', 'description' => 'Movido de fila sin cambios.', 'icon' => null,

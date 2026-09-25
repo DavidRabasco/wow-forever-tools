@@ -14,6 +14,9 @@
 //     cuando haya multi-arbol, totalPoints = suma de los 3 arboles.
 //  5. Quitar puntos (click derecho): no se puede si rompe la puerta de fila de
 //     otro talento con puntos, ni si un dependiente sigue con puntos.
+//  6. Visual estilo WoW: al maximo = borde dorado; disponible = color normal;
+//     bloqueado (sin puerta de fila, sin prerequisito o tope 51) = gris
+//     (icono en escala de grises + apagado). Se repinta en cada click.
 //
 // Controles: click izquierdo suma, click derecho resta (con menu bloqueado).
 // Iconos (c) Blizzard, uso educativo: en DB solo 'spell_holy_x', aqui se monta
@@ -120,6 +123,39 @@ fetch('/api/paladin')
         return true;
     }
 
+    // Mapa slug -> celda DOM, para repintar estados sin reconstruir el grid.
+    const cells = {};
+
+    // Pinta cada talento segun su estado, como en el WoW original:
+    //  - al maximo (state == max_rank): borde dorado, icono a todo color.
+    //  - disponible (canSpend): icono a todo color, cursor de click.
+    //  - bloqueado (falta puerta de fila, falta prerequisito o tope 51): gris,
+    //    icono en escala de grises + apagado, texto atenuado, cursor bloqueado.
+    // Se llama al inicio y despues de cada click, porque gastar/quitar puntos
+    // en un talento puede bloquear o desbloquear a los demas (puertas de fila).
+    function updateVisuals(){
+        for(const talent of tree.talents){
+            const cell = cells[talent.slug];
+            if(!cell) continue; // seguridad: si falta la celda, no romper el resto
+            const icon = cell.querySelector('img');
+            const label = cell.querySelector('span');
+            const maxed = state[talent.slug] >= talent.max_rank;
+            const available = canSpend(talent, tree);
+            const blocked = !maxed && !available;
+            // Borde dorado al completar (los is_gold llevan outline propio por tipo; no se toca).
+            cell.style.borderColor = maxed ? '#facc15' : '';
+            cell.style.cursor = available ? 'pointer' : (maxed ? 'default' : 'not-allowed');
+            // Icono gris + apagado solo si bloqueado; a todo color si disponible o al maximo.
+            if(icon) icon.style.filter = blocked ? 'grayscale(100%)' : '';
+            if(icon) icon.style.opacity = blocked ? '0.35' : '';
+            // Celda y texto atenuados si bloqueado y aun sin puntos (si ya tiene puntos
+            // pero el tope 51 lo bloquea, se queda legible para poder quitarle).
+            const dimmed = blocked && state[talent.slug] === 0;
+            cell.style.opacity = dimmed ? '0.55' : '';
+            if(label) label.style.opacity = dimmed ? '0.6' : '';
+        }
+    }
+
     // 7x4 = 28 celdas (algunas vacias: Holy real tiene 17 talentos)
     for(let r=1; r<=7; r++){
     for(let c=1; c<=4; c++){
@@ -161,17 +197,20 @@ fetch('/api/paladin')
         };
         cell.onclick = () => { // Click izquierdo para gastar puntos
             if(canSpend(talent, tree)){ state[talent.slug]++; refreshLabel();
-            updateCounter();}
+            updateCounter(); updateVisuals();} // repinta: puede desbloquear filas o llegar al tope 51
         };
         cell.oncontextmenu = (event) => { // Click derecho para quitar puntos
             event.preventDefault();
             if(canRemove(talent, tree)){ state[talent.slug]--; refreshLabel();
-            updateCounter(); }
+            updateCounter(); updateVisuals(); } // repinta: puede volver a bloquear filas superiores
         };
         }
+        if(talent) cells[talent.slug] = cell; // Guarda la celda para repintar su estado en updateVisuals()
         grid.appendChild(cell);
     }
     }
+    // Estado inicial: con 0 puntos solo la fila 1 esta disponible; el resto sale en gris.
+    updateVisuals();
 })
 // Captura cualquier fallo (red, API 500, JSON sin trees) y lo muestra en pantalla.
 // Sin este catch el error seria "Cannot read properties of undefined (reading '0')"

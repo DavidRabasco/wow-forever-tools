@@ -2,25 +2,39 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+// Semilla de Paladin para la calculadora WoW Forever.
+// --------------------------------------------------
+// Que hace:
+//  1. Crea la clase 'paladin' y sus 3 arboles (holy/protection/retribution).
+//  2. Carga los talentos REALES de Holy desde database/data/paladin_holy.json
+//     (scrapeado de wowtbc.gg page-data.json, formato classic 7x4).
+//  3. Resuelve prerequisitos en 2 pasadas: primero inserta sin requires_talent_id,
+//     despues actualiza con el id del slug requerido (requires_slug -> id).
+//
+// Como actualizar datos:
+//  - Edita database/data/paladin_holy.json (row 1-7, col 1-4, slug unico sin tildes).
+//  - Ejecuta: php artisan db:seed --class=Database\\Seeders\\PaladinSeeder
+//  - El seeder es idempotente (updateOrInsert por slug), no duplica.
+//
+// Fuente y licencia:
+//  - Datos (c) wowtbc.gg / Blizzard, uso educativo.
+//  - Iconos (c) Blizzard: en DB solo nombre corto para wow.zamimg.com, nunca binarios.
 class PaladinSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //1. Clase
-        $classId = DB::table('classes')->updateOrInsert(
+        // 1. Clase Paladin (updateOrInsert = si existe actualiza nombre, si no crea).
+        DB::table('classes')->updateOrInsert(
             ['slug' => 'paladin'],
             ['name' => 'Paladín', 'created_at' => now(), 'updated_at' => now()]
         );
         $classId = DB::table('classes')->where('slug', 'paladin')->value('id');
 
-        //2. Árboles de talentos
+        // 2. Los 3 arboles existen aunque solo Holy tenga talentos reales de momento.
+        //    'order' define el orden en la API (1=Holy primero).
         $trees = [
             ['slug' => 'holy', 'name' => 'Sagrado', 'order' => 1],
             ['slug' => 'protection', 'name' => 'Protección', 'order' => 2],
@@ -32,49 +46,55 @@ class PaladinSeeder extends Seeder
                 ['class_id' => $classId, 'name' => $tree['name'], 'order' => $tree['order'], 'created_at' => now(), 'updated_at' => now()]
             );
         }
-
         $holyId = DB::table('talent_trees')->where('slug', 'holy')->value('id');
 
-        //3. Talentos de ejemplo (ahora solo Holy)
-        $talents = [
-            [
-                'tree_id' => $holyId, 'row' => 1, 'col' => 1,
-                'slug' => 'bendicion-reyes', 'name' => 'Bendición de Reyes',
-                'max_rank' => 1, 'is_gold' => false, 'requires_talent_id' => null,
-                'status' => 'now_baseline', 'description' => 'Antes talento, ahora base en Forever.', 'icon' => null,
-            ],
-            [
-                'tree_id' => $holyId, 'row' => 1, 'col' => 2,
-                'slug' => 'juicio-luz-16', 'name' => 'Juicio de Luz (16)',
-                'max_rank' => 1, 'is_gold' => true, 'requires_talent_id' => null,
-                'status' => 'new', 'description' => 'Nuevo dorado de 16 puntos.', 'icon' => null,
-            ],
-            [
-                'tree_id' => $holyId, 'row' => 2, 'col' => 2,
-                'slug' => 'sello-verdad', 'name' => 'Sello de la Verdad',
-                'max_rank' => 5, 'is_gold' => false, 'requires_talent_id' => null,
-                'status' => 'moved', 'description' => 'Movido de fila sin cambios.', 'icon' => null,
-            ],
-        ];
+        // 3. Lee el JSON con los 17 talentos reales de Holy.
+        //    base_path() apunta a la raiz del proyecto Laravel.
+        $jsonPath = base_path('database/data/paladin_holy.json');
+        $raw = json_decode(file_get_contents($jsonPath), true);
+        $talents = $raw['talents'] ?? [];
 
-         foreach ($talents as $tal) {
+        // Pasada 1: inserta todos sin prerequisito (requires_talent_id=null).
+        // No podemos poner el FK aun porque el talento requerido quiza no existe todavia.
+        foreach ($talents as $tal) {
             DB::table('talents')->updateOrInsert(
                 ['slug' => $tal['slug']],
-                $tal + ['created_at' => now(), 'updated_at' => now()]
+                [
+                    'tree_id' => $holyId,
+                    'row' => $tal['row'],
+                    'col' => $tal['col'],
+                    'name' => $tal['name'],
+                    'max_rank' => $tal['max_rank'],
+                    'is_gold' => $tal['is_gold'],
+                    'requires_talent_id' => null,
+                    'status' => $tal['status'],
+                    'description' => $tal['description'],
+                    'icon' => $tal['icon'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
             );
         }
 
-        //4. Talento que requiere otro talento
-        $reqId = DB::table('talents')->where('slug', 'sello-verdad')->value('id');
-        DB::table('talents')->updateOrInsert(
-            ['slug' => 'veredicto-final'],
-            [
-                'tree_id' => $holyId, 'row' => 6, 'col' => 1,
-                'name' => 'Veredicto Final', 'max_rank' => 1, 'is_gold' => false,
-                'requires_talent_id' => $reqId, 'status' => 'unchanged',
-                'description' => 'Requiere Sello de la Verdad.', 'icon' => null,
-                'created_at' => now(), 'updated_at' => now(),
-            ]
-        );
+        // Pasada 2: resuelve requires_slug -> requires_talent_id.
+        // Ejemplo: illumination.requires_slug=reverence => busca id de reverence y lo guarda.
+        foreach ($talents as $tal) {
+            if (empty($tal['requires_slug'])) {
+                continue;
+            }
+            $reqId = DB::table('talents')->where('slug', $tal['requires_slug'])->value('id');
+            DB::table('talents')->where('slug', $tal['slug'])->update([
+                'requires_talent_id' => $reqId,
+                'updated_at' => now(),
+            ]);
+        }
+
+        // Limpieza: borra los 4 talentos de prueba del seeder antiguo si quedaron.
+        // (bendicion-reyes, juicio-luz-16, sello-verdad, veredicto-final ya no existen en el JSON).
+        $slugsReales = collect($talents)->pluck('slug')->all();
+        DB::table('talents')
+            ->where('tree_id', $holyId)
+            ->whereNotIn('slug', $slugsReales)
+            ->delete();
     }
 }

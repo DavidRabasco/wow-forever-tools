@@ -1,0 +1,41 @@
+{
+  "_guia": "Rellena un objeto por talento real de Sagrado visto en Wowhead Forever. Borra los ejemplos. Campos: row 1-7, col 1-4, slug unico sin tildes, max_rank real, is_gold true solo en 11/21/31/16, requires_slug (slug del requisito o null), status: unchanged|new|changed|removed|now_baseline|moved, icon: nombre corto wow.zamimg sin URL o null",
+  "_ejemplo_no_borrar_estructura": {
+    "row": 1,
+    "col": 1,
+    "slug": "ejemplo-fuerza-sagrada",
+    "name": "Fuerza Sagrada",
+    "max_rank": 5,
+    "is_gold": false,
+    "requires_slug": null,
+    "status": "unchanged",
+    "description": "Aumenta el daño sagrado.",
+    "icon": null
+  },
+  "talents": [
+    {
+      "row": 1,
+      "col": 1,
+      "slug": "RELLENAR-1",
+      "name": "Nombre en Wowhead",
+      "max_rank": 5,
+      "is_gold": false,
+      "requires_slug": null,
+      "status": "unchanged",
+      "description": "",
+      "icon": null
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "slug": "RELLENAR-2",
+      "name": "",
+      "max_rank": 5,
+      "is_gold": false,
+      "requires_slug": null,
+      "status": "unchanged",
+      "description": "",
+      "icon": null
+    }
+  ]
+}

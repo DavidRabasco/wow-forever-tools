@@ -3,19 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\WowClass;
 
 class PaladinController extends Controller
 {
+    // Legacy alias kept for bookmarks: GET /api/paladin.
+    // New code uses GET /api/classes/{slug}.
     public function show()
     {
-        // Load the Paladin class with its talent trees and talents, ordered.
-        $class = WowClass::where('slug', 'paladin')
-            ->with(['trees' => fn($q) => $q->orderBy('order'),
-                    'trees.talents' => fn($q) => $q->orderBy('row')->orderBy('col')])
-            ->firstOrFail();
-
-        return response()->json($class);
+        return app(WowClassController::class)->show('paladin');
     }
 }

@@ -1,0 +1,343 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/warrior/page-data.json (talentData, Fury tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "booming-voice",
+            "name": "Booming Voice",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 10%.",
+            "ranks": [
+                "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 10%.",
+                "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 20%.",
+                "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 30%.",
+                "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 40%.",
+                "Increases the radius of your Battle Shout and Demoralizing Shout abilities by 50%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_purge"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "cruelty",
+            "name": "Cruelty",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Improves your chance to get a critical strike with melee attacks by 1%.",
+            "ranks": [
+                "Improves your chance to get a critical strike with melee attacks by 1%.",
+                "Improves your chance to get a critical strike with melee attacks by 2%.",
+                "Improves your chance to get a critical strike with melee attacks by 3%.",
+                "Improves your chance to get a critical strike with melee attacks by 4%.",
+                "Improves your chance to get a critical strike with melee attacks by 5%."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_eviscerate"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "iron-will",
+            "name": "Iron Will",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the duration of Stun and Fear effects inflicted on you by 3%.",
+            "ranks": [
+                "Reduces the duration of Stun and Fear effects inflicted on you by 3%.",
+                "Reduces the duration of Stun and Fear effects inflicted on you by 6%.",
+                "Reduces the duration of Stun and Fear effects inflicted on you by 9%.",
+                "Reduces the duration of Stun and Fear effects inflicted on you by 12%.",
+                "Reduces the duration of Stun and Fear effects inflicted on you by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_magic_magearmor"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "unbridled-wrath",
+            "name": "Unbridled Wrath",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 12% chance to generate 1 additional Rage when you deal melee damage with a weapon. This effect is increased to 2 Rage for two-handed weapons.",
+            "ranks": [
+                "Gives you a 12% chance to generate 1 additional Rage when you deal melee damage with a weapon. This effect is increased to 2 Rage for two-handed weapons.",
+                "Gives you a 24% chance to generate 1 additional Rage when you deal melee damage with a weapon. This effect is increased to 2 Rage for two-handed weapons.",
+                "Gives you a 36% chance to generate 1 additional Rage when you deal melee damage with a weapon. This effect is increased to 2 Rage for two-handed weapons.",
+                "Gives you a 48% chance to generate 1 additional Rage when you deal melee damage with a weapon. This effect is increased to 2 Rage for two-handed weapons.",
+                "Gives you a 60% chance to generate 1 additional Rage when you deal melee damage with a weapon. This effect is increased to 2 Rage for two-handed weapons."
+            ],
+            "skill": null,
+            "icon": "spell_nature_stoneclawtotem"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "improved-cleave",
+            "name": "Improved Cleave",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Rage cost of your Cleave ability by 1.",
+            "ranks": [
+                "Reduces the Rage cost of your Cleave ability by 1.",
+                "Reduces the Rage cost of your Cleave ability by 2.",
+                "Reduces the Rage cost of your Cleave ability by 3."
+            ],
+            "skill": null,
+            "icon": "ability_warrior_cleave"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "piercing-howl",
+            "name": "Piercing Howl",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Causes all nearby enemies to be Dazed, reducing movement speed by 50% for 6 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "10 Rage",
+                "type": "Instant",
+                "description": "Causes all nearby enemies to be Dazed, reducing movement speed by 50% for 6 sec."
+            },
+            "icon": "spell_shadow_deathscream"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "blood-craze",
+            "name": "Blood Craze",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Regenerates 1% of your total Health over 6 sec after being the victim of a critical strike, dealing damage with Bloodthirst, or suffering more than 20% of your Maximum Health from a single attack.",
+            "ranks": [
+                "Regenerates 1% of your total Health over 6 sec after being the victim of a critical strike, dealing damage with Bloodthirst, or suffering more than 20% of your Maximum Health from a single attack.",
+                "Regenerates 2% of your total Health over 6 sec after being the victim of a critical strike, dealing damage with Bloodthirst, or suffering more than 20% of your Maximum Health from a single attack.",
+                "Regenerates 3% of your total Health over 6 sec after being the victim of a critical strike, dealing damage with Bloodthirst, or suffering more than 20% of your Maximum Health from a single attack."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_summonimp"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "boundless-rage",
+            "name": "Boundless Rage",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your maximum Rage by 10.",
+            "ranks": [
+                "Increases your maximum Rage by 10.",
+                "Increases your maximum Rage by 20.",
+                "Increases your maximum Rage by 30."
+            ],
+            "skill": null,
+            "icon": "ability_warrior_intensifyrage"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "dual-wield-specialization",
+            "name": "Dual Wield Specialization",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your off-hand weapon damage by 5%, off-hand Rage generation by 20%, and chance to hit with off-hand attacks by 2%.",
+            "ranks": [
+                "Increases your off-hand weapon damage by 5%, off-hand Rage generation by 20%, and chance to hit with off-hand attacks by 2%.",
+                "Increases your off-hand weapon damage by 10%, off-hand Rage generation by 40%, and chance to hit with off-hand attacks by 4%.",
+                "Increases your off-hand weapon damage by 15%, off-hand Rage generation by 60%, and chance to hit with off-hand attacks by 6%.",
+                "Increases your off-hand weapon damage by 20%, off-hand Rage generation by 80%, and chance to hit with off-hand attacks by 8%.",
+                "Increases your off-hand weapon damage by 25%, off-hand Rage generation by 100%, and chance to hit with off-hand attacks by 10%."
+            ],
+            "skill": null,
+            "icon": "ability_dualwield"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "raging-blows",
+            "name": "Raging Blows",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Causes your Whirlwind to also strike with your off-hand weapon, and reduces the Rage cost of your Cleave ability by 2.",
+            "ranks": [
+                "Causes your Whirlwind to also strike with your off-hand weapon, and reduces the Rage cost of your Cleave ability by 2."
+            ],
+            "skill": null,
+            "icon": "ability_whirlwind"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "enrage",
+            "name": "Enrage",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 30% chance to deal 2% increased Physical damage for 12 sec after being the victim of any damaging attack.",
+            "ranks": [
+                "Gives you a 30% chance to deal 2% increased Physical damage for 12 sec after being the victim of any damaging attack.",
+                "Gives you a 30% chance to deal 4% increased Physical damage for 12 sec after being the victim of any damaging attack.",
+                "Gives you a 30% chance to deal 6% increased Physical damage for 12 sec after being the victim of any damaging attack.",
+                "Gives you a 30% chance to deal 8% increased Physical damage for 12 sec after being the victim of any damaging attack.",
+                "Gives you a 30% chance to deal 10% increased Physical damage for 12 sec after being the victim of any damaging attack."
+            ],
+            "skill": null,
+            "icon": "ability_druid_enrage"
+        },
+        {
+            "row": 4,
+            "col": 4,
+            "slug": "improved-execute",
+            "name": "Improved Execute",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Rage cost of your Execute ability by 3.",
+            "ranks": [
+                "Reduces the Rage cost of your Execute ability by 3.",
+                "Reduces the Rage cost of your Execute ability by 5."
+            ],
+            "skill": null,
+            "icon": "inv_sword_48"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "precision",
+            "name": "Precision",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Improves your chance to hit by 1%.",
+            "ranks": [
+                "Improves your chance to hit by 1%.",
+                "Improves your chance to hit by 2%.",
+                "Improves your chance to hit by 3%."
+            ],
+            "skill": null,
+            "icon": "ability_marksmanship"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "death-wish",
+            "name": "Death Wish",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "When activated, increases your Physical damage done by 20% and makes you immune to Fear effects, but increases all damage you take by 5%. Lasts 30 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "10 Rage",
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "When activated, increases your Physical damage done by 20% and makes you immune to Fear effects, but increases all damage you take by 5%. Lasts 30 sec."
+            },
+            "icon": "spell_shadow_deathpact"
+        },
+        {
+            "row": 5,
+            "col": 4,
+            "slug": "improved-intercept",
+            "name": "Improved Intercept",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Intercept ability by 5 sec.",
+            "ranks": [
+                "Reduces the cooldown of your Intercept ability by 5 sec.",
+                "Reduces the cooldown of your Intercept ability by 10 sec."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_sprint"
+        },
+        {
+            "row": 6,
+            "col": 1,
+            "slug": "improved-berserker-rage",
+            "name": "Improved Berserker Rage",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Berserker Rage ability will instantly generate 5 Rage and has a 50% chance to remove all movement impairing effects when activated.",
+            "ranks": [
+                "Your Berserker Rage ability will instantly generate 5 Rage and has a 50% chance to remove all movement impairing effects when activated.",
+                "Your Berserker Rage ability will instantly generate 10 Rage and has a 100% chance to remove all movement impairing effects when activated."
+            ],
+            "skill": null,
+            "icon": "spell_nature_ancestralguardian"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "flurry",
+            "name": "Flurry",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "enrage",
+            "status": "unchanged",
+            "description": "Increases your attack speed by 5% for your next 3 swings after dealing a melee critical strike.",
+            "ranks": [
+                "Increases your attack speed by 5% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your attack speed by 10% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your attack speed by 15% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your attack speed by 20% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your attack speed by 25% for your next 3 swings after dealing a melee critical strike."
+            ],
+            "skill": null,
+            "icon": "ability_ghoulfrenzy"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "bloodthirst",
+            "name": "Bloodthirst",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "death-wish",
+            "status": "unchanged",
+            "description": "Instantly attack the target causing damage equal to 35% of your Attack Power plus 30 and increasing your movement speed by 10% for 10 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "30 Rage",
+                "range": "Melee",
+                "type": "Instant",
+                "cd": "6 sec",
+                "description": "Instantly attack the target causing damage equal to 35% of your Attack Power plus 30 and increasing your movement speed by 10% for 10 sec."
+            },
+            "icon": "spell_nature_bloodlust"
+        }
+    ]
+}

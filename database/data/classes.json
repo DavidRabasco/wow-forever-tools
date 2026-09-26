@@ -1,0 +1,57 @@
+{
+    "_notes": "Class manifest: every playable class with its trees and data files. The seeder (ForeverClassSeeder) loads everything from here; adding a class = its JSON files + one entry.",
+    "classes": {
+        "paladin": {
+            "name": "Paladin",
+            "trees": {
+                "holy": {
+                    "name": "Holy",
+                    "order": 1,
+                    "file": "paladin_holy.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/holy_paladin.jpg",
+                    "spec_icon": "spell_holy_holybolt"
+                },
+                "protection": {
+                    "name": "Protection",
+                    "order": 2,
+                    "file": "paladin_protection.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/protection_paladin.jpg",
+                    "spec_icon": "ability_paladin_shieldofthetemplar"
+                },
+                "retribution": {
+                    "name": "Retribution",
+                    "order": 3,
+                    "file": "paladin_retribution.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/retribution_paladin.jpg",
+                    "spec_icon": "spell_holy_auraoflight"
+                }
+            }
+        },
+        "warrior": {
+            "name": "Warrior",
+            "trees": {
+                "arms": {
+                    "name": "Arms",
+                    "order": 1,
+                    "file": "warrior_arms.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/arms_warrior.jpg",
+                    "spec_icon": "ability_warrior_savageblow"
+                },
+                "fury": {
+                    "name": "Fury",
+                    "order": 2,
+                    "file": "warrior_fury.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/fury_warrior.jpg",
+                    "spec_icon": "ability_warrior_innerrage"
+                },
+                "protection": {
+                    "name": "Protection",
+                    "order": 3,
+                    "file": "warrior_protection.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/protection_warrior.jpg",
+                    "spec_icon": "ability_warrior_defensivestance"
+                }
+            }
+        }
+    }
+}

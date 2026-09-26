@@ -1,6 +1,8 @@
-// Paladin calculator - WoW Forever (level 60 = 51 points shared by 3 trees).
+// Talent calculator - WoW Forever (level 60 = 51 points shared by 3 trees).
 // ---------------------------------------------------------------------------
-// Data source: GET /api/paladin -> { trees: [holy, protection, retribution] }.
+// Generic for every class: the endpoint comes from #trees data-api
+// (e.g. /api/classes/warrior), set by the backend view per page.
+// Data source: GET {api} -> { trees: [t1, t2, t3] }.
 // Each talent comes from the DB with: id, slug, name, row (1-7), col (1-4),
 // max_rank, requires_talent_id (FK or null), is_gold, status, description,
 // icon (short name or null).
@@ -29,11 +31,14 @@
 // artwork URL dies, the dark panel base still shows.
 // Icons (c) Blizzard, educational use: the DB stores only 'spell_holy_x', the
 // wow.zamimg.com URL is built here. Missing/broken icons fall back to text.
-fetch('/api/paladin')
+// The API URL travels in #trees data-api so this file serves every class.
+const apiMount = document.getElementById('trees');
+const API_URL = apiMount?.dataset.api || '/api/classes/paladin';
+fetch(API_URL)
 // If the API fails (500, 404, network down), response.ok is false: show the
 // error in #trees instead of crashing with "Cannot read properties of undefined".
 .then(response => {
-    if(!response.ok) throw new Error(`API /api/paladin returned ${response.status}`);
+    if(!response.ok) throw new Error(`API ${API_URL} returned ${response.status}`);
     return response.json();
 })
 .then(data => {
@@ -478,8 +483,27 @@ fetch('/api/paladin')
         // White name + current rank.
         let html = `<div style="color:#fff;font-weight:bold;font-size:14px">${talent.name}</div>`;
         html += `<div style="color:#fff">Rank ${pts}/${talent.max_rank}</div>`;
-        // Yellow description (the DB holds a summary of all ranks).
-        if(talent.description) html += `<div style="color:#ffd100;margin-top:4px">${talent.description}</div>`;
+        // Body in yellow: verbatim per-rank texts when imported (ranks[]),
+        // otherwise the hand-written summary (Paladin rows predate ranks).
+        const ranks = Array.isArray(talent.ranks) && talent.ranks.length ? talent.ranks : null;
+        // Active-ability meta (cost · type · cooldown · range) in gray.
+        if(talent.skill){
+            const range = talent.skill.range;
+            const meta = [talent.skill.cost, talent.skill.type,
+                talent.skill.cd ? `${talent.skill.cd} cooldown` : null,
+                range ? (typeof range === 'number' ? `${range} yd range` : range) : null,
+            ].filter(Boolean).join(' · ');
+            if(meta) html += `<div style="color:#9d9d9d">${meta}</div>`;
+        }
+        if(ranks){
+            const current = ranks[Math.min(pts, ranks.length - 1)];
+            if(current) html += `<div style="color:#ffd100;margin-top:4px">${current}</div>`;
+            // Next-rank preview while skilling, as on Wowhead.
+            if(pts > 0 && pts < talent.max_rank && ranks[pts])
+                html += `<div style="color:#fff;margin-top:4px">Next Rank:</div><div style="color:#ffd100">${ranks[pts]}</div>`;
+        } else if(talent.description){
+            html += `<div style="color:#ffd100;margin-top:4px">${talent.description}</div>`;
+        }
         // Red requirements: strict row gate (rows above only) and unmaxed parent.
         const missing = [];
         const needPts = rowRequirement(talent);
@@ -543,5 +567,5 @@ fetch('/api/paladin')
 .catch(error => {
     const div = document.getElementById('trees');
     if(div) div.innerHTML = `<p class="text-red-400">Error loading talents: ${error.message}</p>`;
-    console.error('[paladin] failed loading /api/paladin:', error);
+    console.error(`[calculator] failed loading ${API_URL}:`, error);
 });

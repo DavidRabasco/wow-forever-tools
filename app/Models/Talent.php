@@ -8,6 +8,13 @@ class Talent extends Model
 {
     protected $table = 'talents';
 
+    // JSON columns decode to arrays automatically (API serves them as arrays).
+    protected $casts = [
+        'ranks' => 'array',
+        'skill' => 'array',
+        'is_gold' => 'boolean',
+    ];
+
     public function tree()
     {
         return $this->belongsTo(TalentTree::class, 'tree_id', 'id');

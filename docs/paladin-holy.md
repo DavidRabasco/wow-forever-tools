@@ -35,7 +35,7 @@ text fallback.
 | `database/data/paladin_holy_template.json` | Original empty template, kept as a field reference. |
 | `database/seeders/PaladinSeeder.php` | Creates the class + 3 trees and loads the JSON in 2 passes (insert, then resolve `requires_slug → requires_talent_id`). Idempotent + deletes old test talents. |
 | `resources/js/paladin.js` | 3 side-by-side 7×4 grids sharing the 51-point pool, per-tree counters, WoW-style borders/arrows/tooltip. Commented in English. |
-| `resources/views/paladin.blade.php` | `/paladin` view (only the `#trees` container, the JS paints the rest). |
+| `resources/views/paladin.blade.php` | `/paladin` view: `#trees` slot (JS-owned) + right-side pick-order panel (`#pick-level`, `#pick-order`). |
 | `app/Http/Controllers/Api/PaladinController.php` | `GET /api/paladin` → class + ordered trees + talents by row/col. |
 | `database/migrations/2026_09_26_005315_add_presentation_to_talent_trees.php` | Adds `background` (full artwork URL) + `spec_icon` (zamimg short name) to `talent_trees`. |
 
@@ -85,7 +85,15 @@ bronze/gold double edge, and a header with the official retail spec icon
 Retribution `spell_holy_auraoflight`) + gold tree name. Fields live on
 `talent_trees` (`background`, `spec_icon`) and travel in the API.
 
-## 7. Pending
+## 7. Pick-order panel (2026-09-26, done)
+
+Right-side list with one line per spent point, in learn order:
+`Level 10 - Divine Strength 1/5`, `Level 11 - Divine Strength 2/5`...
+Line *i* = level 10+*i*, rank shown is the running count. Header shows the
+character level (9 + spent points; 51 pts = 60). Spending appends, removing
+drops that talent's most recent pick, so the list is always a valid sequence.
+
+## 8. Pending
 
 1. `status`: everything is `unchanged` today; diff against Classic to flag `new/changed/moved/now_baseline`.
 2. `builds` (6-char hash): shareable save/load builds — table created, API pending.

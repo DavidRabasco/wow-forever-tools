@@ -50,6 +50,14 @@ fetch('/api/paladin')
     let state = {};
     data.trees.forEach(tree => tree.talents.forEach(talent => state[talent.slug] = 0));
 
+    // Learn order: one slug per spent point, in click order.
+    // Spending pushes, removing splices that talent's LAST entry, so the list
+    // always reads as a valid level-by-level progression.
+    const pickOrder = []; // e.g. ['divine-strength', 'divine-strength', ...]
+    // slug -> talent (any tree), to render the list without searching.
+    const talentBySlug = {};
+    data.trees.forEach(tree => tree.talents.forEach(talent => talentBySlug[talent.slug] = talent));
+
     // slug -> icon cell DOM, to repaint states without rebuilding the grids.
     const cells = {};
 
@@ -243,11 +251,18 @@ fetch('/api/paladin')
                 if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
             };
             cell.onclick = (event) => { // Left click spends a point.
-                if(canSpend(talent, tree)){ state[talent.slug]++; refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event); }
+                if(canSpend(talent, tree)){ state[talent.slug]++; pickOrder.push(talent.slug); refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event); }
             };
             cell.oncontextmenu = (event) => { // Right click removes a point.
                 event.preventDefault();
-                if(canRemove(talent, tree)){ state[talent.slug]--; refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event); }
+                if(canRemove(talent, tree)){
+                    state[talent.slug]--;
+                    // Drop this talent's most recent pick so the list stays a
+                    // valid learn sequence (canRemove guarantees one exists).
+                    const lastPick = pickOrder.lastIndexOf(talent.slug);
+                    if(lastPick !== -1) pickOrder.splice(lastPick, 1);
+                    refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event);
+                }
             };
             // Wowhead-style hover: show on enter, follow the mouse, hide on leave.
             // Talent cells only.
@@ -262,10 +277,51 @@ fetch('/api/paladin')
         return view;
     }
 
-    // Refresh every tree (counters + states + arrows): spending in one tree can
-    // lock or unlock the others through the shared 51-point pool.
+    // Refresh every tree (counters + states + arrows) plus the pick-order panel:
+    // spending in one tree can lock/unlock the others through the shared pool.
     function refreshAll(){
         for(const view of views){ updateCounter(view); updateVisuals(view); }
+        renderPickOrder();
+    }
+
+    // Pick-order panel (right side): one line per spent point, in learn order.
+    // Line i was learned at level 10+i (first point at 10, Classic) with the
+    // running rank (1/5, 2/5...). Header shows the character level: 9 + spent
+    // points (51 pts = level 60). Rebuilt from pickOrder on every change.
+    // Single scroll-free column; rows stay on one line (whitespace-nowrap).
+    function renderPickOrder(){
+        const list = document.getElementById('pick-order');
+        const levelEl = document.getElementById('pick-level');
+        if(!list) return; // safety: panel missing from the template
+        const seen = {}; // slug -> ranks shown so far (running 1/5, 2/5...)
+        list.innerHTML = '';
+        if(pickOrder.length === 0){
+            const empty = document.createElement('li');
+            empty.className = 'text-neutral-500 text-sm';
+            empty.textContent = 'No talents learned yet.';
+            list.appendChild(empty);
+        }
+        pickOrder.forEach((slug, i) => {
+            const talent = talentBySlug[slug];
+            if(!talent) return; // safety: unknown slug, skip the line
+            seen[slug] = (seen[slug] || 0) + 1;
+            const row = document.createElement('li');
+            row.className = 'flex items-center gap-2 text-xs py-0.5 whitespace-nowrap';
+            const img = document.createElement('img');
+            const src = iconUrl(talent, 'small');
+            if(src){
+                img.src = src;
+                img.alt = '';
+                img.className = 'w-5 h-5 rounded shrink-0';
+                img.onerror = () => img.remove();
+            }
+            row.appendChild(img);
+            const text = document.createElement('span');
+            text.textContent = `Level ${10 + i} - ${talent.name} ${seen[slug]}/${talent.max_rank}`;
+            row.appendChild(text);
+            list.appendChild(row);
+        });
+        if(levelEl) levelEl.textContent = `Level ${9 + pickOrder.length}`;
     }
 
     // Refresh one tree's branch counter ("12 points", green when 51 is reached).
@@ -427,7 +483,7 @@ fetch('/api/paladin')
         // Red requirements: strict row gate (rows above only) and unmaxed parent.
         const missing = [];
         const needPts = rowRequirement(talent);
-        if(pointsAbove(tree, talent.row) < needPts) missing.push(`Requires ${needPts} points in ${tree.name} rows above`);
+        if(pointsAbove(tree, talent.row) < needPts) missing.push(`Requires ${needPts} points in ${tree.name}`);
         if(talent.requires_talent_id){
             const parent = tree.talents.find(item => item.id === talent.requires_talent_id);
             if(parent && (state[parent.slug] || 0) < parent.max_rank)

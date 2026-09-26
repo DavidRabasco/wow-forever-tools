@@ -50,8 +50,9 @@ class="flex flex-col items-center gap-1 rounded p-1 border-2 border-neutral-700 
 <div class="hidden min-[1200px]:block"></div>
 {{-- data-api tells calculator.js which class endpoint to load. --}}
 <div id="trees" class="min-w-0" data-api="/api/classes/{{ $wowClass->slug }}">Loading...</div>
-{{-- Height-capped to the trees: the panel stretches to the row height (the
-     trees set it) and the list scrolls inside, so they always match. --}}
+{{-- Height-capped to the trees by JS (syncPanelHeight): inline max-height makes
+     the list scroll inside instead of growing the page. flex-col + min-h-0
+     on the <ol> are required for that inner scroll to work. --}}
 <aside id="pick-panel" class="w-max max-w-full rounded border border-neutral-700 bg-black/40 p-3 min-[1200px]:justify-self-start min-[1200px]:self-stretch flex flex-col overflow-hidden">
 <h2 class="text-lg font-bold" style="color:#ffd100">Pick Order</h2>
 <div id="pick-level" class="text-sm text-neutral-300 mb-2">Level 9</div>

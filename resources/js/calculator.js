@@ -555,12 +555,23 @@ fetch(API_URL)
         if(event) placeTooltip(event);
     }
 
+    // Freeze the pick panel to the trees' height: cap it so the list scrolls
+    // inside instead of growing the page. Measured live (icons have fixed
+    // sizes, so layout is stable once built); re-synced on resize.
+    function syncPanelHeight(){
+        const panel = document.getElementById('pick-panel');
+        const treesEl = document.getElementById('trees');
+        if(!panel || !treesEl) return;
+        panel.style.maxHeight = `${treesEl.offsetHeight}px`;
+    }
+
     // Initial state: at 0 points only row 1 is available; the rest renders gray.
     refreshAll();
     // Trace dependency arrows (cells must exist first so they can be measured).
     views.forEach(drawArrows);
-    // Responsive width changes the coordinates: redraw.
-    window.addEventListener('resize', () => views.forEach(drawArrows));
+    syncPanelHeight();
+    // Responsive width changes the coordinates: redraw. Panel height follows.
+    window.addEventListener('resize', () => { views.forEach(drawArrows); syncPanelHeight(); });
 })
 // Catch any failure (network, API 500, treeless JSON) and show it on screen.
 // Without this catch the error would be "Cannot read properties of undefined (reading '0')"

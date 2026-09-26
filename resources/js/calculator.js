@@ -208,6 +208,24 @@ fetch(API_URL)
         counter.className = 'text-sm text-neutral-300 mt-2';
         counter.textContent = '0 points';
         section.appendChild(counter);
+
+        // Per-tree reset: clears this branch only (its state + its picks),
+        // leaving the other trees untouched.
+        const treeSlugs = new Set(tree.talents.map(t => t.slug));
+        const treeReset = document.createElement('button');
+        treeReset.type = 'button';
+        treeReset.title = `Reset ${tree.name} only`;
+        treeReset.className = 'text-xs px-2 py-0.5 mt-1 rounded border border-neutral-700 bg-black/40 text-neutral-400 hover:text-red-400 hover:border-red-800';
+        treeReset.textContent = 'reset';
+        treeReset.addEventListener('click', () => {
+            for(const slug of treeSlugs) state[slug] = 0;
+            for(let i = pickOrder.length - 1; i >= 0; i--){
+                if(treeSlugs.has(pickOrder[i])) pickOrder.splice(i, 1);
+            }
+            hideTooltip(); // it may show a stale rank
+            refreshAll();
+        });
+        section.appendChild(treeReset);
         wrap.appendChild(section);
 
         const view = { tree, grid, counter, arrows: [], svg: null };
@@ -248,6 +266,17 @@ fetch(API_URL)
                 iconWrap.className = 'relative leading-none';
                 iconImage.replaceWith(iconWrap);
                 iconWrap.appendChild(iconImage);
+                // Gold pip: marquee talents (capstones, 21-pointers) carry a small
+                // gold diamond at the corner. It avoids the icon border, which
+                // encodes state (green/yellow/gray), so both signals coexist.
+                if(talent.is_gold){
+                    const pip = document.createElement('div');
+                    pip.className = 'absolute -top-1 -left-1 w-2.5 h-2.5 rotate-45 pointer-events-none';
+                    pip.style.background = '#ffd100';
+                    pip.style.border = '1px solid #6b5a2e';
+                    pip.style.boxShadow = '0 0 4px rgba(255,209,0,0.9)';
+                    iconWrap.appendChild(pip);
+                }
                 const label = document.createElement('span');
                 label.className = 'absolute bottom-0 right-0 text-[11px] leading-none text-white pointer-events-none';
                 label.style.textShadow = '1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000';

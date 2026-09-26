@@ -262,6 +262,83 @@ fetch('/api/paladin')
         paintArrows();
     }
 
+    // Tooltip estilo Wowhead (sigue al raton; una sola capa para toda la pagina).
+    // ------------------------------------------------------------------
+    // Colores Wowhead: nombre en blanco, descripcion en amarillo (#ffd100),
+    // requisitos sin cumplir en rojo, y al final en verde la accion disponible:
+    // "Click para aprender" (si aun admite puntos) o "Click derecho para
+    // olvidar" (si esta al maximo). pointer-events:none para que no parpadee
+    // al pasar el raton por encima del propio tooltip.
+    const tooltip = document.createElement('div');
+    tooltip.id = 'talent-tooltip';
+    tooltip.style.cssText = 'position:fixed;display:none;z-index:50;max-width:320px;pointer-events:none;'
+        + 'background:rgba(8,8,16,0.95);border:1px solid #a0a0a0;border-radius:4px;'
+        + 'padding:8px 10px;font-size:12px;line-height:1.4;';
+    document.body.appendChild(tooltip);
+    let tooltipSlug = null; // talento mostrado ahora (para refrescarlo tras cada click)
+
+    // Puntos de rama que pide la fila (0 en fila 1, 5 en fila 2... 30 en fila 7).
+    function rowRequirement(talent){ return (talent.row - 1) * 5; }
+
+    // HTML del tooltip segun el estado actual (se regenera en cada hover y click).
+    function tooltipHtml(talent){
+        const pts = state[talent.slug] || 0;
+        // Nombre en blanco + rango actual.
+        let html = `<div style="color:#fff;font-weight:bold;font-size:14px">${talent.name}</div>`;
+        html += `<div style="color:#fff">Rank ${pts}/${talent.max_rank}</div>`;
+        // Descripcion en amarillo (en DB es un resumen de todos los rangos).
+        if(talent.description) html += `<div style="color:#ffd100;margin-top:4px">${talent.description}</div>`;
+        // Requisitos en rojo: puerta de fila y talento previo sin maxear.
+        const missing = [];
+        const needPts = rowRequirement(talent);
+        if(pointsInTree(tree) < needPts) missing.push(`Requires ${needPts} points in Holy Talents`);
+        if(talent.requires_talent_id){
+            const parent = tree.talents.find(item => item.id === talent.requires_talent_id);
+            if(parent && (state[parent.slug] || 0) < parent.max_rank)
+                missing.push(`Requires ${parent.max_rank} point${parent.max_rank > 1 ? 's' : ''} in ${parent.name}`);
+        }
+        for(const line of missing) html += `<div style="color:#ff4040;margin-top:4px">${line}</div>`;
+        // Si se cumplen, accion en verde: aprender (admite puntos) u olvidar (al maximo).
+        if(missing.length === 0){
+            if(pts < talent.max_rank && totalPoints() < MAX_TOTAL_POINTS)
+                html += `<div style="color:#40ff40;margin-top:4px">Click para aprender</div>`;
+            else if(pts > 0)
+                html += `<div style="color:#40ff40;margin-top:4px">Click derecho para olvidar</div>`;
+        }
+        return html;
+    }
+
+    // Coloca el tooltip junto al cursor sin salirse de la ventana (gira al otro
+    // lado si no cabe a la derecha o abajo).
+    function placeTooltip(event){
+        const pad = 16;
+        tooltip.style.display = 'block';
+        const w = tooltip.offsetWidth, h = tooltip.offsetHeight;
+        let x = event.clientX + pad, y = event.clientY + pad;
+        if(x + w > window.innerWidth - 8) x = event.clientX - w - pad;
+        if(y + h > window.innerHeight - 8) y = event.clientY - h - pad;
+        tooltip.style.left = `${x}px`;
+        tooltip.style.top = `${y}px`;
+    }
+
+    function showTooltip(event, talent){
+        tooltipSlug = talent.slug;
+        tooltip.innerHTML = tooltipHtml(talent);
+        placeTooltip(event);
+    }
+
+    function hideTooltip(){
+        tooltipSlug = null;
+        tooltip.style.display = 'none';
+    }
+
+    // Tras gastar/quitar con el tooltip abierto, refresca su texto (rango y colores).
+    function refreshTooltip(talent, event){
+        if(tooltipSlug !== talent.slug) return;
+        tooltip.innerHTML = tooltipHtml(talent);
+        if(event) placeTooltip(event);
+    }
+
     // 7x4 = 28 celdas (algunas vacias: Holy real tiene 17 talentos)
     for(let r=1; r<=7; r++){
     for(let c=1; c<=4; c++){
@@ -304,25 +381,29 @@ fetch('/api/paladin')
             label.textContent = `0/${talent.max_rank}`;
             iconWrap.appendChild(label);
         }
-        // Tooltip con nombre + descripcion + estado (el nombre ya no se pinta en la celda).
-        if(talent) cell.title = `${talent.name}: ${talent.description} [${talent.status}]`;
+        // (Sin title nativo: lo sustituye el tooltip personalizado estilo Wowhead de abajo.)
 
 
-        //Clicks en los talentos: actualizan state y solo el <span> del texto (sin borrar el <img>).
+        //Clicks en los talentos: actualizan state y solo el <span> del rango (sin borrar el <img>).
         if(talent){
         const refreshLabel = () => {
             const label = cell.querySelector('span');
             if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
         };
-        cell.onclick = () => { // Click izquierdo para gastar puntos
+        cell.onclick = (event) => { // Click izquierdo para gastar puntos
             if(canSpend(talent, tree)){ state[talent.slug]++; refreshLabel();
-            updateCounter(); updateVisuals();} // repinta: puede desbloquear filas o llegar al tope 51
+            updateCounter(); updateVisuals(); refreshTooltip(talent, event);} // repinta: puede desbloquear filas o llegar al tope 51
         };
         cell.oncontextmenu = (event) => { // Click derecho para quitar puntos
             event.preventDefault();
             if(canRemove(talent, tree)){ state[talent.slug]--; refreshLabel();
-            updateCounter(); updateVisuals(); } // repinta: puede volver a bloquear filas superiores
+            updateCounter(); updateVisuals(); refreshTooltip(talent, event); } // repinta: puede volver a bloquear filas superiores
         };
+        // Hover estilo Wowhead: muestra el tooltip al entrar, lo mueve con el
+        // raton y lo oculta al salir. Solo en celdas con talento.
+        cell.addEventListener('mouseenter', (event) => showTooltip(event, talent));
+        cell.addEventListener('mousemove', placeTooltip);
+        cell.addEventListener('mouseleave', hideTooltip);
         }
         if(talent) cells[talent.slug] = cell; // Guarda la celda para repintar su estado en updateVisuals()
         grid.appendChild(cell);

@@ -33,12 +33,12 @@ text fallback.
 | `database/data/paladin_protection.json` | Same schema: 16 Protection talents. |
 | `database/data/paladin_retribution.json` | Same schema: 17 Retribution talents. |
 | `database/data/paladin_holy_template.json` | Original empty template, kept as a field reference. |
-| `database/seeders/PaladinSeeder.php` | Creates the class + 3 trees and loads the JSON in 2 passes (insert, then resolve `requires_slug → requires_talent_id`). Idempotent + deletes old test talents. |
+| `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes (scoped slugs, 2 passes). |
 | `resources/js/calculator.js` | Generic calculator (API URL from `#trees data-api`): 3 side-by-side 7×4 grids sharing the 51-point pool, per-tree counters, WoW-style borders/arrows/tooltip with verbatim ranks + Next Rank. Commented in English. |
 | `resources/views/calculator.blade.php` | Generic `/{class}` view: backend-driven class bar + `#trees` slot (JS-owned) + right-side pick-order panel (`#pick-level`, `#pick-order`). |
 | `app/Http/Controllers/Api/PaladinController.php` | Legacy alias: `GET /api/paladin` delegates to `WowClassController@show('paladin')`. |
 | `app/Http/Controllers/Api/WowClassController.php` | `GET /api/classes/{slug}` → class + ordered trees + talents by row/col. |
-| `app/Http/Controllers/ClassController.php` | `GET /{class}` → `calculator` view with the 9-class bar (backend-driven availability). |
+| `app/Http/Controllers/ClassController.php` | `GET /{class}` → `calculator` view with the 9-class bar (catalog from `config/forever.php`, backend-driven availability). |
 | `app/Console/Commands/ImportForeverClass.php` | `php artisan forever:import {class}`: scrapes wowtbc page-data into `database/data/{class}_{tree}.json` (verbatim ranks, resolved icons/backgrounds, manifest merge). |
 | `database/data/classes.json` | Class manifest: trees, files, backgrounds, spec icons. |
 | `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes (scoped slugs, 2 passes). |
@@ -64,14 +64,14 @@ Classic grants 1 point per level from 10 → **51 points** at 60 (`MAX_TOTAL_POI
 
 ```powershell
 php artisan migrate --force
-php artisan db:seed --class="Database\Seeders\PaladinSeeder" --force
+php artisan db:seed --class="Database\Seeders\ForeverClassSeeder" --force
 npm run build   # or npm run dev for Vite
 ```
 
 Verified: 50/50 talents (17 Holy + 16 Protection + 17 Retribution), 7 prerequisites resolved, `php artisan test` 2/2 OK,
 `node --check resources/js/calculator.js` OK.
 
-## 8. Multi-class pipeline (Warrior pilot, 2026-09-26, done)
+## 8. Multi-class pipeline (Warrior pilot + full batch, 2026-09-26, done)
 
 New classes no longer need hand-written summaries or per-class seeders:
 `php artisan forever:import {class}` downloads the wowtbc page-data, writes
@@ -115,14 +115,21 @@ Line *i* = level 10+*i*, rank shown is the running count. Header shows the
 character level (9 + spent points; 51 pts = 60). Spending appends, removing
 drops that talent's most recent pick, so the list is always a valid sequence.
 
-## 10. Shareable builds (2026-09-26, done)
+## 9. Shareable builds (2026-09-26, done)
 
 `Share` posts the pick order; the backend replays it with the exact calculator
 rules (cap, pool, prerequisites, strict rows-above gate) and returns a 6-char
 hash, or 422 on illegal sequences. Identical pick orders reuse the existing hash
 (200, no new row), so sharing 40 times creates 1 row. The page URL becomes `/{class}?build={hash}`
 and is copied to the clipboard. Opening the link replays the picks (cross-class
-links redirect to their own page). Covered by `tests/Feature/BuildTest.php` (4 tests).
+links redirect to their own page). Covered by `tests/Feature/BuildTest.php` (5 tests).
+
+## 10. Level selector (2026-09-26, done)
+
+Levels 10-60 cap the pool to level-9 points (30 -> 21) for planning leveling
+builds. Lowering trims picks from the end of the learn order; reset restores
+60. The level travels in shared URLs (`&level=30`, omitted at 60); the server
+keeps enforcing the absolute 51 cap.
 
 ## 11. Pending
 

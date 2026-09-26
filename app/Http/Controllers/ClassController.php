@@ -7,28 +7,15 @@ use App\Models\WowClass;
 // Serves the talent calculator page for any seeded class (GET /{class}).
 class ClassController extends Controller
 {
-    // The 9 Forever classes in bar order. Only seeded ones are clickable;
-    // the rest render dimmed with a "coming soon" tooltip (see the view).
-    private const CLASSES = [
-        'druid' => 'Druid',
-        'hunter' => 'Hunter',
-        'mage' => 'Mage',
-        'paladin' => 'Paladin',
-        'priest' => 'Priest',
-        'rogue' => 'Rogue',
-        'shaman' => 'Shaman',
-        'warlock' => 'Warlock',
-        'warrior' => 'Warrior',
-    ];
-
     public function show(string $class)
     {
         $wowClass = WowClass::where('slug', $class)->firstOrFail();
 
-        // Bar entries: portrait art lives at sunderarmor (same set as reference).
+        // Bar entries from the catalog (config/forever.php); availability =
+        // seeded in DB. Portrait art lives at sunderarmor (reference set).
         $available = WowClass::pluck('slug')->all();
         $classes = [];
-        foreach (self::CLASSES as $slug => $name) {
+        foreach (config('forever.classes') as $slug => $name) {
             $classes[] = [
                 'slug' => $slug,
                 'name' => $name,

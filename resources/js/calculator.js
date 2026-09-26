@@ -15,7 +15,8 @@
 //     Consequence: removing from row 1 with 5+1 leaves 4 supporting row 2,
 //     so it is blocked (row 7 needs no exemption: its gate counts rows above).
 //  3. Prerequisite: if requires_talent_id, the required talent must be maxed.
-//  4. Global 51 cap: a level 60 only has 51 talent points across ALL trees.
+//  4. Capped pool: 51 at level 60, fewer below (level selector: level - 9).
+//     Lowering the level trims picks from the end of the learn order.
 //  5. Removing points (right click): not allowed if it would break the row gate
 //     of another skilled talent, or leave a dependent without its prerequisite.
 //  6. WoW-style visuals: cell = icon only + overlaid rank (no rectangles).
@@ -51,6 +52,10 @@ fetch(API_URL)
     }
     // Level 60 in Classic/Forever = 51 talent points (1 per level from 10).
     const MAX_TOTAL_POINTS = 51;
+    // Active pool cap, lowered by the level selector (level 30 -> 21 points).
+    // The server still enforces the absolute 51 cap; this is a view constraint.
+    let pointCap = MAX_TOTAL_POINTS;
+    let currentLevel = 60;
 
     // Shared state: slug -> spent points (2/5, 0/3, etc.). Slugs are unique
     // across trees, so one flat map covers Holy + Protection + Retribution.
@@ -112,8 +117,8 @@ fetch(API_URL)
         // Already maxed, nothing more to spend.
         if(state[talent.slug] >= talent.max_rank) return false;
 
-        // Global 51 cap: never exceed the level 60 maximum.
-        if(totalPoints() >= MAX_TOTAL_POINTS) return false;
+        // Capped pool (level selector): never exceed the active cap.
+        if(totalPoints() >= pointCap) return false;
 
         // Prerequisite talent must be maxed first.
         if(talent.requires_talent_id){
@@ -308,7 +313,7 @@ fetch(API_URL)
     function updateRemaining(){
         const el = document.getElementById('points-remaining');
         if(!el) return; // safety: toolbar missing from the template
-        el.textContent = `${MAX_TOTAL_POINTS - totalPoints()} remaining`;
+        el.textContent = `${pointCap - totalPoints()} remaining`;
     }
 
     // One-line status under the toolbar (share feedback, load errors...).
@@ -364,14 +369,14 @@ fetch(API_URL)
             row.appendChild(text);
             list.appendChild(row);
         });
-        if(levelEl) levelEl.textContent = `Level ${9 + pickOrder.length}`;
+        if(levelEl) levelEl.textContent = `Level ${Math.max(10, 9 + pickOrder.length)}`;
     }
 
     // Refresh one tree's branch counter ("12 points", green when 51 is reached).
     function updateCounter(view){
         const total = pointsInTree(view.tree);
         view.counter.textContent = `${total} points`;
-        view.counter.style.color = total >= MAX_TOTAL_POINTS ? '#22c55e' : '';
+        view.counter.style.color = total >= pointCap ? '#22c55e' : '';
     }
 
     // WoW-style dependency arrows (overlaid SVG per tree, no libraries).
@@ -554,7 +559,7 @@ fetch(API_URL)
         for(const line of missing) html += `<div style="color:#ff4040;margin-top:4px">${line}</div>`;
         // When everything is met, green action: learn (takes points) or unlearn (maxed).
         if(missing.length === 0){
-            if(pts < talent.max_rank && totalPoints() < MAX_TOTAL_POINTS)
+            if(pts < talent.max_rank && totalPoints() < pointCap)
                 html += `<div style="color:#40ff40;margin-top:4px">Click to learn</div>`;
             else if(pts > 0)
                 html += `<div style="color:#40ff40;margin-top:4px">Right-click to unlearn</div>`;
@@ -605,16 +610,42 @@ fetch(API_URL)
 
     // Initial state: at 0 points only row 1 is available; the rest renders gray.
     refreshAll();
+    // Level selector (10-60): caps the pool to level-9 points to simulate lower
+    // levels (30 -> 21). Filled here so the template stays static.
+    const levelSelect = document.getElementById('level-select');
+    if(levelSelect){
+        for(let level = 10; level <= 60; level++){
+            const option = document.createElement('option');
+            option.value = String(level);
+            option.textContent = String(level);
+            if(level === 60) option.selected = true;
+            levelSelect.appendChild(option);
+        }
+        levelSelect.addEventListener('change', () => setLevel(parseInt(levelSelect.value, 10)));
+    }
+    // Apply a level cap, trimming picks from the END of the learn order while
+    // over the new cap (most recent picks go first).
+    function setLevel(level){
+        if(!Number.isInteger(level)) return;
+        currentLevel = Math.min(Math.max(level, 10), 60);
+        if(levelSelect) levelSelect.value = String(currentLevel);
+        pointCap = Math.min(Math.max(currentLevel - 9, 0), MAX_TOTAL_POINTS);
+        while(totalPoints() > pointCap && pickOrder.length > 0){
+            const slug = pickOrder.pop();
+            if(state[slug] > 0) state[slug]--;
+        }
+        hideTooltip();
+        refreshAll();
+    }
     // Global reset: wipe every point, empty the pick order, restore the pool.
     const resetBtn = document.getElementById('reset-build');
     if(resetBtn) resetBtn.addEventListener('click', () => {
         Object.keys(state).forEach(slug => state[slug] = 0);
         pickOrder.length = 0;
-        hideTooltip(); // it may show a stale rank
         setShareStatus('');
         // Drop ?build= from the URL: the page no longer shows a saved build.
         history.replaceState('', '', location.pathname);
-        refreshAll();
+        setLevel(60); // full 51-point pool back (refreshes everything)
     });
     // Share: POST the pick order, then turn the page URL into the share link
     // (?build=hash) and copy it to the clipboard.
@@ -630,8 +661,10 @@ fetch(API_URL)
             });
             if(!res.ok) throw new Error(`save failed (${res.status})`);
             const { hash } = await res.json();
-            const url = `${location.origin}/${PAGE_CLASS}?build=${hash}`;
-            history.replaceState('', '', `/${PAGE_CLASS}?build=${hash}`);
+            // Level travels in the URL too (omitted at 60 for clean links).
+            const levelQuery = currentLevel < 60 ? `&level=${currentLevel}` : '';
+            const url = `${location.origin}/${PAGE_CLASS}?build=${hash}${levelQuery}`;
+            history.replaceState('', '', `/${PAGE_CLASS}?build=${hash}${levelQuery}`);
             try {
                 await navigator.clipboard.writeText(url);
                 setShareStatus('Link copied!');
@@ -646,7 +679,13 @@ fetch(API_URL)
     // same rules (canSpend), so a tampered link can never produce odd states.
     // A build of another class redirects to its own page with the same hash.
     (async function loadSharedBuild(){
-        const hash = new URLSearchParams(location.search).get('build');
+        const params = new URLSearchParams(location.search);
+        const hash = params.get('build');
+        // Shared level cap applies before replaying (extra picks are refused
+        // by canSpend, so a tampered URL stays legal).
+        const sharedLevel = parseInt(params.get('level') || '', 10);
+        if(!hash && !sharedLevel) return;
+        if(sharedLevel >= 9 && sharedLevel <= 60) setLevel(sharedLevel);
         if(!hash) return;
         try {
             const res = await fetch(`/api/builds/${encodeURIComponent(hash)}`, { headers: { 'Accept': 'application/json' } });

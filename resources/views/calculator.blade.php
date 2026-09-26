@@ -13,7 +13,7 @@
      dies the onerror drops it and the site name still shows. --}}
 <header class="sticky top-0 z-40 -m-4 mb-4 border-b border-[#6b5a2e] bg-black/80 backdrop-blur">
 <nav class="flex items-center gap-6 px-4 py-2">
-<a href="/paladin" class="flex items-center gap-2">
+<a href="/{{ $wowClass->slug }}" class="flex items-center gap-2">
 <img src="https://sunderarmor.com/WOWFOREVER/UI/logo_icon_4.png" alt="WoW Forever logo" class="h-8 w-8" onerror="this.remove()">
 <span class="text-lg font-bold" style="color:#ffd100">WoW Forever Tools</span>
 </a>
@@ -53,6 +53,10 @@ class="flex flex-col items-center gap-1 rounded p-1 border-2 border-neutral-700 
      centered (equal side widths); content right-aligns toward the trees. --}}
 <div class="min-[1200px]:justify-self-end min-[1200px]:w-[300px]">
 <div class="flex flex-row min-[1200px]:flex-col items-center min-[1200px]:items-end gap-2">
+<label class="text-sm text-neutral-300">Level
+<select id="level-select" title="Cap the point pool to simulate lower levels (60 = full 51 points)"
+class="bg-neutral-800 border border-neutral-700 rounded text-sm px-1 py-0.5"></select>
+</label>
 <button id="reset-build" type="button" title="Remove all points and restore the 51-point pool"
 class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#3a0d0d] hover:bg-[#5a1414] text-sm font-bold" style="color:#ffd100">Reset</button>
 <button id="share-build" type="button" title="Save this build and copy its link"
@@ -68,7 +72,7 @@ class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#0d2a3a] hover:bg-[#143d5
      on the <ol> are required for that inner scroll to work. --}}
 <aside id="pick-panel" class="w-max max-w-full rounded border border-neutral-700 bg-black/40 p-3 min-[1200px]:justify-self-start min-[1200px]:self-stretch flex flex-col overflow-hidden">
 <h2 class="text-lg font-bold" style="color:#ffd100">Pick Order</h2>
-<div id="pick-level" class="text-sm text-neutral-300 mb-2">Level 9</div>
+<div id="pick-level" class="text-sm text-neutral-300 mb-2">Level 10</div>
 {{-- Single column with internal scroll; rows stay on one line (see renderPickOrder). --}}
 <ol id="pick-order" class="flex-1 min-h-0 overflow-y-auto"></ol>
 </aside>

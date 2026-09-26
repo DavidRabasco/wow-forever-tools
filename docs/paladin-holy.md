@@ -30,9 +30,11 @@ text fallback.
 | File | What it is |
 |---|---|
 | `database/data/paladin_holy.json` | Source of truth: 17 Holy talents (row/col/slug/max_rank/requires_slug/status/description/icon). |
+| `database/data/paladin_protection.json` | Same schema: 16 Protection talents. |
+| `database/data/paladin_retribution.json` | Same schema: 17 Retribution talents. |
 | `database/data/paladin_holy_template.json` | Original empty template, kept as a field reference. |
 | `database/seeders/PaladinSeeder.php` | Creates the class + 3 trees and loads the JSON in 2 passes (insert, then resolve `requires_slug → requires_talent_id`). Idempotent + deletes old test talents. |
-| `resources/js/paladin.js` | 7×4 grid, left-click adds / right-click removes, row gates, prerequisites, 51 cap, branch counter, WoW-style borders/arrows/tooltip. Commented in English. |
+| `resources/js/paladin.js` | 3 side-by-side 7×4 grids sharing the 51-point pool, per-tree counters, WoW-style borders/arrows/tooltip. Commented in English. |
 | `resources/views/paladin.blade.php` | `/paladin` view (only the `#trees` container, the JS paints the rest). |
 | `app/Http/Controllers/Api/PaladinController.php` | `GET /api/paladin` → class + ordered trees + talents by row/col. |
 
@@ -57,7 +59,7 @@ php artisan db:seed --class="Database\Seeders\PaladinSeeder" --force
 npm run build   # or npm run dev for Vite
 ```
 
-Verified: 17/17 Holy talents, 3 prerequisites resolved, `php artisan test` 2/2 OK,
+Verified: 50/50 talents (17 Holy + 16 Protection + 17 Retribution), 7 prerequisites resolved, `php artisan test` 2/2 OK,
 `node --check resources/js/paladin.js` OK.
 
 ## 5. Icon status (2026-09-25, done)
@@ -74,5 +76,4 @@ not Classic): 9 icons match Classic and 8 are new in Forever
 ## 6. Pending
 
 1. `status`: everything is `unchanged` today; diff against Classic to flag `new/changed/moved/now_baseline`.
-2. Multi-tree: render Prot/Retri so `totalPoints()` sums all 3 (the JS already supports it).
-3. `builds` (6-char hash): shareable save/load builds — table created, API pending.
+2. `builds` (6-char hash): shareable save/load builds — table created, API pending.

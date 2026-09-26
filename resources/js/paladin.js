@@ -1,26 +1,24 @@
-// Holy Paladin calculator - WoW Forever (level 60 = 51 points).
+// Paladin calculator - WoW Forever (level 60 = 51 points shared by 3 trees).
 // ---------------------------------------------------------------------------
-// Data source: GET /api/paladin -> { trees: [holy, ...], each tree.talents[] }.
+// Data source: GET /api/paladin -> { trees: [holy, protection, retribution] }.
 // Each talent comes from the DB with: id, slug, name, row (1-7), col (1-4),
 // max_rank, requires_talent_id (FK or null), is_gold, status, description,
 // icon (short name or null).
 //
-// Implemented classic/Forever rules:
+// Implemented classic/Forever rules (same for the 3 trees, 51-point pool shared):
 //  1. Per-talent cap: state[slug] <= max_rank.
-//  2. Row gate: row R needs (R-1)*5 points spent in the tree.
+//  2. Row gate: row R needs (R-1)*5 points spent in ITS tree.
 //     E.g. row 2 needs 5, row 7 needs 30.
 //  3. Prerequisite: if requires_talent_id, the required talent must be maxed.
 //  4. Global 51 cap: a level 60 only has 51 talent points across ALL trees.
-//     Only Holy is rendered for now, so the cap applies to Holy;
-//     with multi-tree, totalPoints = sum of the 3 trees.
 //  5. Removing points (right click): not allowed if it would break the row gate
 //     of another skilled talent, or leave a dependent without its prerequisite.
 //  6. WoW-style visuals: cell = icon only + overlaid rank (no rectangles).
 //     Thin green border = available, yellow = maxed, gray = locked
 //     (grayscaled + dimmed icon). Repainted on every click.
-//  7. WoW-style dependency arrows: SVG overlay with one line from the
-//     requirement to the dependent (illumination<-reverence, etc.). Gray while
-//     the requirement is not maxed, gold once fulfilled. Redrawn on resize.
+//  7. WoW-style dependency arrows: SVG overlay per tree with one line from the
+//     requirement to the dependent. Gray while unmet, gold once fulfilled.
+//     Redrawn on resize.
 //
 // Controls: left click spends, right click removes (context menu blocked).
 // Icons (c) Blizzard, educational use: the DB stores only 'spell_holy_x', the
@@ -41,23 +39,20 @@ fetch('/api/paladin')
     // Level 60 in Classic/Forever = 51 talent points (1 per level from 10).
     const MAX_TOTAL_POINTS = 51;
 
-    let state = {}; // Points spent per talent (2/5, 0/3, etc.)
-    const tree = data.trees[0]; // Holy only for now (trees[0] by order=1)
-    tree.talents.forEach(talent => state[talent.slug] = 0); // Start every talent at 0 points
-    const div = document.getElementById('trees');
-    div.innerHTML = `<h2>${tree.name}</h2>`;
+    // Shared state: slug -> spent points (2/5, 0/3, etc.). Slugs are unique
+    // across trees, so one flat map covers Holy + Protection + Retribution.
+    let state = {};
+    data.trees.forEach(tree => tree.talents.forEach(talent => state[talent.slug] = 0));
 
-    const grid = document.createElement('div');
-    grid.className = 'grid grid-cols-4 gap-2 max-w-md relative'; // relative: the arrow SVG positions over the grid
-    grid.style.gridTemplateRows = 'repeat(7, 64px)';
-    div.appendChild(grid);
+    // slug -> icon cell DOM, to repaint states without rebuilding the grids.
+    const cells = {};
 
-    // Branch point counter, below the grid.
-    const counter = document.createElement('div');
-    counter.id = 'counter';
-    counter.className = 'text-sm text-neutral-300 mt-2';
-    counter.textContent = `0 points`;
-    div.appendChild(counter);
+    const mount = document.getElementById('trees');
+    mount.innerHTML = '';
+    // The three trees side by side (wraps on narrow screens).
+    const wrap = document.createElement('div');
+    wrap.className = 'flex flex-wrap gap-8 justify-center';
+    mount.appendChild(wrap);
 
     // Build the icon URL from wow.zamimg.com using the short name stored in the DB.
     // The DB stores only 'spell_holy_sealofsalvation', never the full URL or binary.
@@ -75,20 +70,14 @@ fetch('/api/paladin')
         return tree.talents.reduce((acumulado, talent) => acumulado + (state[talent.slug] || 0), 0);
     }
 
-    // Global total (multi-tree ready; today = Holy only).
+    // Global total across all trees (the shared 51-point pool).
     function totalPoints(){
-        // data.trees may hold holy+protection+retribution; unpainted trees
-        // contribute 0 because state[slug] is undefined -> 0.
         return data.trees.reduce((acumulado, t) =>
             acumulado + t.talents.reduce((s, talent) => s + (state[talent.slug] || 0), 0), 0);
     }
 
-    // Refresh the branch counter ("12 points", green when 51 is reached).
-    function updateCounter(){
-        const total = pointsInTree(tree);
-        counter.textContent = `${total} points`;
-        counter.style.color = total >= MAX_TOTAL_POINTS ? '#22c55e' : '';
-    }
+    // Branch points required by a row (0 on row 1, 5 on row 2... 30 on row 7).
+    function rowRequirement(talent){ return (talent.row - 1) * 5; }
 
     // Rules for SPENDING a point (left click).
     function canSpend(talent, tree){
@@ -130,37 +119,142 @@ fetch('/api/paladin')
         return true;
     }
 
-    // slug -> cell DOM map, to repaint states without rebuilding the grid.
-    const cells = {};
+    // One view per tree: { tree, grid, counter, arrows, svg }.
+    // Views share `state` (the 51-point pool) but paint independently.
+    const views = data.trees.map(tree => buildTreeView(tree));
 
-    // WoW-style dependency arrows (overlaid SVG, no libraries).
+    // Build the DOM for one tree: title, 7x4 grid of icon cells, branch counter.
+    // Cells register in the shared `cells` map; clicks refresh ALL views because
+    // spending here can lock/unlock the other trees through the shared pool.
+    function buildTreeView(tree){
+        const section = document.createElement('section');
+        section.className = 'flex flex-col items-center';
+        const title = document.createElement('h2');
+        title.className = 'text-lg font-bold mb-2';
+        title.textContent = tree.name;
+        section.appendChild(title);
+
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-4 gap-2 relative'; // relative: the arrow SVG positions over the grid
+        grid.style.gridTemplateRows = 'repeat(7, 64px)';
+        section.appendChild(grid);
+
+        // Branch point counter, below its grid.
+        const counter = document.createElement('div');
+        counter.className = 'text-sm text-neutral-300 mt-2';
+        counter.textContent = '0 points';
+        section.appendChild(counter);
+        wrap.appendChild(section);
+
+        const view = { tree, grid, counter, arrows: [], svg: null };
+
+        // 7x4 = 28 cells (some empty: Holy has 17 talents, Protection 16, Retribution 17).
+        for(let r=1; r<=7; r++){
+        for(let c=1; c<=4; c++){
+
+            const talent = tree.talents.find(item => item.row===r && item.col===c);
+            const cell = document.createElement('div');
+            cell.style.gridRow = r;
+            cell.style.gridColumn = c;
+            // Empty slot: WoW renders no box, just the background. Keep the grid
+            // hole transparent instead of painting ghost rectangles.
+            if(!talent){
+                cell.className = 'h-16';
+            } else {
+                // WoW-style slot: ONLY the 44px icon, centered, + "0/5" rank
+                // overlaid bottom-right. No name, no background, no rectangle.
+                cell.className = 'relative flex items-center justify-center h-16';
+                const iconImage = document.createElement('img');
+                iconImage.alt = talent.name;
+                // 2px border colored by updateVisuals(): green = available,
+                // yellow = maxed, gray = locked.
+                iconImage.className = 'w-11 h-11 rounded border-2';
+                iconImage.style.borderStyle = 'solid';
+                const iconSrc = iconUrl(talent, 'medium');
+                if(iconSrc){
+                    iconImage.src = iconSrc;
+                    // Dead icon URL: drop the img, the rank stays as placeholder.
+                    iconImage.onerror = () => iconImage.remove();
+                }
+                cell.appendChild(iconImage);
+                // In-game style overlaid rank: bottom-right corner OF THE ICON
+                // (relative wrapper), black outline for readability, clicks pass
+                // through (pointer-events-none). A <div> avoids matching the <span>.
+                const iconWrap = document.createElement('div');
+                iconWrap.className = 'relative leading-none';
+                iconImage.replaceWith(iconWrap);
+                iconWrap.appendChild(iconImage);
+                const label = document.createElement('span');
+                label.className = 'absolute bottom-0 right-0 text-[11px] leading-none text-white pointer-events-none';
+                label.style.textShadow = '1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000';
+                label.textContent = `0/${talent.max_rank}`;
+                iconWrap.appendChild(label);
+            }
+            // (No native title: replaced by the custom Wowhead-style tooltip below.)
+
+            // Talent clicks: update state plus the rank <span> only (the <img> stays).
+            if(talent){
+            const refreshLabel = () => {
+                const label = cell.querySelector('span');
+                if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
+            };
+            cell.onclick = (event) => { // Left click spends a point.
+                if(canSpend(talent, tree)){ state[talent.slug]++; refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event); }
+            };
+            cell.oncontextmenu = (event) => { // Right click removes a point.
+                event.preventDefault();
+                if(canRemove(talent, tree)){ state[talent.slug]--; refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event); }
+            };
+            // Wowhead-style hover: show on enter, follow the mouse, hide on leave.
+            // Talent cells only.
+            cell.addEventListener('mouseenter', (event) => showTooltip(event, talent, tree));
+            cell.addEventListener('mousemove', placeTooltip);
+            cell.addEventListener('mouseleave', hideTooltip);
+            cells[talent.slug] = cell; // Keep the cell to repaint its state in updateVisuals()
+            }
+            grid.appendChild(cell);
+        }
+        }
+        return view;
+    }
+
+    // Refresh every tree (counters + states + arrows): spending in one tree can
+    // lock or unlock the others through the shared 51-point pool.
+    function refreshAll(){
+        for(const view of views){ updateCounter(view); updateVisuals(view); }
+    }
+
+    // Refresh one tree's branch counter ("12 points", green when 51 is reached).
+    function updateCounter(view){
+        const total = pointsInTree(view.tree);
+        view.counter.textContent = `${total} points`;
+        view.counter.style.color = total >= MAX_TOTAL_POINTS ? '#22c55e' : '';
+    }
+
+    // WoW-style dependency arrows (overlaid SVG per tree, no libraries).
     // ------------------------------------------------------------------
-    // Each talent with requires_talent_id gets an arrow from its requirement:
-    // illumination<-reverence and lights-vigil<-holy-shock (vertical),
-    // divine-precision<-holy-shock (horizontal). The line runs edge to edge
-    // between icons through the cell corridor; crossing an empty slot
-    // (row 6 between holy-shock and light's-vigil) is normal, as in game.
+    // Each talent with requires_talent_id gets an arrow from its requirement.
+    // The line runs edge to edge between icons through the cell corridor;
+    // crossing an empty slot is normal, as in game.
     // Gray = requirement not maxed, gold = requirement fulfilled.
-    const arrows = []; // {line, parent} to recolor without re-measuring
-    let arrowSvg = null; // SVG layer over the grid (pointer-events-none: never steals clicks)
 
-    // Paint arrow colors from state. Split from tracing so every click can
-    // call it without measuring the DOM again.
-    function paintArrows(){
-        for(const arrow of arrows){
+    // Paint one view's arrow colors from state. Split from tracing so every
+    // click can call it without measuring the DOM again.
+    function paintArrows(view){
+        for(const arrow of view.arrows){
             const done = state[arrow.parent.slug] >= arrow.parent.max_rank;
             arrow.line.setAttribute('stroke', done ? '#ffd100' : '#6b7280');
-            arrow.line.setAttribute('marker-end', done ? 'url(#arrow-gold)' : 'url(#arrow-gray)');
+            arrow.line.setAttribute('marker-end', done ? `url(#arrow-gold-${view.tree.slug})` : `url(#arrow-gray-${view.tree.slug})`);
         }
     }
 
     // Arrow endpoints: centers snapped to the dominant axis, from the parent
     // icon edge to the child icon edge (or the cell if the <img> failed).
     // All in px relative to the grid, which is the SVG coordinate system.
-    function arrowEndpoints(fromCell, toCell){
+    function arrowEndpoints(view, fromCell, toCell){
         const fromBox = fromCell.querySelector('img') || fromCell;
         const toBox = toCell.querySelector('img') || toCell;
-        const gridRect = grid.getBoundingClientRect();
+        const gridRect = view.grid.getBoundingClientRect();
         const fr = fromBox.getBoundingClientRect();
         const tr = toBox.getBoundingClientRect();
         const fx = fr.left + fr.width / 2 - gridRect.left;
@@ -180,20 +274,21 @@ fetch('/api/paladin')
             : { x1: fr.left - gridRect.left, y1: y, x2: tr.right - gridRect.left, y2: y };
     }
 
-    // Build the SVG layer and trace one line per dependency. Called on load and
-    // on every resize (coordinates depend on the real grid width).
-    function drawArrows(){
+    // Build one view's SVG layer and trace one line per dependency. Called on
+    // load and on every resize (coordinates depend on the real grid width).
+    // Marker ids carry the tree slug so the three SVGs never collide.
+    function drawArrows(view){
         // Clear the previous tracing (resize re-measures everything).
-        arrows.length = 0;
-        if(arrowSvg) arrowSvg.remove();
+        view.arrows.length = 0;
+        if(view.svg) view.svg.remove();
         const NS = 'http://www.w3.org/2000/svg';
-        arrowSvg = document.createElementNS(NS, 'svg');
-        arrowSvg.setAttribute('class', 'absolute inset-0 pointer-events-none');
-        arrowSvg.setAttribute('width', grid.clientWidth);
-        arrowSvg.setAttribute('height', grid.clientHeight);
+        const svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('class', 'absolute inset-0 pointer-events-none');
+        svg.setAttribute('width', view.grid.clientWidth);
+        svg.setAttribute('height', view.grid.clientHeight);
         // Arrowheads: one gray, one gold (fixed size, never scale).
         const defs = document.createElementNS(NS, 'defs');
-        const heads = [['arrow-gray', '#6b7280'], ['arrow-gold', '#ffd100']];
+        const heads = [[`arrow-gray-${view.tree.slug}`, '#6b7280'], [`arrow-gold-${view.tree.slug}`, '#ffd100']];
         for(const head of heads){
             const marker = document.createElementNS(NS, 'marker');
             marker.setAttribute('id', head[0]);
@@ -209,45 +304,44 @@ fetch('/api/paladin')
             marker.appendChild(tip);
             defs.appendChild(marker);
         }
-        arrowSvg.appendChild(defs);
+        svg.appendChild(defs);
         // Behind the icons: inserted first so it never covers them.
-        grid.insertBefore(arrowSvg, grid.firstChild);
+        view.grid.insertBefore(svg, view.grid.firstChild);
+        view.svg = svg;
         // One line per required talent, from parent to child.
-        for(const talent of tree.talents){
+        for(const talent of view.tree.talents){
             if(!talent.requires_talent_id) continue; // no requirement = no arrow
-            const parent = tree.talents.find(item => item.id === talent.requires_talent_id);
+            const parent = view.tree.talents.find(item => item.id === talent.requires_talent_id);
             const fromCell = parent && cells[parent.slug];
             const toCell = cells[talent.slug];
             if(!parent || !fromCell || !toCell) continue; // safety: broken data, no arrow
-            const p = arrowEndpoints(fromCell, toCell);
+            const p = arrowEndpoints(view, fromCell, toCell);
             const line = document.createElementNS(NS, 'line');
             line.setAttribute('x1', p.x1);
             line.setAttribute('y1', p.y1);
             line.setAttribute('x2', p.x2);
             line.setAttribute('y2', p.y2);
             line.setAttribute('stroke-width', '2');
-            arrowSvg.appendChild(line);
-            arrows.push({ line, parent });
+            svg.appendChild(line);
+            view.arrows.push({ line, parent });
         }
-        paintArrows();
+        paintArrows(view);
     }
 
-    // Paint each talent by state, as in original WoW:
+    // Paint one view's talents by state, as in original WoW:
     //  - maxed (state == max_rank): YELLOW border, full-color icon.
     //  - available (canSpend): thin GREEN border, full-color icon, click cursor.
     //  - locked (missing row gate, missing prerequisite, or 51 cap): GRAY border,
     //    grayscaled + dimmed icon, blocked cursor.
-    // Color goes on the <img> border (cells have no box anymore). Called on load
-    // and after every click, because spending/removing on one talent can lock
-    // or unlock the others (row gates).
-    function updateVisuals(){
-        for(const talent of tree.talents){
+    // Color goes on the <img> border (cells have no box anymore).
+    function updateVisuals(view){
+        for(const talent of view.tree.talents){
             const cell = cells[talent.slug];
             if(!cell) continue; // safety: missing cell must not break the rest
             const icon = cell.querySelector('img');
             const label = cell.querySelector('span');
             const maxed = state[talent.slug] >= talent.max_rank;
-            const available = canSpend(talent, tree);
+            const available = canSpend(talent, view.tree);
             const blocked = !maxed && !available;
             // Icon border: yellow = maxed, green = available, gray = locked.
             if(icon) icon.style.borderColor = maxed ? '#ffd100' : (available ? '#22ff22' : '#6b7280');
@@ -260,7 +354,7 @@ fetch('/api/paladin')
             if(label) label.style.opacity = (blocked && state[talent.slug] === 0) ? '0.6' : '';
         }
         // Arrows change too (gray -> gold) when requirements get maxed.
-        paintArrows();
+        paintArrows(view);
     }
 
     // Wowhead-style tooltip (follows the mouse; one layer for the whole page).
@@ -278,21 +372,18 @@ fetch('/api/paladin')
     document.body.appendChild(tooltip);
     let tooltipSlug = null; // talent currently shown (refreshed after each click)
 
-    // Branch points required by a row (0 on row 1, 5 on row 2... 30 on row 7).
-    function rowRequirement(talent){ return (talent.row - 1) * 5; }
-
     // Tooltip HTML from current state (rebuilt on every hover and click).
-    function tooltipHtml(talent){
+    function tooltipHtml(talent, tree){
         const pts = state[talent.slug] || 0;
         // White name + current rank.
         let html = `<div style="color:#fff;font-weight:bold;font-size:14px">${talent.name}</div>`;
         html += `<div style="color:#fff">Rank ${pts}/${talent.max_rank}</div>`;
         // Yellow description (the DB holds a summary of all ranks).
         if(talent.description) html += `<div style="color:#ffd100;margin-top:4px">${talent.description}</div>`;
-        // Red requirements: row gate and unmaxed parent talent.
+        // Red requirements: row gate (in THIS tree) and unmaxed parent talent.
         const missing = [];
         const needPts = rowRequirement(talent);
-        if(pointsInTree(tree) < needPts) missing.push(`Requires ${needPts} points in Holy Talents`);
+        if(pointsInTree(tree) < needPts) missing.push(`Requires ${needPts} points in ${tree.name} Talents`);
         if(talent.requires_talent_id){
             const parent = tree.talents.find(item => item.id === talent.requires_talent_id);
             if(parent && (state[parent.slug] || 0) < parent.max_rank)
@@ -322,9 +413,9 @@ fetch('/api/paladin')
         tooltip.style.top = `${y}px`;
     }
 
-    function showTooltip(event, talent){
+    function showTooltip(event, talent, tree){
         tooltipSlug = talent.slug;
-        tooltip.innerHTML = tooltipHtml(talent);
+        tooltip.innerHTML = tooltipHtml(talent, tree);
         placeTooltip(event);
     }
 
@@ -334,87 +425,18 @@ fetch('/api/paladin')
     }
 
     // After spending/removing with the tooltip open, refresh its text (rank and colors).
-    function refreshTooltip(talent, event){
+    function refreshTooltip(talent, tree, event){
         if(tooltipSlug !== talent.slug) return;
-        tooltip.innerHTML = tooltipHtml(talent);
+        tooltip.innerHTML = tooltipHtml(talent, tree);
         if(event) placeTooltip(event);
     }
 
-    // 7x4 = 28 cells (some empty: the real Holy tree has 17 talents)
-    for(let r=1; r<=7; r++){
-    for(let c=1; c<=4; c++){
-
-        const talent = tree.talents.find(item => item.row===r && item.col===c);
-        const cell = document.createElement('div');
-        cell.style.gridRow = r;
-        cell.style.gridColumn = c;
-        // Empty slot: WoW renders no box, just the background. Keep the grid
-        // hole transparent instead of painting ghost rectangles.
-        if(!talent){
-            cell.className = 'h-16';
-        } else {
-            // WoW-style slot: ONLY the 44px icon, centered, + "0/5" rank
-            // overlaid bottom-right. No name, no background, no rectangle.
-            cell.className = 'relative flex items-center justify-center h-16';
-            const iconImage = document.createElement('img');
-            iconImage.alt = talent.name;
-            // 2px border colored by updateVisuals(): green = available,
-            // yellow = maxed, gray = locked.
-            iconImage.className = 'w-11 h-11 rounded border-2';
-            iconImage.style.borderStyle = 'solid';
-            const iconSrc = iconUrl(talent, 'medium');
-            if(iconSrc){
-                iconImage.src = iconSrc;
-                // Dead icon URL: drop the img, the rank stays as placeholder.
-                iconImage.onerror = () => iconImage.remove();
-            }
-            cell.appendChild(iconImage);
-            // In-game style overlaid rank: bottom-right corner OF THE ICON
-            // (relative wrapper), black outline for readability, clicks pass
-            // through (pointer-events-none). A <div> avoids matching the <span>.
-            const iconWrap = document.createElement('div');
-            iconWrap.className = 'relative leading-none';
-            iconImage.replaceWith(iconWrap);
-            iconWrap.appendChild(iconImage);
-            const label = document.createElement('span');
-            label.className = 'absolute bottom-0 right-0 text-[11px] leading-none text-white pointer-events-none';
-            label.style.textShadow = '1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000';
-            label.textContent = `0/${talent.max_rank}`;
-            iconWrap.appendChild(label);
-        }
-        // (No native title: replaced by the custom Wowhead-style tooltip below.)
-
-        // Talent clicks: update state plus the rank <span> only (the <img> stays).
-        if(talent){
-        const refreshLabel = () => {
-            const label = cell.querySelector('span');
-            if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
-        };
-        cell.onclick = (event) => { // Left click spends a point.
-            if(canSpend(talent, tree)){ state[talent.slug]++; refreshLabel();
-            updateCounter(); updateVisuals(); refreshTooltip(talent, event);} // repaint: may unlock rows or hit the 51 cap
-        };
-        cell.oncontextmenu = (event) => { // Right click removes a point.
-            event.preventDefault();
-            if(canRemove(talent, tree)){ state[talent.slug]--; refreshLabel();
-            updateCounter(); updateVisuals(); refreshTooltip(talent, event); } // repaint: may lock upper rows again
-        };
-        // Wowhead-style hover: show on enter, follow the mouse, hide on leave.
-        // Talent cells only.
-        cell.addEventListener('mouseenter', (event) => showTooltip(event, talent));
-        cell.addEventListener('mousemove', placeTooltip);
-        cell.addEventListener('mouseleave', hideTooltip);
-        }
-        if(talent) cells[talent.slug] = cell; // Keep the cell to repaint its state in updateVisuals()
-        grid.appendChild(cell);
-    }
-    }
     // Initial state: at 0 points only row 1 is available; the rest renders gray.
-    updateVisuals();
+    refreshAll();
     // Trace dependency arrows (cells must exist first so they can be measured).
-    drawArrows();
+    views.forEach(drawArrows);
     // Responsive width changes the coordinates: redraw.
-    window.addEventListener('resize', drawArrows);
+    window.addEventListener('resize', () => views.forEach(drawArrows));
 })
 // Catch any failure (network, API 500, treeless JSON) and show it on screen.
 // Without this catch the error would be "Cannot read properties of undefined (reading '0')"

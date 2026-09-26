@@ -9,16 +9,18 @@ use Illuminate\Support\Facades\DB;
 // --------------------------------------------------
 // What it does:
 //  1. Creates the 'paladin' class and its 3 trees (holy/protection/retribution).
-//  2. Loads the REAL Holy talents from database/data/paladin_holy.json
+//  2. Loads the REAL talents of each tree from database/data/paladin_{tree}.json
 //     (scraped from wowtbc.gg page-data.json, classic 7x4 format).
 //  3. Resolves prerequisites in 2 passes: first inserts with requires_talent_id
 //     empty, then updates it with the id of the required slug
 //     (requires_slug -> id).
 //
 // How to update data:
-//  - Edit database/data/paladin_holy.json (row 1-7, col 1-4, unique ASCII slug).
+//  - Edit database/data/paladin_{holy,protection,retribution}.json
+//    (row 1-7, col 1-4, unique ASCII slug).
 //  - Run: php artisan db:seed --class=Database\\Seeders\\PaladinSeeder
 //  - The seeder is idempotent (updateOrInsert by slug), it never duplicates.
+//  - Same shape works for other classes: add the class + its tree files.
 //
 // Source and license:
 //  - Data (c) wowtbc.gg / Blizzard, educational use.
@@ -26,6 +28,13 @@ use Illuminate\Support\Facades\DB;
 //    never binaries.
 class PaladinSeeder extends Seeder
 {
+    // Tree slug => [display name, order in the API, data file].
+    private const TREES = [
+        'holy' => ['name' => 'Holy', 'order' => 1, 'file' => 'paladin_holy.json'],
+        'protection' => ['name' => 'Protection', 'order' => 2, 'file' => 'paladin_protection.json'],
+        'retribution' => ['name' => 'Retribution', 'order' => 3, 'file' => 'paladin_retribution.json'],
+    ];
+
     public function run(): void
     {
         // 1. Paladin class (updateOrInsert = updates the name if it exists,
@@ -36,25 +45,25 @@ class PaladinSeeder extends Seeder
         );
         $classId = DB::table('classes')->where('slug', 'paladin')->value('id');
 
-        // 2. All 3 trees exist even though only Holy has real talents for now.
-        //    'order' sets the API order (1=Holy first).
-        $trees = [
-            ['slug' => 'holy', 'name' => 'Holy', 'order' => 1],
-            ['slug' => 'protection', 'name' => 'Protection', 'order' => 2],
-            ['slug' => 'retribution', 'name' => 'Retribution', 'order' => 3],
-        ];
-        foreach ($trees as $tree) {
-            DB::table('talent_trees')->updateOrInsert(
-                ['slug' => $tree['slug']],
-                ['class_id' => $classId, 'name' => $tree['name'], 'order' => $tree['order'], 'created_at' => now(), 'updated_at' => now()]
-            );
+        foreach (self::TREES as $slug => $tree) {
+            $this->seedTree($classId, $slug, $tree);
         }
-        $holyId = DB::table('talent_trees')->where('slug', 'holy')->value('id');
+    }
 
-        // 3. Read the JSON with the 17 real Holy talents.
+    // Seeds one tree: creates the tree row, upserts its talents from JSON,
+    // then resolves requires_slug -> requires_talent_id in a second pass.
+    private function seedTree(int $classId, string $slug, array $tree): void
+    {
+        // 2. Tree row (idempotent by slug).
+        DB::table('talent_trees')->updateOrInsert(
+            ['slug' => $slug],
+            ['class_id' => $classId, 'name' => $tree['name'], 'order' => $tree['order'], 'created_at' => now(), 'updated_at' => now()]
+        );
+        $treeId = DB::table('talent_trees')->where('slug', $slug)->value('id');
+
+        // 3. Read the JSON with the real talents of this tree.
         //    base_path() points to the Laravel project root.
-        $jsonPath = base_path('database/data/paladin_holy.json');
-        $raw = json_decode(file_get_contents($jsonPath), true);
+        $raw = json_decode(file_get_contents(base_path('database/data/'.$tree['file'])), true);
         $talents = $raw['talents'] ?? [];
 
         // Pass 1: insert everything with no prerequisite (requires_talent_id=null).
@@ -63,7 +72,7 @@ class PaladinSeeder extends Seeder
             DB::table('talents')->updateOrInsert(
                 ['slug' => $tal['slug']],
                 [
-                    'tree_id' => $holyId,
+                    'tree_id' => $treeId,
                     'row' => $tal['row'],
                     'col' => $tal['col'],
                     'name' => $tal['name'],
@@ -92,11 +101,11 @@ class PaladinSeeder extends Seeder
             ]);
         }
 
-        // Cleanup: delete the 4 placeholder talents from the old seeder if left over.
-        // (bendicion-reyes, juicio-luz-16, sello-verdad, veredicto-final are not in the JSON).
+        // Cleanup: delete stale talents of this tree that are no longer in the JSON
+        // (e.g. placeholders from the old single-tree seeder).
         $realSlugs = collect($talents)->pluck('slug')->all();
         DB::table('talents')
-            ->where('tree_id', $holyId)
+            ->where('tree_id', $treeId)
             ->whereNotIn('slug', $realSlugs)
             ->delete();
     }

@@ -28,11 +28,18 @@ use Illuminate\Support\Facades\DB;
 //    never binaries.
 class PaladinSeeder extends Seeder
 {
-    // Tree slug => [display name, order in the API, data file].
+    // Tree slug => [display name, order in the API, data file, Blizzard artwork
+    // background (hotlink, educational use) and official zamimg spec icon].
     private const TREES = [
-        'holy' => ['name' => 'Holy', 'order' => 1, 'file' => 'paladin_holy.json'],
-        'protection' => ['name' => 'Protection', 'order' => 2, 'file' => 'paladin_protection.json'],
-        'retribution' => ['name' => 'Retribution', 'order' => 3, 'file' => 'paladin_retribution.json'],
+        'holy' => ['name' => 'Holy', 'order' => 1, 'file' => 'paladin_holy.json',
+            'background' => 'https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/holy_paladin.jpg',
+            'spec_icon' => 'spell_holy_holybolt'],
+        'protection' => ['name' => 'Protection', 'order' => 2, 'file' => 'paladin_protection.json',
+            'background' => 'https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/protection_paladin.jpg',
+            'spec_icon' => 'ability_paladin_shieldofthetemplar'],
+        'retribution' => ['name' => 'Retribution', 'order' => 3, 'file' => 'paladin_retribution.json',
+            'background' => 'https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/retribution_paladin.jpg',
+            'spec_icon' => 'spell_holy_auraoflight'],
     ];
 
     public function run(): void
@@ -54,10 +61,12 @@ class PaladinSeeder extends Seeder
     // then resolves requires_slug -> requires_talent_id in a second pass.
     private function seedTree(int $classId, string $slug, array $tree): void
     {
-        // 2. Tree row (idempotent by slug).
+        // 2. Tree row (idempotent by slug), including presentation fields.
         DB::table('talent_trees')->updateOrInsert(
             ['slug' => $slug],
-            ['class_id' => $classId, 'name' => $tree['name'], 'order' => $tree['order'], 'created_at' => now(), 'updated_at' => now()]
+            ['class_id' => $classId, 'name' => $tree['name'], 'order' => $tree['order'],
+             'background' => $tree['background'], 'spec_icon' => $tree['spec_icon'],
+             'created_at' => now(), 'updated_at' => now()]
         );
         $treeId = DB::table('talent_trees')->where('slug', $slug)->value('id');
 

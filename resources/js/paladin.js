@@ -24,6 +24,9 @@
 //     Redrawn on resize.
 //
 // Controls: left click spends, right click removes (context menu blocked).
+// Presentation per tree comes from the API (talent_trees.background/spec_icon):
+// official Blizzard artwork + retail spec icon, framed WoW-style. If the
+// artwork URL dies, the dark panel base still shows.
 // Icons (c) Blizzard, educational use: the DB stores only 'spell_holy_x', the
 // wow.zamimg.com URL is built here. Missing/broken icons fall back to text.
 fetch('/api/paladin')
@@ -133,16 +136,47 @@ fetch('/api/paladin')
     // Views share `state` (the 51-point pool) but paint independently.
     const views = data.trees.map(tree => buildTreeView(tree));
 
-    // Build the DOM for one tree: title, 7x4 grid of icon cells, branch counter.
+    // Build the DOM for one tree: framed panel with Blizzard artwork background,
+    // header (spec icon + name), 7x4 grid of icon cells, branch counter.
     // Cells register in the shared `cells` map; clicks refresh ALL views because
     // spending here can lock/unlock the other trees through the shared pool.
     function buildTreeView(tree){
         const section = document.createElement('section');
-        section.className = 'flex flex-col items-center';
+        section.className = 'flex flex-col items-center p-4';
+        // WoW-style frame: dark base (shows if the artwork fails to load) with
+        // the tree artwork on top, dimmed by a black gradient so icons stay
+        // readable. Gold double edge: outer dark line + bronze inner line.
+        section.style.backgroundColor = '#0a0a12';
+        if(tree.background){
+            section.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url("${tree.background}")`;
+            section.style.backgroundSize = 'cover';
+            section.style.backgroundPosition = 'center top';
+        }
+        section.style.border = '2px solid #6b5a2e';
+        section.style.outline = '1px solid #c9b037';
+        section.style.outlineOffset = '-5px';
+        section.style.borderRadius = '6px';
+        section.style.boxShadow = '0 0 24px rgba(0,0,0,0.8), inset 0 0 40px rgba(0,0,0,0.7)';
+
+        // Header: official spec icon (zamimg, large) + tree name in gold.
+        const header = document.createElement('div');
+        header.className = 'flex items-center gap-2 mb-2';
+        if(tree.spec_icon){
+            const specImg = document.createElement('img');
+            specImg.src = `https://wow.zamimg.com/images/wow/icons/large/${tree.spec_icon}.jpg`;
+            specImg.alt = `${tree.name} specialization`;
+            specImg.className = 'w-10 h-10 rounded';
+            specImg.style.border = '2px solid #c9b037';
+            // Dead icon URL: drop the img, the name still shows.
+            specImg.onerror = () => specImg.remove();
+            header.appendChild(specImg);
+        }
         const title = document.createElement('h2');
-        title.className = 'text-lg font-bold mb-2';
+        title.className = 'text-lg font-bold';
+        title.style.color = '#ffd100';
         title.textContent = tree.name;
-        section.appendChild(title);
+        header.appendChild(title);
+        section.appendChild(header);
 
         const grid = document.createElement('div');
         grid.className = 'grid grid-cols-4 gap-2 relative'; // relative: the arrow SVG positions over the grid

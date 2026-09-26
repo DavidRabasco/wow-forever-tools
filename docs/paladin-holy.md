@@ -37,6 +37,7 @@ text fallback.
 | `resources/js/paladin.js` | 3 side-by-side 7×4 grids sharing the 51-point pool, per-tree counters, WoW-style borders/arrows/tooltip. Commented in English. |
 | `resources/views/paladin.blade.php` | `/paladin` view (only the `#trees` container, the JS paints the rest). |
 | `app/Http/Controllers/Api/PaladinController.php` | `GET /api/paladin` → class + ordered trees + talents by row/col. |
+| `database/migrations/2026_09_26_005315_add_presentation_to_talent_trees.php` | Adds `background` (full artwork URL) + `spec_icon` (zamimg short name) to `talent_trees`. |
 
 ## 3. Rules (level 60 = 51 points)
 
@@ -73,7 +74,18 @@ not Classic): 9 icons match Classic and 8 are new in Forever
 `spell_holy_healingfocus`, `spell_holy_innerfire`,
 `ability_paladin_judgementofthepure`). All 17 verified with HTTP 200 on zamimg.
 
-## 6. Pending
+## 6. Presentation (2026-09-26, done)
+
+Each tree renders as a WoW-style framed panel: official Blizzard artwork as
+background (same classic textures Wowhead shows; Wowhead builds its zamimg path
+at runtime from beta data, so the identical art is hotlinked from sunderarmor
+with a dark fallback base), dimmed with a black gradient for icon readability,
+bronze/gold double edge, and a header with the official retail spec icon
+(Holy `spell_holy_holybolt`, Protection `ability_paladin_shieldofthetemplar`,
+Retribution `spell_holy_auraoflight`) + gold tree name. Fields live on
+`talent_trees` (`background`, `spec_icon`) and travel in the API.
+
+## 7. Pending
 
 1. `status`: everything is `unchanged` today; diff against Classic to flag `new/changed/moved/now_baseline`.
 2. `builds` (6-char hash): shareable save/load builds — table created, API pending.

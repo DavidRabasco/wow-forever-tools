@@ -1,7 +1,7 @@
 {
-    "_fuente": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/paladin/page-data.json (talentData, tree Holy, ids 2-18). Extraido 2026-09-25.",
-    "_atribucion": "Datos (c) wowtbc.gg / Blizzard. Uso educativo. Iconos (c) Blizzard via wow.zamimg.com, solo guardamos nombre corto.",
-    "_notas": "Formato classic 7 filas x 4 cols. row=rN, col=cN. requires_slug resuelve a requires_talent_id en el seeder (2 pasadas). is_gold: supuesto Holy Shock (21pts) y Light Vigli (31pts) = true; VERIFICAR en Wowhead Forever cuando abra beta. status=unchanged provisional (sin baseline Classic cargado). icon: nombre corto wow.zamimg verificado 200 el 2026-09-25 contra Wowhead Forever (talents-classic db 1790292378); 9 vienen de Classic y 8 son nuevos de Forever.",
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/paladin/page-data.json (talentData, Holy tree, ids 2-18). Extracted 2026-09-25.",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Classic 7-row x 4-col format. row=rN, col=cN. requires_slug resolves to requires_talent_id in the seeder (2 passes). is_gold: assumed Holy Shock (21pts) and Light's Vigil (31pts) = true; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional (no Classic baseline loaded). icon: wow.zamimg short name verified 200 on 2026-09-25 against Wowhead Forever (talents-classic db 1790292378); 9 come from Classic and 8 are new in Forever.",
     "talents": [
         {
             "row": 1,
@@ -12,7 +12,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Increases your Strength by 2/4/6/8/10% (por rango).",
+            "description": "Increases your Strength by 2/4/6/8/10% (per rank).",
             "icon": "ability_golemthunderclap"
         },
         {
@@ -24,7 +24,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Increases your total Intellect by 2/4/6/8/10% (por rango).",
+            "description": "Increases your total Intellect by 2/4/6/8/10% (per rank).",
             "icon": "spell_nature_sleep"
         },
         {
@@ -36,7 +36,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Increases the amount healed by Holy Light, Flash of Light and Holy Shock by 4/8/12% (por rango). Requiere 5 pts en Sagrado.",
+            "description": "Increases the amount healed by Holy Light, Flash of Light and Holy Shock by 4/8/12% (per rank). Requires 5 points in Holy.",
             "icon": "spell_holy_holybolt"
         },
         {
@@ -48,7 +48,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Gives Flash of Light, Holy Light and Light's Vigil a 35/70% chance to not lose casting time when you take damage. Requiere 5 pts.",
+            "description": "Gives Flash of Light, Holy Light and Light's Vigil a 35/70% chance to not lose casting time when you take damage. Requires 5 points.",
             "icon": "spell_arcane_blink"
         },
         {
@@ -60,7 +60,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Increases the damage done by Seals and Judgements by 5/10/15% (por rango). Requiere 5 pts.",
+            "description": "Increases the damage done by Seals and Judgements by 5/10/15% (per rank). Requires 5 points.",
             "icon": "ability_thunderbolt"
         },
         {
@@ -72,7 +72,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Reduces the duration of Fear and Disorient effects by 15/30%. Requiere 5 pts.",
+            "description": "Reduces the duration of Fear and Disorient effects by 15/30%. Requires 5 points.",
             "icon": "spell_holy_unyieldingfaith"
         },
         {
@@ -84,7 +84,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Instant, 3 min cd. Grants immunity to Silence and Interrupt for 6 sec. Requiere 10 pts.",
+            "description": "Instant, 3 min cooldown. Grants immunity to Silence and Interrupt effects for 6 sec. Requires 10 points.",
             "icon": "inv_misc_horn_03"
         },
         {
@@ -96,7 +96,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Allows 10/20/30% of Mana regeneration to continue while casting. Habilita Illumination. Requiere 10 pts.",
+            "description": "Allows 10/20/30% of your Mana regeneration to continue while casting. Unlocks Illumination. Requires 10 points.",
             "icon": "spell_holy_divineillumination"
         },
         {
@@ -108,7 +108,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Cleanse/Purify -10/20% mana; Exorcism/Holy Wrath -17/33% cooldown. Requiere 10 pts.",
+            "description": "Reduces the Mana cost of Cleanse and Purify by 10/20% and the cooldown of Exorcism and Holy Wrath by 17/33%. Requires 10 points.",
             "icon": "spell_holy_purifyingpower"
         },
         {
@@ -120,7 +120,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Holy Shock / Flash of Light crits reduce the cast time of your next Holy Light within 15 sec by 0.5/1.0 sec. Requiere 15 pts.",
+            "description": "Your Holy Shock and Flash of Light critical strikes reduce the cast time of your next Holy Light within 15 sec by 0.5/1.0 sec. Requires 15 points.",
             "icon": "ability_paladin_infusionoflight"
         },
         {
@@ -132,7 +132,7 @@
             "is_gold": false,
             "requires_slug": "reverence",
             "status": "unchanged",
-            "description": "Crit heal (Flash/Holy Light/Light's Vigil/Holy Shock): 20/40/60/80/100% chance to gain Mana = 50% of base cost. Requiere Reverence al maximo + 15 pts.",
+            "description": "Critical heals (Flash of Light, Holy Light, Light's Vigil, Holy Shock): 20/40/60/80/100% chance to gain Mana equal to 50% of the base cost. Requires Reverence maxed + 15 points.",
             "icon": "spell_holy_greaterheal"
         },
         {
@@ -144,7 +144,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "37 Mana, Instant, 2 min cd. Next Flash of Light / Holy Light / Holy Shock crits 100%. Requiere 15 pts.",
+            "description": "37 Mana, Instant, 2 min cooldown. Your next Flash of Light, Holy Light or Holy Shock is a 100% critical. Requires 15 points.",
             "icon": "spell_holy_heal"
         },
         {
@@ -156,7 +156,7 @@
             "is_gold": false,
             "requires_slug": "holy-shock",
             "status": "unchanged",
-            "description": "Holy spell hit +6/12/18%. Requiere Holy Shock + 20 pts. OJO: mismo nivel que su requisito (r5), verificar flecha en Wowhead.",
+            "description": "Increases your chance to hit with Holy spells by 6/12/18%. Requires Holy Shock + 20 points. NOTE: same tier as its requirement (r5), verify the arrow on Wowhead.",
             "icon": "spell_holy_healingfocus"
         },
         {
@@ -168,7 +168,7 @@
             "is_gold": true,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "160 Mana, 20 range, Instant, 10 sec cd. 134 Holy damage to enemy or 114 healing to ally. Talento dorado ~21 pts. Requiere 20 pts.",
+            "description": "160 Mana, 20 yd range, Instant, 10 sec cooldown. Blasts the target for 134 Holy damage, or heals an ally for 114. Gold talent (~21 pts). Requires 20 points.",
             "icon": "spell_holy_searinglight"
         },
         {
@@ -180,7 +180,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Holy spells +5/10% damage against the first 4 enemies that enter your Consecration. Requiere 20 pts.",
+            "description": "Your Holy spells deal 5/10% increased damage against the first 4 enemies that enter your Consecration. Requires 20 points.",
             "icon": "spell_holy_innerfire"
         },
         {
@@ -192,7 +192,7 @@
             "is_gold": false,
             "requires_slug": null,
             "status": "unchanged",
-            "description": "Holy Shock / Holy Strike crit +3/6/9/12/15%, all other spells +1/2/3/4/5%. Requiere 25 pts.",
+            "description": "Increases the critical chance of Holy Shock and Holy Strike by 3/6/9/12/15%, and of all other spells by 1/2/3/4/5%. Requires 25 points.",
             "icon": "spell_holy_power"
         },
         {
@@ -204,7 +204,7 @@
             "is_gold": true,
             "requires_slug": "holy-shock",
             "status": "unchanged",
-            "description": "730 Mana, 20 range, 1.5 sec cast, 6 sec cd. Light's Vigil 30 sec; next Holy Shock: no cd, 182 damage + 75% mana refund (enemigo) o cura al party por 324 (aliado). Uno por party. Capstone ~31 pts. Requiere Holy Shock + 30 pts.",
+            "description": "730 Mana, 20 yd range, 1.5 sec cast, 6 sec cooldown. Applies Light's Vigil for 30 sec; your next Holy Shock on the target has no cooldown and deals 182 Holy damage + 75% Mana refund (enemy) or heals the party for 324 (ally). One per party. Capstone (~31 pts). Requires Holy Shock + 30 points.",
             "icon": "ability_paladin_judgementofthepure"
         }
     ]

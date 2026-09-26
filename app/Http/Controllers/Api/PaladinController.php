@@ -10,7 +10,7 @@ class PaladinController extends Controller
 {
     public function show()
     {
-        //Recupera la clase Paladin junto con sus árboles de talentos y talentos ordenados
+        // Load the Paladin class with its talent trees and talents, ordered.
         $class = WowClass::where('slug', 'paladin')
             ->with(['trees' => fn($q) => $q->orderBy('order'),
                     'trees.talents' => fn($q) => $q->orderBy('row')->orderBy('col')])

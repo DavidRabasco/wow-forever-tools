@@ -7,7 +7,19 @@
     @vite(['resources/css/app.css', 'resources/js/paladin.js'])
 </head>
 <body class="bg-neutral-900 text-white p-4">
-<h1 class="text-2xl font-bold text-center">Paladin - Forever Calculator</h1>
+{{-- Top navbar: logo + site name pinned left, section links after it.
+     To add future tools, append more <a> links inside <nav>.
+     Logo hotlinked (sunderarmor/wowtbc.gg, educational use); if it ever
+     dies the onerror drops it and the site name still shows. --}}
+<header class="sticky top-0 z-40 -m-4 mb-4 border-b border-[#6b5a2e] bg-black/80 backdrop-blur">
+<nav class="flex items-center gap-6 px-4 py-2">
+<a href="/paladin" class="flex items-center gap-2">
+<img src="https://sunderarmor.com/WOWFOREVER/UI/logo_icon_4.png" alt="WoW Forever logo" class="h-8 w-8" onerror="this.remove()">
+<span class="text-lg font-bold" style="color:#ffd100">WoW Forever Tools</span>
+</a>
+<a href="/paladin" class="text-sm font-semibold text-white border-b-2 border-[#ffd100] pb-0.5">Talent Calculator</a>
+</nav>
+</header>
 {{-- Trees on the left, pick-order panel on the right. The JS owns #trees
      content and #pick-order rows; this skeleton only holds their slots. --}}
 <div class="flex flex-wrap justify-center items-start gap-8 mt-4">

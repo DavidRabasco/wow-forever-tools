@@ -45,16 +45,19 @@ fetch('/api/paladin')
     tree.talents.forEach(talent => state[talent.slug] = 0); // Inicializa el estado con 0 puntos en cada talento
     const div = document.getElementById('trees');
     div.innerHTML = `<h2>${tree.name}</h2>`;
-    const counter = document.createElement('div');
-    counter.id = 'counter';
-    counter.className = 'text-sm text-neutral-300 mb-2';
-    counter.textContent = `0 / ${MAX_TOTAL_POINTS} puntos`;
-    div.appendChild(counter);
 
     const grid = document.createElement('div');
     grid.className = 'grid grid-cols-4 gap-2 max-w-md relative'; // relative: el SVG de flechas se posiciona sobre el grid
     grid.style.gridTemplateRows = 'repeat(7, 64px)';
     div.appendChild(grid);
+
+    // Contador de puntos DE LA RAMA, debajo del grid (sustituye al viejo
+    // #counter-holy estatico de la plantilla, que siempre mostraba 0).
+    const counter = document.createElement('div');
+    counter.id = 'counter';
+    counter.className = 'text-sm text-neutral-300 mt-2';
+    counter.textContent = `0 puntos`;
+    div.appendChild(counter);
 
     // Construye la URL del icono desde wow.zamimg.com a partir del nombre corto guardado en DB.
     // En DB guardamos solo 'spell_holy_sealofsalvation', no la URL entera ni el binario.
@@ -79,10 +82,10 @@ fetch('/api/paladin')
             acumulado + t.talents.reduce((s, talent) => s + (state[talent.slug] || 0), 0), 0);
     }
 
-    // Actualizar el contador de puntos ("12 / 51 puntos", verde al completar)
+    // Actualizar el contador de puntos de la rama ("12 puntos", verde al completar 51)
     function updateCounter(){
         const total = pointsInTree(tree);
-        counter.textContent = `${total} / ${MAX_TOTAL_POINTS} puntos`;
+        counter.textContent = `${total} puntos`;
         counter.style.color = total >= MAX_TOTAL_POINTS ? '#22c55e' : '';
     }
 

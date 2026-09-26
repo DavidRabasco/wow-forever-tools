@@ -9,6 +9,5 @@
 <body class="bg-neutral-900 text-white p-4">
 <h1 class="text-2xl font-bold">Paladín - Calculadora Forever</h1>
 <div id="trees">cargando...</div>
-<div id="counter-holy">0 puntos</div>
 </body>
 </html>

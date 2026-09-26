@@ -282,11 +282,31 @@ fetch(API_URL)
         return view;
     }
 
-    // Refresh every tree (counters + states + arrows) plus the pick-order panel:
-    // spending in one tree can lock/unlock the others through the shared pool.
+    // Refresh every tree (counters + states + arrows), labels, remaining pool
+    // and pick-order panel: spending in one tree can lock/unlock the others
+    // through the shared 51-point pool.
     function refreshAll(){
         for(const view of views){ updateCounter(view); updateVisuals(view); }
+        updateLabels();
+        updateRemaining();
         renderPickOrder();
+    }
+
+    // Repaint every rank label from state. Per-click updates use refreshLabel
+    // for the single cell; this full pass is for global actions (reset).
+    function updateLabels(){
+        for(const slug of Object.keys(cells)){
+            const talent = talentBySlug[slug];
+            const label = cells[slug].querySelector('span');
+            if(talent && label) label.textContent = `${state[slug] || 0}/${talent.max_rank}`;
+        }
+    }
+
+    // Refresh the shared pool counter ("12 remaining").
+    function updateRemaining(){
+        const el = document.getElementById('points-remaining');
+        if(!el) return; // safety: toolbar missing from the template
+        el.textContent = `${MAX_TOTAL_POINTS - totalPoints()} remaining`;
     }
 
     // Pick-order panel (right side): one line per spent point, in learn order.
@@ -567,6 +587,14 @@ fetch(API_URL)
 
     // Initial state: at 0 points only row 1 is available; the rest renders gray.
     refreshAll();
+    // Global reset: wipe every point, empty the pick order, restore the pool.
+    const resetBtn = document.getElementById('reset-build');
+    if(resetBtn) resetBtn.addEventListener('click', () => {
+        Object.keys(state).forEach(slug => state[slug] = 0);
+        pickOrder.length = 0;
+        hideTooltip(); // it may show a stale rank
+        refreshAll();
+    });
     // Trace dependency arrows (cells must exist first so they can be measured).
     views.forEach(drawArrows);
     syncPanelHeight();

@@ -42,12 +42,22 @@ class="flex flex-col items-center gap-1 rounded p-1 border-2 border-neutral-700 
 @endif
 @endforeach
 </div>
-{{-- Exact-center layout: 3-column grid [spacer | trees | panel] on wide screens.
+{{-- Exact-center layout: 3-column grid [toolbar | trees | panel] on wide screens.
      Equal 1fr tracks center the trees on the page; the list sits in the right
      track, adjacent to them. Below 1200px it stacks centered (side-by-side
      cannot physically fit there). --}}
 <div class="mt-4 grid grid-cols-1 min-[1200px]:grid-cols-[1fr_auto_1fr] gap-6 items-start justify-items-center">
-<div class="hidden min-[1200px]:block"></div>
+{{-- Left rail: global reset + remaining pool counter (both JS-owned). Centered
+     above the trees on narrow screens, hugging the trees on wide ones. The
+     fixed 300px width balances the right pick panel so the trees stay exactly
+     centered (equal side widths); content right-aligns toward the trees. --}}
+<div class="min-[1200px]:justify-self-end min-[1200px]:w-[300px]">
+<div class="flex flex-row min-[1200px]:flex-col items-center min-[1200px]:items-end gap-2">
+<button id="reset-build" type="button" title="Remove all points and restore the 51-point pool"
+class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#3a0d0d] hover:bg-[#5a1414] text-sm font-bold" style="color:#ffd100">Reset</button>
+<span id="points-remaining" class="text-sm text-neutral-300">51 remaining</span>
+</div>
+</div>
 {{-- data-api tells calculator.js which class endpoint to load. --}}
 <div id="trees" class="min-w-0" data-api="/api/classes/{{ $wowClass->slug }}">Loading...</div>
 {{-- Height-capped to the trees by JS (syncPanelHeight): inline max-height makes

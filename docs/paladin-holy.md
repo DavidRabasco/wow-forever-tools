@@ -116,5 +116,5 @@ drops that talent's most recent pick, so the list is always a valid sequence.
 
 1. `status`: everything is `unchanged` today; diff against Classic to flag `new/changed/moved/now_baseline`.
 2. `builds` (6-char hash): shareable save/load builds — table created, API pending.
-3. Remaining 7 classes (druid, hunter, mage, priest, rogue, shaman, warlock): `forever:import` + spec icons + reseed.
+3. All 9 classes live (2026-09-26, done): 466 talents via `forever:import`, icons 466/466 (2 hand-fixed: primal-bite, blood-frenzy), backgrounds verified, spec icons retail-official (doubtful ones visually inspected), `/druid ... /warlock` 200.
 4. Paladin `description` summaries: optionally re-import verbatim ranks via the importer for Next-Rank tooltips.

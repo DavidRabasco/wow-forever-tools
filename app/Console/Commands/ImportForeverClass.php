@@ -134,7 +134,7 @@ class ImportForeverClass extends Command
         $path = base_path('database/data/classes.json');
         $manifest = json_decode(file_get_contents($path), true);
         $manifest['classes'][$class]['name'] ??= ucfirst($class);
-        $bg = sprintf(self::BG_PATTERN, $treeSlug, $class);
+        $bg = sprintf(self::BG_PATTERN, str_replace('-', '_', $treeSlug), $class);
         $manifest['classes'][$class]['trees'][$treeSlug] = [
             'name' => $treeName,
             'order' => $order,

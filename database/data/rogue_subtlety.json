@@ -1,0 +1,351 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/rogue/page-data.json (talentData, Subtlety tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "camouflage",
+            "name": "Camouflage",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces your speed penalty from your Stealth ability by 3% and reduces its cooldown by 2 sec.",
+            "ranks": [
+                "Reduces your speed penalty from your Stealth ability by 3% and reduces its cooldown by 2 sec.",
+                "Reduces your speed penalty from your Stealth ability by 6% and reduces its cooldown by 3 sec.",
+                "Reduces your speed penalty from your Stealth ability by 9% and reduces its cooldown by 4 sec.",
+                "Reduces your speed penalty from your Stealth ability by 12% and reduces its cooldown by 5 sec.",
+                "Reduces your speed penalty from your Stealth ability by 15% and reduces its cooldown by 6 sec."
+            ],
+            "skill": null,
+            "icon": "ability_stealth"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "master-of-deception",
+            "name": "Master of Deception",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the chance enemies have to detect you while in Stealth mode as if you were 1 level higher.",
+            "ranks": [
+                "Reduces the chance enemies have to detect you while in Stealth mode as if you were 1 level higher.",
+                "Reduces the chance enemies have to detect you while in Stealth mode as if you were 2 levels higher.",
+                "Reduces the chance enemies have to detect you while in Stealth mode as if you were 3 levels higher."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_charm"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "opportunity",
+            "name": "Opportunity",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage dealt by your Backstab, Garrote, Ambush, and Mutilate abilities by 5%.",
+            "ranks": [
+                "Increases the damage dealt by your Backstab, Garrote, Ambush, and Mutilate abilities by 5%.",
+                "Increases the damage dealt by your Backstab, Garrote, Ambush, and Mutilate abilities by 10%."
+            ],
+            "skill": null,
+            "icon": "ability_warrior_warcry"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "setup",
+            "name": "Setup",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 33% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell.",
+            "ranks": [
+                "Gives you a 33% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell.",
+                "Gives you a 67% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell.",
+                "Gives you a 100% chance to add a Combo Point to your target after Dodging an attack or fully resisting a spell."
+            ],
+            "skill": null,
+            "icon": "spell_nature_mirrorimage"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "elusiveness",
+            "name": "Elusiveness",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Vanish and Blind abilities by 45 sec.",
+            "ranks": [
+                "Reduces the cooldown of your Vanish and Blind abilities by 45 sec.",
+                "Reduces the cooldown of your Vanish and Blind abilities by 90 sec."
+            ],
+            "skill": null,
+            "icon": "spell_magic_lesserinvisibilty"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "dirty-tricks",
+            "name": "Dirty Tricks",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Energy cost of your Sap and Blind abilities by 25%.",
+            "ranks": [
+                "Reduces the Energy cost of your Sap and Blind abilities by 25%.",
+                "Reduces the Energy cost of your Sap and Blind abilities by 50%."
+            ],
+            "skill": null,
+            "icon": "ability_sap"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "improved-ambush",
+            "name": "Improved Ambush",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Ambush ability by 15%.",
+            "ranks": [
+                "Increases the critical strike chance of your Ambush ability by 15%.",
+                "Increases the critical strike chance of your Ambush ability by 30%.",
+                "Increases the critical strike chance of your Ambush ability by 45%."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_ambush"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "initiative",
+            "name": "Initiative",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 33% chance to add an additional Combo Point to your target when using your Ambush, Garrote, or Cheap Shot ability.",
+            "ranks": [
+                "Gives you a 33% chance to add an additional Combo Point to your target when using your Ambush, Garrote, or Cheap Shot ability.",
+                "Gives you a 67% chance to add an additional Combo Point to your target when using your Ambush, Garrote, or Cheap Shot ability.",
+                "Gives you a 100% chance to add an additional Combo Point to your target when using your Ambush, Garrote, or Cheap Shot ability."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_fumble"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "ghostly-strike",
+            "name": "Ghostly Strike",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "A strike that deals 125% (180% if a Dagger is equipped in your Main Hand) weapon damage and increases your chance to dodge by 15% for 7 sec. Awards 1 Combo Points.",
+            "ranks": null,
+            "skill": {
+                "cost": "40 Energy",
+                "range": "Melee",
+                "type": "Instant",
+                "cd": "20 sec",
+                "description": "A strike that deals 125% (180% if a Dagger is equipped in your Main Hand) weapon damage and increases your chance to dodge by 15% for 7 sec. Awards 1 Combo Points."
+            },
+            "icon": "spell_shadow_curse"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "improved-distract",
+            "name": "Improved Distract",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the radius of your Distract ability by 3 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 1 levels lower.",
+            "ranks": [
+                "Increases the radius of your Distract ability by 3 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 1 levels lower.",
+                "Increases the radius of your Distract ability by 5 yds, and further reduces the Stealth detection of distracted enemies as though they were an additional 2 levels lower."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_distract"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "heightened-senses",
+            "name": "Heightened Senses",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Stealth detection as if you were 1 level higher and reduces your chance to be hit by spells and ranged attacks by 2%.",
+            "ranks": [
+                "Increases your Stealth detection as if you were 1 level higher and reduces your chance to be hit by spells and ranged attacks by 2%.",
+                "Increases your Stealth detection as if you were 3 levels higher and reduces your chance to be hit by spells and ranged attacks by 4%."
+            ],
+            "skill": null,
+            "icon": "ability_ambush"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "premeditation",
+            "name": "Premeditation",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Adds 2 Combo Points to your target. You must add to or use those Combo Points within 20 sec or the Combo Points are lost.",
+            "ranks": null,
+            "skill": {
+                "range": 20,
+                "type": "Instant",
+                "cd": "2 min",
+                "description": "Adds 2 Combo Points to your target. You must add to or use those Combo Points within 20 sec or the Combo Points are lost."
+            },
+            "icon": "spell_shadow_possession"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "serrated-blades",
+            "name": "Serrated Blades",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Causes your attacks to ignore 3% of your target's Armor and increases the damage dealt by your Rupture ability by 10%.",
+            "ranks": [
+                "Causes your attacks to ignore 3% of your target's Armor and increases the damage dealt by your Rupture ability by 10%.",
+                "Causes your attacks to ignore 6% of your target's Armor and increases the damage dealt by your Rupture ability by 20%.",
+                "Causes your attacks to ignore 9% of your target's Armor and increases the damage dealt by your Rupture ability by 30%."
+            ],
+            "skill": null,
+            "icon": "inv_sword_17"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "dirty-deeds",
+            "name": "Dirty Deeds",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 10, and your Garrote ability no longer requires you to be behind your target.",
+            "ranks": [
+                "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 10, and your Garrote ability no longer requires you to be behind your target.",
+                "Reduces the Energy cost of your Cheap Shot and Garrote abilities by 20, and your Garrote ability no longer requires you to be behind your target."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_summonsuccubus"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "preparation",
+            "name": "Preparation",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "When activated, this ability immediately finishes the cooldown on your other Rogue abilities.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "10 min",
+                "description": "When activated, this ability immediately finishes the cooldown on your other Rogue abilities."
+            },
+            "icon": "spell_shadow_antishadow"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "hemorrhage",
+            "name": "Hemorrhage",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "serrated-blades",
+            "status": "unchanged",
+            "description": "An instant strike that deals 100% weapon damage (145% if a Dagger is equipped) and causes the target to take 15% increased Rupture damage from the Rogue. Lasts 15 sec. Awards 1 Combo Points.",
+            "ranks": null,
+            "skill": {
+                "cost": "35 Energy",
+                "range": "Melee",
+                "type": "Instant",
+                "description": "An instant strike that deals 100% weapon damage (145% if a Dagger is equipped) and causes the target to take 15% increased Rupture damage from the Rogue. Lasts 15 sec. Awards 1 Combo Points."
+            },
+            "icon": "spell_shadow_lifedrain"
+        },
+        {
+            "row": 6,
+            "col": 1,
+            "slug": "quietus",
+            "name": "Quietus",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "dirty-deeds",
+            "status": "unchanged",
+            "description": "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 2% more damage against targets below 35% health.",
+            "ranks": [
+                "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 2% more damage against targets below 35% health.",
+                "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 4% more damage against targets below 35% health.",
+                "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 6% more damage against targets below 35% health.",
+                "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 8% more damage against targets below 35% health.",
+                "Your Sinister Strike, Ghostly Strike, and Hemorrhage abilities cause 10% more damage against targets below 35% health."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_garrote"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "cutthroat",
+            "name": "Cutthroat",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Backstab has a 3% chance to cause your next Ambush within 10 sec to not require Stealth.",
+            "ranks": [
+                "Your Backstab has a 3% chance to cause your next Ambush within 10 sec to not require Stealth.",
+                "Your Backstab has a 6% chance to cause your next Ambush within 10 sec to not require Stealth.",
+                "Your Backstab has a 9% chance to cause your next Ambush within 10 sec to not require Stealth.",
+                "Your Backstab has a 12% chance to cause your next Ambush within 10 sec to not require Stealth.",
+                "Your Backstab has a 15% chance to cause your next Ambush within 10 sec to not require Stealth."
+            ],
+            "skill": null,
+            "icon": "classicon_rogue"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "thousand-cuts",
+            "name": "Thousand Cuts",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "preparation",
+            "status": "unchanged",
+            "description": "When your Rupture ability deals periodic damage, the Energy cost of your next Hemorrhage or Backstab ability within 10 sec is reduced by 3, stacking up to 5 times.",
+            "ranks": [
+                "When your Rupture ability deals periodic damage, the Energy cost of your next Hemorrhage or Backstab ability within 10 sec is reduced by 3, stacking up to 5 times."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_rupture"
+        }
+    ]
+}

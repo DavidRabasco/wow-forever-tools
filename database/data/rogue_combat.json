@@ -1,0 +1,315 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/rogue/page-data.json (talentData, Combat tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "improved-eviscerate",
+            "name": "Improved Eviscerate",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Eviscerate ability by 7%.",
+            "ranks": [
+                "Increases the damage done by your Eviscerate ability by 7%.",
+                "Increases the damage done by your Eviscerate ability by 13%.",
+                "Increases the damage done by your Eviscerate ability by 20%."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_eviscerate"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "improved-sinister-strike",
+            "name": "Improved Sinister Strike",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Energy cost of your Sinister Strike ability by 3.",
+            "ranks": [
+                "Reduces the Energy cost of your Sinister Strike ability by 3.",
+                "Reduces the Energy cost of your Sinister Strike ability by 5."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_ritualofsacrifice"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "lightning-reflexes",
+            "name": "Lightning Reflexes",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Dodge chance by 1%.",
+            "ranks": [
+                "Increases your Dodge chance by 1%.",
+                "Increases your Dodge chance by 2%.",
+                "Increases your Dodge chance by 3%.",
+                "Increases your Dodge chance by 4%.",
+                "Increases your Dodge chance by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_invisibilty"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "puncturing-wounds",
+            "name": "Puncturing Wounds",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Backstab by 10% and your Mutilate by 5%, and gives Backstab a 15% chance to add an additional Combo Point.",
+            "ranks": [
+                "Increases the critical strike chance of your Backstab by 10% and your Mutilate by 5%, and gives Backstab a 15% chance to add an additional Combo Point.",
+                "Increases the critical strike chance of your Backstab by 20% and your Mutilate by 10%, and gives Backstab a 30% chance to add an additional Combo Point.",
+                "Increases the critical strike chance of your Backstab by 30% and your Mutilate by 15%, and gives Backstab a 45% chance to add an additional Combo Point."
+            ],
+            "skill": null,
+            "icon": "ability_backstab"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "deflection",
+            "name": "Deflection",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Parry chance by 2%.",
+            "ranks": [
+                "Increases your Parry chance by 2%.",
+                "Increases your Parry chance by 4%.",
+                "Increases your Parry chance by 6%."
+            ],
+            "skill": null,
+            "icon": "ability_parry"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "precision",
+            "name": "Precision",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Improves your chance to hit by 1%.",
+            "ranks": [
+                "Improves your chance to hit by 1%.",
+                "Improves your chance to hit by 2%.",
+                "Improves your chance to hit by 3%."
+            ],
+            "skill": null,
+            "icon": "ability_marksmanship"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "endurance",
+            "name": "Endurance",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Sprint and Evasion abilities by 30%.",
+            "ranks": [
+                "Reduces the cooldown of your Sprint and Evasion abilities by 30%.",
+                "Reduces the cooldown of your Sprint and Evasion abilities by 60%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_unyeildingstamina"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "riposte",
+            "name": "Riposte",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": "deflection",
+            "status": "unchanged",
+            "description": "A strike that becomes active after parrying an opponent's attack. This attack deals 150% weapon damage and disarms the target for 6 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "10 Energy",
+                "range": "Melee",
+                "type": "Instant",
+                "cd": "6 sec",
+                "description": "A strike that becomes active after parrying an opponent's attack. This attack deals 150% weapon damage and disarms the target for 6 sec."
+            },
+            "icon": "ability_warrior_challange"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "improved-sprint",
+            "name": "Improved Sprint",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives a 50% chance to remove all Movement Impairing effects when you activate your Sprint ability.",
+            "ranks": [
+                "Gives a 50% chance to remove all Movement Impairing effects when you activate your Sprint ability.",
+                "Gives a 100% chance to remove all Movement Impairing effects when you activate your Sprint ability."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_sprint"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "improved-kick",
+            "name": "Improved Kick",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Kick ability a 50% chance to silence the target for 2 sec.",
+            "ranks": [
+                "Gives your Kick ability a 50% chance to silence the target for 2 sec.",
+                "Gives your Kick ability a 100% chance to silence the target for 2 sec."
+            ],
+            "skill": null,
+            "icon": "ability_kick"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "flawless-execution",
+            "name": "Flawless Execution",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Energy cost of your Eviscerate ability by 10.",
+            "ranks": [
+                "Reduces the Energy cost of your Eviscerate ability by 10."
+            ],
+            "skill": null,
+            "icon": "inv_sword_35"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "dual-wield-specialization",
+            "name": "Dual Wield Specialization",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "precision",
+            "status": "unchanged",
+            "description": "Increases the damage done by your off-hand weapon by 5%.",
+            "ranks": [
+                "Increases the damage done by your off-hand weapon by 5%.",
+                "Increases the damage done by your off-hand weapon by 10%.",
+                "Increases the damage done by your off-hand weapon by 15%.",
+                "Increases the damage done by your off-hand weapon by 20%.",
+                "Increases the damage done by your off-hand weapon by 25%."
+            ],
+            "skill": null,
+            "icon": "ability_dualwield"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "blade-flurry",
+            "name": "Blade Flurry",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your melee attack speed by 20% and your melee attacks strike an additional nearby opponent. Lasts 15 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "25 Energy",
+                "type": "Instant",
+                "cd": "2 min",
+                "description": "Increases your melee attack speed by 20% and your melee attacks strike an additional nearby opponent. Lasts 15 sec."
+            },
+            "icon": "ability_warrior_punishingblow"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "hack-and-slash",
+            "name": "Hack and Slash",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your melee weapon attacks a benefit depending on the weapon.\n\nAxe/Sword: Your successful melee attacks have a 1% chance to trigger an extra attack on the target.\n\nDagger/Fist: Increases your critical strike chance by 1%.\n\nMace: Your attacks ignore 3% of your target's armor.",
+            "ranks": [
+                "Gives your melee weapon attacks a benefit depending on the weapon.\n\nAxe/Sword: Your successful melee attacks have a 1% chance to trigger an extra attack on the target.\n\nDagger/Fist: Increases your critical strike chance by 1%.\n\nMace: Your attacks ignore 3% of your target's armor.",
+                "Gives your melee weapon attacks a benefit depending on the weapon.\n\nAxe/Sword: Your successful melee attacks have a 2% chance to trigger an extra attack on the target.\n\nDagger/Fist: Increases your critical strike chance by 2%.\n\nMace: Your attacks ignore 6% of your target's armor.",
+                "Gives your melee weapon attacks a benefit depending on the weapon.\n\nAxe/Sword: Your successful melee attacks have a 3% chance to trigger an extra attack on the target.\n\nDagger/Fist: Increases your critical strike chance by 3%.\n\nMace: Your attacks ignore 9% of your target's armor.",
+                "Gives your melee weapon attacks a benefit depending on the weapon.\n\nAxe/Sword: Your successful melee attacks have a 4% chance to trigger an extra attack on the target.\n\nDagger/Fist: Increases your critical strike chance by 4%.\n\nMace: Your attacks ignore 12% of your target's armor.",
+                "Gives your melee weapon attacks a benefit depending on the weapon.\n\nAxe/Sword: Your successful melee attacks have a 5% chance to trigger an extra attack on the target.\n\nDagger/Fist: Increases your critical strike chance by 5%.\n\nMace: Your attacks ignore 15% of your target's armor."
+            ],
+            "skill": null,
+            "icon": "inv_sword_27"
+        },
+        {
+            "row": 6,
+            "col": 2,
+            "slug": "weapon-expertise",
+            "name": "Weapon Expertise",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": "blade-flurry",
+            "status": "unchanged",
+            "description": "Reduces the chance for your attacks to be Dodged or Parried by 1%.",
+            "ranks": [
+                "Reduces the chance for your attacks to be Dodged or Parried by 1%.",
+                "Reduces the chance for your attacks to be Dodged or Parried by 2%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_blessingofstrength"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "aggression",
+            "name": "Aggression",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 2%.",
+            "ranks": [
+                "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 2%.",
+                "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 4%.",
+                "Increases the damage of your Sinister Strike, Backstab, and Eviscerate abilities by 6%."
+            ],
+            "skill": null,
+            "icon": "ability_racial_avatar"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "adrenaline-rush",
+            "name": "Adrenaline Rush",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Energy regeneration rate by 100% for 15 sec.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "5 min",
+                "description": "Increases your Energy regeneration rate by 100% for 15 sec."
+            },
+            "icon": "spell_shadow_shadowworddominate"
+        }
+    ]
+}

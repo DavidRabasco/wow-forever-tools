@@ -1,0 +1,316 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/mage/page-data.json (talentData, Fire tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "wake-of-fire",
+            "name": "Wake of Fire",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Fire Blast spell by 1 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by 25%.",
+            "ranks": [
+                "Reduces the cooldown of your Fire Blast spell by 1 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by 25%.",
+                "Reduces the cooldown of your Fire Blast spell by 2 sec. Killing a non-trivial target increases the critical strike chance of your next Fire Blast cast within 30 sec by 50%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_lavaspawn"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "incineration",
+            "name": "Incineration",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 2%.",
+            "ranks": [
+                "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 2%.",
+                "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 4%.",
+                "Increases the critical strike chance of your Fire Blast, Ice Lance, Arcane Blast, and Scorch spells by 6%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_flameshock"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "improved-fireball",
+            "name": "Improved Fireball",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.1 sec.",
+            "ranks": [
+                "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.1 sec.",
+                "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.2 sec.",
+                "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.3 sec.",
+                "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.4 sec.",
+                "Reduces the casting time of your Fireball and Frostfire Bolt spells by 0.5 sec."
+            ],
+            "skill": null,
+            "icon": "spell_fire_flamebolt"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "ignite",
+            "name": "Ignite",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your critical strikes from Fire damage spells cause the target to burn for an additional 8% of your spell's damage over 4 sec.",
+            "ranks": [
+                "Your critical strikes from Fire damage spells cause the target to burn for an additional 8% of your spell's damage over 4 sec.",
+                "Your critical strikes from Fire damage spells cause the target to burn for an additional 16% of your spell's damage over 4 sec.",
+                "Your critical strikes from Fire damage spells cause the target to burn for an additional 24% of your spell's damage over 4 sec.",
+                "Your critical strikes from Fire damage spells cause the target to burn for an additional 32% of your spell's damage over 4 sec.",
+                "Your critical strikes from Fire damage spells cause the target to burn for an additional 40% of your spell's damage over 4 sec."
+            ],
+            "skill": null,
+            "icon": "spell_fire_incinerate"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "flame-throwing",
+            "name": "Flame Throwing",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your Fire spells by 3 yards.",
+            "ranks": [
+                "Increases the range of your Fire spells by 3 yards.",
+                "Increases the range of your Fire spells by 6 yards."
+            ],
+            "skill": null,
+            "icon": "spell_fire_flare"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "impact",
+            "name": "Impact",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Fire spells a 3% chance to stun the target for 2 sec.",
+            "ranks": [
+                "Gives your Fire spells a 3% chance to stun the target for 2 sec.",
+                "Gives your Fire spells a 7% chance to stun the target for 2 sec.",
+                "Gives your Fire spells a 10% chance to stun the target for 2 sec."
+            ],
+            "skill": null,
+            "icon": "spell_fire_meteorstorm"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "burning-soul",
+            "name": "Burning Soul",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Fire spells a 23% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 10%.",
+            "ranks": [
+                "Gives your Fire spells a 23% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 10%.",
+                "Gives your Fire spells a 47% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 20%.",
+                "Gives your Fire spells a 70% chance to not lose casting time when you take damage and reduces the threat caused by your Fire spells by 30%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_fire"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "improved-flamestrike",
+            "name": "Improved Flamestrike",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Flamestrike spell by 5%.",
+            "ranks": [
+                "Increases the critical strike chance of your Flamestrike spell by 5%.",
+                "Increases the critical strike chance of your Flamestrike spell by 10%.",
+                "Increases the critical strike chance of your Flamestrike spell by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_selfdestruct"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "pyroblast",
+            "name": "Pyroblast",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Hurls an immense fiery boulder that causes 110 Fire damage and an additional 44 Fire damage over 12 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "125 Mana",
+                "range": 35,
+                "type": "6 sec cast",
+                "description": "Hurls an immense fiery boulder that causes 110 Fire damage and an additional 44 Fire damage over 12 sec."
+            },
+            "icon": "spell_fire_fireball02"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "improved-scorch",
+            "name": "Improved Scorch",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Scorch spell has a 33% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times.",
+            "ranks": [
+                "Your Scorch spell has a 33% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times.",
+                "Your Scorch spell has a 67% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times.",
+                "Your Scorch spell has a 100% chance to cause your target to be vulnerable to Fire damage. This vulnerability increases all Fire damage you deal to your target by 3% and lasts 30 sec, stacking up to 5 times."
+            ],
+            "skill": null,
+            "icon": "spell_fire_windsofwoe"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "improved-fire-ward",
+            "name": "Improved Fire Ward",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Causes your Fire Ward to have a 10% chance to reflect Fire spells while active.",
+            "ranks": [
+                "Causes your Fire Ward to have a 10% chance to reflect Fire spells while active.",
+                "Causes your Fire Ward to have a 20% chance to reflect Fire spells while active."
+            ],
+            "skill": null,
+            "icon": "spell_fire_firearmor"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "hot-streak",
+            "name": "Hot Streak",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": "pyroblast",
+            "status": "unchanged",
+            "description": "Your non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch grant Hot Streak for 20 sec. Hot Streak reduces the cast time of Pyroblast by 25%, stacking up to 3 times.",
+            "ranks": [
+                "Your non-periodic critical strikes with Fireball, Frostfire Bolt, Fire Blast, and Scorch grant Hot Streak for 20 sec. Hot Streak reduces the cast time of Pyroblast by 25%, stacking up to 3 times."
+            ],
+            "skill": null,
+            "icon": "ability_mage_hotstreak"
+        },
+        {
+            "row": 4,
+            "col": 4,
+            "slug": "master-of-elements",
+            "name": "Master of Elements",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Fire and Frost critical strikes will refund 10% of their base mana cost.",
+            "ranks": [
+                "Your Fire and Frost critical strikes will refund 10% of their base mana cost.",
+                "Your Fire and Frost critical strikes will refund 20% of their base mana cost.",
+                "Your Fire and Frost critical strikes will refund 30% of their base mana cost."
+            ],
+            "skill": null,
+            "icon": "spell_fire_masterofelements"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "critical-mass",
+            "name": "Critical Mass",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Fire spells by 2%.",
+            "ranks": [
+                "Increases the critical strike chance of your Fire spells by 2%.",
+                "Increases the critical strike chance of your Fire spells by 4%.",
+                "Increases the critical strike chance of your Fire spells by 6%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_wispheal"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "blast-wave",
+            "name": "Blast Wave",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 163 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "215 Mana",
+                "type": "Instant",
+                "cd": "45 sec",
+                "description": "A wave of flame radiates outward from the caster, damaging all enemies caught within the blast for 163 Fire damage, and Dazing them for 50% reduced movement speed for 6 sec."
+            },
+            "icon": "spell_holy_excorcism_02"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "fire-power",
+            "name": "Fire Power",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Fire spells by 2%.",
+            "ranks": [
+                "Increases the damage done by your Fire spells by 2%.",
+                "Increases the damage done by your Fire spells by 4%.",
+                "Increases the damage done by your Fire spells by 6%.",
+                "Increases the damage done by your Fire spells by 8%.",
+                "Increases the damage done by your Fire spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_immolation"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "combustion",
+            "name": "Combustion",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "critical-mass",
+            "status": "unchanged",
+            "description": "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until you have caused 4 non-periodic critical strikes with Fire spells.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "When activated, this spell causes each of your Fire damage spell hits to increase your critical strike chance with Fire damage spells by 10%. This effect lasts until you have caused 4 non-periodic critical strikes with Fire spells."
+            },
+            "icon": "spell_fire_sealoffire"
+        }
+    ]
+}

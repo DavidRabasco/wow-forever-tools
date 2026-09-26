@@ -1,0 +1,311 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/warlock/page-data.json (talentData, Destruction tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "destructive-reach",
+            "name": "Destructive Reach",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your damaging spells by 10%.",
+            "ranks": [
+                "Increases the range of your damaging spells by 10%.",
+                "Increases the range of your damaging spells by 20%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_corpseexplode"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "improved-shadow-bolt",
+            "name": "Improved Shadow Bolt",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 4% for 12 sec.",
+            "ranks": [
+                "Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 4% for 12 sec.",
+                "Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 8% for 12 sec.",
+                "Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 12% for 12 sec.",
+                "Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 16% for 12 sec.",
+                "Your Shadow Bolt critical strikes increase Shadow damage taken by the target from your attacks by 20% for 12 sec."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_shadowbolt"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "bane",
+            "name": "Bane",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.1 sec and your Soul Fire spell by 0.4 sec.",
+            "ranks": [
+                "Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.1 sec and your Soul Fire spell by 0.4 sec.",
+                "Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.2 sec and your Soul Fire spell by 0.8 sec.",
+                "Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.3 sec and your Soul Fire spell by 1.2 sec.",
+                "Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.4 sec and your Soul Fire spell by 1.6 sec.",
+                "Reduces the casting time of your Shadow Bolt, Immolate, and Incinerate spells by 0.5 sec and your Soul Fire spell by 2 sec."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_deathpact"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "molten-skin",
+            "name": "Molten Skin",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces all damage taken by 2%.",
+            "ranks": [
+                "Reduces all damage taken by 2%.",
+                "Reduces all damage taken by 4%.",
+                "Reduces all damage taken by 6%.",
+                "Reduces all damage taken by 8%.",
+                "Reduces all damage taken by 10%."
+            ],
+            "skill": null,
+            "icon": "ability_mage_moltenarmor"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "cataclysm",
+            "name": "Cataclysm",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Mana cost of your Destruction spells by 3%.",
+            "ranks": [
+                "Reduces the Mana cost of your Destruction spells by 3%.",
+                "Reduces the Mana cost of your Destruction spells by 6%.",
+                "Reduces the Mana cost of your Destruction spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_windsofwoe"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "aftermath",
+            "name": "Aftermath",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the initial damage of your Immolate spell by 10% and your Conflagrate spell has a 20% chance to Daze the target, reducing the target's movement speed by 50% for 5 sec.",
+            "ranks": [
+                "Increases the initial damage of your Immolate spell by 10% and your Conflagrate spell has a 20% chance to Daze the target, reducing the target's movement speed by 50% for 5 sec.",
+                "Increases the initial damage of your Immolate spell by 20% and your Conflagrate spell has a 40% chance to Daze the target, reducing the target's movement speed by 50% for 5 sec.",
+                "Increases the initial damage of your Immolate spell by 30% and your Conflagrate spell has a 60% chance to Daze the target, reducing the target's movement speed by 50% for 5 sec.",
+                "Increases the initial damage of your Immolate spell by 40% and your Conflagrate spell has a 80% chance to Daze the target, reducing the target's movement speed by 50% for 5 sec.",
+                "Increases the initial damage of your Immolate spell by 50% and your Conflagrate spell has a 100% chance to Daze the target, reducing the target's movement speed by 50% for 5 sec."
+            ],
+            "skill": null,
+            "icon": "spell_fire_fire"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "ruin",
+            "name": "Ruin",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike damage bonus of your Destruction spells by 20%.",
+            "ranks": [
+                "Increases the critical strike damage bonus of your Destruction spells by 20%.",
+                "Increases the critical strike damage bonus of your Destruction spells by 40%.",
+                "Increases the critical strike damage bonus of your Destruction spells by 60%.",
+                "Increases the critical strike damage bonus of your Destruction spells by 80%.",
+                "Increases the critical strike damage bonus of your Destruction spells by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_shadowwordpain"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "shadowburn",
+            "name": "Shadowburn",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Instantly blasts the target for 66 Shadow damage. If a non-trivial target dies within 8 sec of being hit with Shadowburn, the caster gains a Soul Shard.",
+            "ranks": null,
+            "skill": {
+                "cost": "105 Mana",
+                "range": 30,
+                "type": "Instant",
+                "cd": "15 sec",
+                "description": "Instantly blasts the target for 66 Shadow damage. If a non-trivial target dies within 8 sec of being hit with Shadowburn, the caster gains a Soul Shard."
+            },
+            "icon": "spell_shadow_scourgebuild"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "intensity",
+            "name": "Intensity",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 23% chance to resist interruption caused by damage while casting or channeling any Destruction spell.",
+            "ranks": [
+                "Gives you a 23% chance to resist interruption caused by damage while casting or channeling any Destruction spell.",
+                "Gives you a 47% chance to resist interruption caused by damage while casting or channeling any Destruction spell.",
+                "Gives you a 70% chance to resist interruption caused by damage while casting or channeling any Destruction spell."
+            ],
+            "skill": null,
+            "icon": "spell_fire_lavaspawn"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "agonizing-flames",
+            "name": "Agonizing Flames",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Searing Pain spell by 3% and the damage done by all your Destruction spells by 3%.",
+            "ranks": [
+                "Increases the critical strike chance of your Searing Pain spell by 3% and the damage done by all your Destruction spells by 3%.",
+                "Increases the critical strike chance of your Searing Pain spell by 7% and the damage done by all your Destruction spells by 7%.",
+                "Increases the critical strike chance of your Searing Pain spell by 10% and the damage done by all your Destruction spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_soulburn"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "conflagrate",
+            "name": "Conflagrate",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Ignites a target that is already afflicted by your Immolate spell, dealing 95 Fire damage and consuming your Immolate effect.",
+            "ranks": null,
+            "skill": {
+                "cost": "100 Mana",
+                "range": 30,
+                "type": "Instant",
+                "cd": "10 sec",
+                "description": "Ignites a target that is already afflicted by your Immolate spell, dealing 95 Fire damage and consuming your Immolate effect."
+            },
+            "icon": "spell_fire_fireball"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "pyroclasm",
+            "name": "Pyroclasm",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": "intensity",
+            "status": "unchanged",
+            "description": "Gives your Soul Fire spell a 13% chance to stun the target for 3 sec, and your Rain of Fire and Hellfire spells a 13% chance over their duration to Stun targets they damage for 3 sec.",
+            "ranks": [
+                "Gives your Soul Fire spell a 13% chance to stun the target for 3 sec, and your Rain of Fire and Hellfire spells a 13% chance over their duration to Stun targets they damage for 3 sec.",
+                "Gives your Soul Fire spell a 26% chance to stun the target for 3 sec, and your Rain of Fire and Hellfire spells a 26% chance over their duration to Stun targets they damage for 3 sec."
+            ],
+            "skill": null,
+            "icon": "spell_fire_volcano"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "bane-of-havoc",
+            "name": "Bane of Havoc",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Afflicts the target for 5 min, causing 15% of all damage done by the Warlock to other targets to also be dealt to the cursed target. Bane of Havoc is limited to 1 target, and only one Bane per Warlock can be active on any one target.",
+            "ranks": null,
+            "skill": {
+                "cost": "43 Mana",
+                "range": 30,
+                "type": "Instant",
+                "description": "Afflicts the target for 5 min, causing 15% of all damage done by the Warlock to other targets to also be dealt to the cursed target. Bane of Havoc is limited to 1 target, and only one Bane per Warlock can be active on any one target."
+            },
+            "icon": "ability_warlock_baneofhavoc"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "fire-and-brimstone",
+            "name": "Fire and Brimstone",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": "conflagrate",
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Conflagrate spell by 8%.",
+            "ranks": [
+                "Increases the critical strike chance of your Conflagrate spell by 8%.",
+                "Increases the critical strike chance of your Conflagrate spell by 17%.",
+                "Increases the critical strike chance of your Conflagrate spell by 25%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_meteorstorm"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "shadow-and-flame",
+            "name": "Shadow and Flame",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Hitting an enemy with Conflagrate increases all Shadow damage you deal by 2% for 20 sec, and hitting an enemy with Shadowburn increases all Fire damage you deal by 2% for 20 sec. In addition, Conflagrate has a 20% chance not to consume Immolate, and Shadowburn has a 20% chance to instantly refund a Soul Shard.",
+            "ranks": [
+                "Hitting an enemy with Conflagrate increases all Shadow damage you deal by 2% for 20 sec, and hitting an enemy with Shadowburn increases all Fire damage you deal by 2% for 20 sec. In addition, Conflagrate has a 20% chance not to consume Immolate, and Shadowburn has a 20% chance to instantly refund a Soul Shard.",
+                "Hitting an enemy with Conflagrate increases all Shadow damage you deal by 4% for 20 sec, and hitting an enemy with Shadowburn increases all Fire damage you deal by 4% for 20 sec. In addition, Conflagrate has a 40% chance not to consume Immolate, and Shadowburn has a 40% chance to instantly refund a Soul Shard.",
+                "Hitting an enemy with Conflagrate increases all Shadow damage you deal by 6% for 20 sec, and hitting an enemy with Shadowburn increases all Fire damage you deal by 6% for 20 sec. In addition, Conflagrate has a 60% chance not to consume Immolate, and Shadowburn has a 60% chance to instantly refund a Soul Shard.",
+                "Hitting an enemy with Conflagrate increases all Shadow damage you deal by 8% for 20 sec, and hitting an enemy with Shadowburn increases all Fire damage you deal by 8% for 20 sec. In addition, Conflagrate has a 80% chance not to consume Immolate, and Shadowburn has a 80% chance to instantly refund a Soul Shard.",
+                "Hitting an enemy with Conflagrate increases all Shadow damage you deal by 10% for 20 sec, and hitting an enemy with Shadowburn increases all Fire damage you deal by 10% for 20 sec. In addition, Conflagrate has a 100% chance not to consume Immolate, and Shadowburn has a 100% chance to instantly refund a Soul Shard."
+            ],
+            "skill": null,
+            "icon": "spell_fire_playingwithfire"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "incinerate",
+            "name": "Incinerate",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "bane-of-havoc",
+            "status": "unchanged",
+            "description": "Deals 97 Fire damage to your target and an additional 25% damage if the target is afflicted by Immolate.",
+            "ranks": null,
+            "skill": {
+                "cost": "205 Mana",
+                "range": 30,
+                "type": "2.5 sec",
+                "description": "Deals 97 Fire damage to your target and an additional 25% damage if the target is afflicted by Immolate."
+            },
+            "icon": "spell_fire_burnout"
+        }
+    ]
+}

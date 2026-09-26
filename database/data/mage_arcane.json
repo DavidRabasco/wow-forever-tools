@@ -1,0 +1,331 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/mage/page-data.json (talentData, Arcane tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "wand-specialization",
+            "name": "Wand Specialization",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your damage with Wands by 13%.",
+            "ranks": [
+                "Increases your damage with Wands by 13%.",
+                "Increases your damage with Wands by 25%."
+            ],
+            "skill": null,
+            "icon": "inv_wand_01"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "arcane-focus",
+            "name": "Arcane Focus",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Improves your chance to hit with Arcane spells by 1%.",
+            "ranks": [
+                "Improves your chance to hit with Arcane spells by 1%.",
+                "Improves your chance to hit with Arcane spells by 2%.",
+                "Improves your chance to hit with Arcane spells by 3%.",
+                "Improves your chance to hit with Arcane spells by 4%.",
+                "Improves your chance to hit with Arcane spells by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_devotion"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "improved-channeling",
+            "name": "Improved Channeling",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 20% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 14% chance while casting Arcane Blast.",
+            "ranks": [
+                "Gives you a 20% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 14% chance while casting Arcane Blast.",
+                "Gives you a 40% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 28% chance while casting Arcane Blast.",
+                "Gives you a 60% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 42% chance while casting Arcane Blast.",
+                "Gives you a 80% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 56% chance while casting Arcane Blast.",
+                "Gives you a 100% chance to avoid interruption caused by damage while channeling Arcane Missiles and a 70% chance while casting Arcane Blast."
+            ],
+            "skill": null,
+            "icon": "spell_nature_starfall"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "arcane-subtlety",
+            "name": "Arcane Subtlety",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces your target's resistance to all your spells by 8 and reduces the threat caused by your Arcane spells by 15%.",
+            "ranks": [
+                "Reduces your target's resistance to all your spells by 8 and reduces the threat caused by your Arcane spells by 15%.",
+                "Reduces your target's resistance to all your spells by 15 and reduces the threat caused by your Arcane spells by 30%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_dispelmagic"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "magic-absorption",
+            "name": "Magic Absorption",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases all your resistances by 5 and causes all spells you fully resist to restore 1% of your total mana. Cannot trigger more often than 1 time per sec.",
+            "ranks": [
+                "Increases all your resistances by 5 and causes all spells you fully resist to restore 1% of your total mana. Cannot trigger more often than 1 time per sec.",
+                "Increases all your resistances by 10 and causes all spells you fully resist to restore 2% of your total mana. Cannot trigger more often than 1 time per sec."
+            ],
+            "skill": null,
+            "icon": "spell_nature_astralrecalgroup"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "arcane-concentration",
+            "name": "Arcane Concentration",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 2% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+            "ranks": [
+                "Gives you a 2% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+                "Gives you a 4% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+                "Gives you a 6% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+                "Gives you a 8% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+                "Gives you a 10% chance of entering a Clearcasting state after any damage spell hits a target. The Clearcasting state reduces the mana cost of your next damage spell by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_manaburn"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "arcane-resilience",
+            "name": "Arcane Resilience",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Armor by an amount equal to 25% of your Intellect.",
+            "ranks": [
+                "Increases your Armor by an amount equal to 25% of your Intellect.",
+                "Increases your Armor by an amount equal to 50% of your Intellect."
+            ],
+            "skill": null,
+            "icon": "spell_arcane_arcaneresilience"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "arcane-geometry",
+            "name": "Arcane Geometry",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your Arcane spells by 3 yards.",
+            "ranks": [
+                "Increases the range of your Arcane spells by 3 yards.",
+                "Increases the range of your Arcane spells by 6 yards."
+            ],
+            "skill": null,
+            "icon": "inv_ability_mage_radiantspark"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "arcane-impact",
+            "name": "Arcane Impact",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Arcane spells by 2%.",
+            "ranks": [
+                "Increases the critical strike chance of your Arcane spells by 2%.",
+                "Increases the critical strike chance of your Arcane spells by 4%.",
+                "Increases the critical strike chance of your Arcane spells by 6%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_wispsplode"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "arcane-blast",
+            "name": "Arcane Blast",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Blasts the target with energy, dealing 54 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast.",
+            "ranks": null,
+            "skill": {
+                "cost": "122 Mana",
+                "range": 30,
+                "type": "2.5 sec",
+                "description": "Blasts the target with energy, dealing 54 Arcane damage. Each time you cast Arcane Blast, the damage of all your other spells is increased by 10% and the mana cost of Arcane Blast is increased by 175%. Effect stacks up to 4 times and lasts 8 sec or until any other damage spell is cast."
+            },
+            "icon": "spell_arcane_blast"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "arcane-shielding",
+            "name": "Arcane Shielding",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Decreases the Mana lost per point of damage taken when your Mana Shield spell is active by 17% and increases the resistances granted by your Mage Armor spell by 25%.",
+            "ranks": [
+                "Decreases the Mana lost per point of damage taken when your Mana Shield spell is active by 17% and increases the resistances granted by your Mage Armor spell by 25%.",
+                "Decreases the Mana lost per point of damage taken when your Mana Shield spell is active by 33% and increases the resistances granted by your Mage Armor spell by 50%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_detectlesserinvisibility"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "improved-counterspell",
+            "name": "Improved Counterspell",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Counterspell also Silences the target for 2 sec.",
+            "ranks": [
+                "Your Counterspell also Silences the target for 2 sec.",
+                "Your Counterspell also Silences the target for 4 sec."
+            ],
+            "skill": null,
+            "icon": "spell_frost_iceshock"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "arcane-meditation",
+            "name": "Arcane Meditation",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": "arcane-concentration",
+            "status": "unchanged",
+            "description": "Allows 17% of your Mana regeneration to continue while casting.",
+            "ranks": [
+                "Allows 17% of your Mana regeneration to continue while casting.",
+                "Allows 33% of your Mana regeneration to continue while casting.",
+                "Allows 50% of your mana regeneration to continue while casting."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_siphonmana"
+        },
+        {
+            "row": 4,
+            "col": 4,
+            "slug": "missile-barrage",
+            "name": "Missile Barrage",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Arcane Blast spell a 40% chance, and your Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec.",
+            "ranks": [
+                "Gives your Arcane Blast spell a 40% chance, and your Fireball, Frostbolt, and Frostfire Bolt spells a 20% chance to reduce the channeled duration of your next Arcane Missiles spell by 50%, reduce the Mana cost by 100%, and missiles fire every 0.5 sec."
+            ],
+            "skill": null,
+            "icon": "ability_mage_missilebarrage"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "presence-of-mind",
+            "name": "Presence of Mind",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "When activated, your next Mage spell with a casting time less than 10 sec becomes an instant cast spell.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "When activated, your next Mage spell with a casting time less than 10 sec becomes an instant cast spell."
+            },
+            "icon": "spell_nature_enchantarmor"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "arcane-mind",
+            "name": "Arcane Mind",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Intellect by 2% and increases the critical strike damage bonus of your Arcane spells by 20%.",
+            "ranks": [
+                "Increases your Intellect by 2% and increases the critical strike damage bonus of your Arcane spells by 20%.",
+                "Increases your Intellect by 4% and increases the critical strike damage bonus of your Arcane spells by 40%.",
+                "Increases your Intellect by 6% and increases the critical strike damage bonus of your Arcane spells by 60%.",
+                "Increases your Intellect by 8% and increases the critical strike damage bonus of your Arcane spells by 80%.",
+                "Increases your Intellect by 10% and increases the critical strike damage bonus of your Arcane spells by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_charm"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "arcane-instability",
+            "name": "Arcane Instability",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your spells by 1% and your critical strike chance by 1%.",
+            "ranks": [
+                "Increases the damage done by your spells by 1% and your critical strike chance by 1%.",
+                "Increases the damage done by your spells by 2% and your critical strike chance by 2%.",
+                "Increases the damage done by your spells by 3% and your critical strike chance by 3%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_teleport"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "arcane-power",
+            "name": "Arcane Power",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "presence-of-mind",
+            "status": "unchanged",
+            "description": "For the next 15 sec, your spells deal 30% more damage while costing 30% more mana to cast.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "For the next 15 sec, your spells deal 30% more damage while costing 30% more mana to cast."
+            },
+            "icon": "spell_nature_lightning"
+        }
+    ]
+}

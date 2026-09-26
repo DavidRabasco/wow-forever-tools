@@ -1,0 +1,322 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/warlock/page-data.json (talentData, Affliction tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "improved-life-tap",
+            "name": "Improved Life Tap",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the amount of Mana awarded by your Life Tap spell by 10%.",
+            "ranks": [
+                "Increases the amount of Mana awarded by your Life Tap spell by 10%.",
+                "Increases the amount of Mana awarded by your Life Tap spell by 20%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_burningspirit"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "suppression",
+            "name": "Suppression",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Improves your chance to hit by 1% and reduces all threat you generate by 4%.",
+            "ranks": [
+                "Improves your chance to hit by 1% and reduces all threat you generate by 4%.",
+                "Improves your chance to hit by 2% and reduces all threat you generate by 8%.",
+                "Improves your chance to hit by 3% and reduces all threat you generate by 12%.",
+                "Improves your chance to hit by 4% and reduces all threat you generate by 16%.",
+                "Improves your chance to hit by 5% and reduces all threat you generate by 20%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_unsummonbuilding"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "improved-corruption",
+            "name": "Improved Corruption",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the casting time of your Corruption spell by 0.4 sec and increases the damage it deals by 2%.",
+            "ranks": [
+                "Reduces the casting time of your Corruption spell by 0.4 sec and increases the damage it deals by 2%.",
+                "Reduces the casting time of your Corruption spell by 0.8 sec and increases the damage it deals by 4%.",
+                "Reduces the casting time of your Corruption spell by 1.2 sec and increases the damage it deals by 6%.",
+                "Reduces the casting time of your Corruption spell by 1.6 sec and increases the damage it deals by 8%.",
+                "Reduces the casting time of your Corruption spell by 2 sec and increases the damage it deals by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_abominationexplosion"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "malediction",
+            "name": "Malediction",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases all periodic damage done by your Warlock spells by 1%.",
+            "ranks": [
+                "Increases all periodic damage done by your Warlock spells by 1%.",
+                "Increases all periodic damage done by your Warlock spells by 2%.",
+                "Increases all periodic damage done by your Warlock spells by 3%.",
+                "Increases all periodic damage done by your Warlock spells by 4%.",
+                "Increases all periodic damage done by your Warlock spells by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_curseofachimonde"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "soul-harvesting",
+            "name": "Soul Harvesting",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "You gain Soul Harvest for 10 sec if a victim is killed while afflicted with your Drain Soul. Soul Harvest allows your Mana to regenerate at 50% of normal speed while you are casting spells, and grants a 50% increase to your Mana regeneration.",
+            "ranks": [
+                "You gain Soul Harvest for 10 sec if a victim is killed while afflicted with your Drain Soul. Soul Harvest allows your Mana to regenerate at 50% of normal speed while you are casting spells, and grants a 50% increase to your Mana regeneration.",
+                "You gain Soul Harvest for 10 sec if a victim is killed while afflicted with your Drain Soul. Soul Harvest allows your Mana to regenerate at 100% of normal speed while you are casting spells, and grants a 100% increase to your Mana regeneration."
+            ],
+            "skill": null,
+            "icon": "inv_elemental_primal_shadow"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "improved-drains",
+            "name": "Improved Drains",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 7%.",
+            "ranks": [
+                "Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 7%.",
+                "Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 13%.",
+                "Increases health drained or damage done by your Drain Life, Drain Soul, and Wrack spells by 20%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_haunting"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "improved-bane-of-agony",
+            "name": "Improved Bane of Agony",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Bane of Agony by 5%.",
+            "ranks": [
+                "Increases the damage done by your Bane of Agony by 5%.",
+                "Increases the damage done by your Bane of Agony by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_curseofsargeras"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "fel-concentration",
+            "name": "Fel Concentration",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 23% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells.",
+            "ranks": [
+                "Gives you a 23% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells.",
+                "Gives you a 47% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells.",
+                "Gives you a 70% chance to avoid interruption caused by damage while channeling or casting your Drain Life, Drain Mana, Drain Soul, or Wrack spells."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_fingerofdeath"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "amplify-curse",
+            "name": "Amplify Curse",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 20%. Lasts 30 sec.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "Increases the effect of your next Curse of Weakness or Bane of Agony by 50%, or your next Curse of Exhaustion by 20%. Lasts 30 sec."
+            },
+            "icon": "spell_shadow_contagion"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "pandemic",
+            "name": "Pandemic",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike damage bonus of your Corruption, Bane of Agony, Bane of Doom, Drain Soul, Drain Life, Siphon Life, and Wrack spells by 33%.",
+            "ranks": [
+                "Increases the critical strike damage bonus of your Corruption, Bane of Agony, Bane of Doom, Drain Soul, Drain Life, Siphon Life, and Wrack spells by 33%.",
+                "Increases the critical strike damage bonus of your Corruption, Bane of Agony, Bane of Doom, Drain Soul, Drain Life, Siphon Life, and Wrack spells by 67%.",
+                "Increases the critical strike damage bonus of your Corruption, Bane of Agony, Bane of Doom, Drain Soul, Drain Life, Siphon Life, and Wrack spells by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_unstableaffliction_2"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "malevolence",
+            "name": "Malevolence",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical effect chance of your Shadow spells by 1%.",
+            "ranks": [
+                "Increases the critical effect chance of your Shadow spells by 1%.",
+                "Increases the critical effect chance of your Shadow spells by 2%.",
+                "Increases the critical effect chance of your Shadow spells by 3%.",
+                "Increases the critical effect chance of your Shadow spells by 4%.",
+                "Increases the critical effect chance of your Shadow spells by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_focusedpower"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "nightfall",
+            "name": "Nightfall",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Corruption, Drain Soul, Drain Life, and Wrack spells a 2% chance to cause you to enter a Shadow Trance after damaging the opponent. The Shadow Trance reduces the casting time of your next Shadow Bolt spell by 100%.",
+            "ranks": [
+                "Gives your Corruption, Drain Soul, Drain Life, and Wrack spells a 2% chance to cause you to enter a Shadow Trance after damaging the opponent. The Shadow Trance reduces the casting time of your next Shadow Bolt spell by 100%.",
+                "Gives your Corruption, Drain Soul, Drain Life, and Wrack spells a 4% chance to cause you to enter a Shadow Trance after damaging the opponent. The Shadow Trance reduces the casting time of your next Shadow Bolt spell by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_twilight"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "curse-of-exhaustion",
+            "name": "Curse of Exhaustion",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": "amplify-curse",
+            "status": "unchanged",
+            "description": "Reduces the target's movement speed by 30% for 12 sec. Only one Curse per Warlock can be active on any one target.",
+            "ranks": null,
+            "skill": {
+                "cost": "69 Mana",
+                "range": 30,
+                "type": "Instant",
+                "description": "Reduces the target's movement speed by 30% for 12 sec. Only one Curse per Warlock can be active on any one target."
+            },
+            "icon": "spell_shadow_grimward"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "siphon-life",
+            "name": "Siphon Life",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Transfers 11 health from the target to the caster every 3 sec. Lasts 30 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "150 Mana",
+                "range": 30,
+                "type": "Instant",
+                "description": "Transfers 11 health from the target to the caster every 3 sec. Lasts 30 sec."
+            },
+            "icon": "spell_shadow_requiem"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "soul-siphon",
+            "name": "Soul Siphon",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done or health drained by your Drain Life, Drain Soul, and Wrack spells by 4% per each of your other Affliction effects active on the target, up to a maximum increase of 12%.",
+            "ranks": [
+                "Increases the damage done or health drained by your Drain Life, Drain Soul, and Wrack spells by 4% per each of your other Affliction effects active on the target, up to a maximum increase of 12%.",
+                "Increases the damage done or health drained by your Drain Life, Drain Soul, and Wrack spells by 8% per each of your other Affliction effects active on the target, up to a maximum increase of 24%.",
+                "Increases the damage done or health drained by your Drain Life, Drain Soul, and Wrack spells by 12% per each of your other Affliction effects active on the target, up to a maximum increase of 36%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_lifedrain02"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "shadow-mastery",
+            "name": "Shadow Mastery",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage dealt or life drained by your Shadow spells by 1%.",
+            "ranks": [
+                "Increases the damage dealt or life drained by your Shadow spells by 1%.",
+                "Increases the damage dealt or life drained by your Shadow spells by 2%.",
+                "Increases the damage dealt or life drained by your Shadow spells by 3%.",
+                "Increases the damage dealt or life drained by your Shadow spells by 4%.",
+                "Increases the damage dealt or life drained by your Shadow spells by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_shadetruesight"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "wrack",
+            "name": "Wrack",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "siphon-life",
+            "status": "unchanged",
+            "description": "Tears the target apart from within, dealing 36 Shadow damage every 1 sec and increasing the damage they take from your other Shadow damage over time effects by 10%. Lasts 6 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "200 Mana",
+                "range": 30,
+                "type": "Channeled",
+                "description": "Tears the target apart from within, dealing 36 Shadow damage every 1 sec and increasing the damage they take from your other Shadow damage over time effects by 10%. Lasts 6 sec."
+            },
+            "icon": "ability_deathknight_hemorrhagicfever"
+        }
+    ]
+}

@@ -1,0 +1,356 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/mage/page-data.json (talentData, Frost tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "frost-warding",
+            "name": "Frost Warding",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the Armor and resistance given by your Frost Armor and Ice Armor spells by 15%. In addition, gives your Frost Ward a 10% chance to reflect Frost spells and effects while active.",
+            "ranks": [
+                "Increases the Armor and resistance given by your Frost Armor and Ice Armor spells by 15%. In addition, gives your Frost Ward a 10% chance to reflect Frost spells and effects while active.",
+                "Increases the Armor and resistance given by your Frost Armor and Ice Armor spells by 30%. In addition, gives your Frost Ward a 20% chance to reflect Frost spells and effects while active."
+            ],
+            "skill": null,
+            "icon": "spell_frost_frostward"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "improved-frostbolt",
+            "name": "Improved Frostbolt",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the casting time of your Frostbolt spell by 0.1 sec.",
+            "ranks": [
+                "Reduces the casting time of your Frostbolt spell by 0.1 sec.",
+                "Reduces the casting time of your Frostbolt spell by 0.2 sec.",
+                "Reduces the casting time of your Frostbolt spell by 0.3 sec.",
+                "Reduces the casting time of your Frostbolt spell by 0.4 sec.",
+                "Reduces the casting time of your Frostbolt spell by 0.5 sec."
+            ],
+            "skill": null,
+            "icon": "spell_frost_frostbolt02"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "elemental-precision",
+            "name": "Elemental Precision",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Improves your chance to hit with Frost and Fire spells by 1%.",
+            "ranks": [
+                "Improves your chance to hit with Frost and Fire spells by 1%.",
+                "Improves your chance to hit with Frost and Fire spells by 2%.",
+                "Improves your chance to hit with Frost and Fire spells by 3%.",
+                "Improves your chance to hit with Frost and Fire spells by 4%.",
+                "Improves your chance to hit with Frost and Fire spells by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_ice_magicdamage"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "ice-shards",
+            "name": "Ice Shards",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike damage bonus of your Frost spells by 20%.",
+            "ranks": [
+                "Increases the critical strike damage bonus of your Frost spells by 20%.",
+                "Increases the critical strike damage bonus of your Frost spells by 40%.",
+                "Increases the critical strike damage bonus of your Frost spells by 60%.",
+                "Increases the critical strike damage bonus of your Frost spells by 80%.",
+                "Increases the critical strike damage bonus of your Frost spells by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_frost_iceshard"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "permafrost",
+            "name": "Permafrost",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the duration of your Chill effects by 11% and reduces the target's speed by an additional 3%.",
+            "ranks": [
+                "Increases the duration of your Chill effects by 11% and reduces the target's speed by an additional 3%.",
+                "Increases the duration of your Chill effects by 22% and reduces the target's speed by an additional 7%.",
+                "Increases the duration of your Chill effects by 33% and reduces the target's speed by an additional 10%."
+            ],
+            "skill": null,
+            "icon": "spell_frost_wisp"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "improved-frost-nova",
+            "name": "Improved Frost Nova",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Frost Nova spell by 2 sec.",
+            "ranks": [
+                "Reduces the cooldown of your Frost Nova spell by 2 sec.",
+                "Reduces the cooldown of your Frost Nova spell by 4 sec."
+            ],
+            "skill": null,
+            "icon": "spell_frost_freezingbreath"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "frostbite",
+            "name": "Frostbite",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Chill effects a 5% chance to Freeze the target for 5 sec.",
+            "ranks": [
+                "Gives your Chill effects a 5% chance to Freeze the target for 5 sec.",
+                "Gives your Chill effects a 10% chance to Freeze the target for 5 sec.",
+                "Gives your Chill effects a 15% chance to Freeze the target for 5 sec."
+            ],
+            "skill": null,
+            "icon": "spell_frost_frostarmor"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "piercing-ice",
+            "name": "Piercing Ice",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Frost spells by 2%.",
+            "ranks": [
+                "Increases the damage done by your Frost spells by 2%.",
+                "Increases the damage done by your Frost spells by 4%.",
+                "Increases the damage done by your Frost spells by 6%."
+            ],
+            "skill": null,
+            "icon": "spell_frost_frostbolt"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "frost-channeling",
+            "name": "Frost Channeling",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the mana cost of your Frost spells by 5% and reduces the threat caused by your Frost spells by 10%.",
+            "ranks": [
+                "Reduces the mana cost of your Frost spells by 5% and reduces the threat caused by your Frost spells by 10%.",
+                "Reduces the mana cost of your Frost spells by 10% and reduces the threat caused by your Frost spells by 20%.",
+                "Reduces the mana cost of your Frost spells by 15% and reduces the threat caused by your Frost spells by 30%."
+            ],
+            "skill": null,
+            "icon": "spell_frost_stun"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "ice-lance",
+            "name": "Ice Lance",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Deals 28 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets.",
+            "ranks": null,
+            "skill": {
+                "cost": "45 Mana",
+                "range": 30,
+                "type": "Instant",
+                "description": "Deals 28 Frost damage to an enemy target. Deals 300% increased damage to Frozen targets."
+            },
+            "icon": "spell_frost_frostblast"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "improved-blizzard",
+            "name": "Improved Blizzard",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Adds a chill effect to your Blizzard spell. This effect lowers the target's movement speed by 15% for 1.5 sec.",
+            "ranks": [
+                "Adds a chill effect to your Blizzard spell. This effect lowers the target's movement speed by 15% for 1.5 sec.",
+                "Adds a chill effect to your Blizzard spell. This effect lowers the target's movement speed by 25% for 1.5 sec.",
+                "Adds a chill effect to your Blizzard spell. This effect lowers the target's movement speed by 40% for 1.5 sec."
+            ],
+            "skill": null,
+            "icon": "spell_frost_icestorm"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "arctic-reach",
+            "name": "Arctic Reach",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%.",
+            "ranks": [
+                "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 10%.",
+                "Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost Nova and Cone of Cold spells by 20%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_darkritual"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "ice-block",
+            "name": "Ice Block",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move, or cast spells.",
+            "ranks": null,
+            "skill": {
+                "cost": "15 Mana",
+                "type": "Instant",
+                "cd": "5 min",
+                "description": "You become encased in a block of ice, protecting you from all physical attacks and spells for 10 sec, but during that time you cannot attack, move, or cast spells."
+            },
+            "icon": "spell_frost_frost"
+        },
+        {
+            "row": 4,
+            "col": 4,
+            "slug": "shatter",
+            "name": "Shatter",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of all your spells against Frozen targets by 17%.",
+            "ranks": [
+                "Increases the critical strike chance of all your spells against Frozen targets by 17%.",
+                "Increases the critical strike chance of all your spells against Frozen targets by 33%.",
+                "Increases the critical strike chance of all your spells against Frozen targets by 50%."
+            ],
+            "skill": null,
+            "icon": "spell_frost_frostshock"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "improved-cone-of-cold",
+            "name": "Improved Cone of Cold",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage dealt by your Cone of Cold spell by 12%.",
+            "ranks": [
+                "Increases the damage dealt by your Cone of Cold spell by 12%.",
+                "Increases the damage dealt by your Cone of Cold spell by 23%.",
+                "Increases the damage dealt by your Cone of Cold spell by 35%."
+            ],
+            "skill": null,
+            "icon": "spell_frost_glacier"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "cold-snap",
+            "name": "Cold Snap",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Finishes the remaining cooldown on all your other Frost spells.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "10 min",
+                "description": "Finishes the remaining cooldown on all your other Frost spells."
+            },
+            "icon": "spell_frost_wizardmark"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "fingers-of-frost",
+            "name": "Fingers of Frost",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": "ice-lance",
+            "status": "unchanged",
+            "description": "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 1 spells cast as if the target were Frozen. Lasts 15 sec.",
+            "ranks": [
+                "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 1 spells cast as if the target were Frozen. Lasts 15 sec.",
+                "Gives your Chill effects a 15% chance to grant you the Fingers of Frost effect, which treats your next 2 spells cast as if the target were Frozen. Lasts 15 sec."
+            ],
+            "skill": null,
+            "icon": "ability_mage_wintersgrasp"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "winters-chill",
+            "name": "Winter's Chill",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Frost damage spells a 20% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 1 times.",
+            "ranks": [
+                "Gives your Frost damage spells a 20% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 1 times.",
+                "Gives your Frost damage spells a 40% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 2 times.",
+                "Gives your Frost damage spells a 60% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 3 times.",
+                "Gives your Frost damage spells a 80% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 4 times.",
+                "Gives your Frost damage spells a 100% chance to apply the Winter's Chill effect, which increases the chance your Ice Lance and Frostbolt spells will critically hit the target by 2% for 15 sec. Stacks up to 5 times."
+            ],
+            "skill": null,
+            "icon": "spell_frost_chillingblast"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "ice-barrier",
+            "name": "Ice Barrier",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "cold-snap",
+            "status": "unchanged",
+            "description": "Instantly shields you, absorbing 431 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage.",
+            "ranks": null,
+            "skill": {
+                "cost": "305 Mana",
+                "type": "Instant",
+                "cd": "30 sec",
+                "description": "Instantly shields you, absorbing 431 damage. Lasts 1 min. While the shield holds, your spellcasts will not be interrupted or delayed from taking damage."
+            },
+            "icon": "spell_ice_lament"
+        }
+    ]
+}

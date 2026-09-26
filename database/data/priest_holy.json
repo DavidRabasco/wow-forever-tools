@@ -1,0 +1,319 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/priest/page-data.json (talentData, Holy tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "twilight-focus",
+            "name": "Twilight Focus",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 23% chance to avoid interruption caused by damage while casting any spell.",
+            "ranks": [
+                "Gives you a 23% chance to avoid interruption caused by damage while casting any spell.",
+                "Gives you a 47% chance to avoid interruption caused by damage while casting any spell.",
+                "Gives you a 70% chance to avoid interruption caused by damage while casting any spell."
+            ],
+            "skill": null,
+            "icon": "spell_holy_healingfocus"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "improved-renew",
+            "name": "Improved Renew",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the amount healed by your Renew spell by 5%.",
+            "ranks": [
+                "Increases the amount healed by your Renew spell by 5%.",
+                "Increases the amount healed by your Renew spell by 10%.",
+                "Increases the amount healed by your Renew spell by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_renew"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "holy-specialization",
+            "name": "Holy Specialization",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the critical effect chance of your Holy spells by 1%.",
+            "ranks": [
+                "Increases the critical effect chance of your Holy spells by 1%.",
+                "Increases the critical effect chance of your Holy spells by 2%.",
+                "Increases the critical effect chance of your Holy spells by 3%.",
+                "Increases the critical effect chance of your Holy spells by 4%.",
+                "Increases the critical effect chance of your Holy spells by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_sealofsalvation"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "spell-warding",
+            "name": "Spell Warding",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces all spell damage taken by 2%.",
+            "ranks": [
+                "Reduces all spell damage taken by 2%.",
+                "Reduces all spell damage taken by 4%.",
+                "Reduces all spell damage taken by 6%.",
+                "Reduces all spell damage taken by 8%.",
+                "Reduces all spell damage taken by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_spellwarding"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "divine-fury",
+            "name": "Divine Fury",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the casting time of your Smite, Holy Fire, Heal, and Greater Heal spells by 0.1 sec.",
+            "ranks": [
+                "Reduces the casting time of your Smite, Holy Fire, Heal, and Greater Heal spells by 0.1 sec.",
+                "Reduces the casting time of your Smite, Holy Fire, Heal, and Greater Heal spells by 0.2 sec.",
+                "Reduces the casting time of your Smite, Holy Fire, Heal, and Greater Heal spells by 0.3 sec.",
+                "Reduces the casting time of your Smite, Holy Fire, Heal, and Greater Heal spells by 0.4 sec.",
+                "Reduces the casting time of your Smite, Holy Fire, Heal, and Greater Heal spells by 0.5 sec."
+            ],
+            "skill": null,
+            "icon": "spell_holy_sealofwrath"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "holy-nova",
+            "name": "Holy Nova",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Causes an explosion of holy light around the caster, causing 27 Holy damage to all enemy targets within 10 yards and healing all party members within 10 yards for 51. These effects cause no threat.",
+            "ranks": null,
+            "skill": {
+                "cost": "185 Mana",
+                "type": "Instant",
+                "description": "Causes an explosion of holy light around the caster, causing 27 Holy damage to all enemy targets within 10 yards and healing all party members within 10 yards for 51. These effects cause no threat."
+            },
+            "icon": "spell_holy_holynova"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "blessed-recovery",
+            "name": "Blessed Recovery",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "After being struck by a melee or ranged critical hit, or suffering more than 30% of your maximum Health from a single attack, heal 8% of the damage taken over 6 sec. Refreshing this effect carries over any remaining healing.",
+            "ranks": [
+                "After being struck by a melee or ranged critical hit, or suffering more than 30% of your maximum Health from a single attack, heal 8% of the damage taken over 6 sec. Refreshing this effect carries over any remaining healing.",
+                "After being struck by a melee or ranged critical hit, or suffering more than 30% of your maximum Health from a single attack, heal 17% of the damage taken over 6 sec. Refreshing this effect carries over any remaining healing.",
+                "After being struck by a melee or ranged critical hit, or suffering more than 30% of your maximum Health from a single attack, heal 25% of the damage taken over 6 sec. Refreshing this effect carries over any remaining healing."
+            ],
+            "skill": null,
+            "icon": "spell_holy_blessedrecovery"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "inspiration",
+            "name": "Inspiration",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your non-periodic critical heals increase your target's Armor by 8% for 15 sec.",
+            "ranks": [
+                "Your non-periodic critical heals increase your target's Armor by 8% for 15 sec.",
+                "Your non-periodic critical heals increase your target's Armor by 17% for 15 sec.",
+                "Your non-periodic critical heals increase your target's Armor by 25% for 15 sec."
+            ],
+            "skill": null,
+            "icon": "spell_holy_layonhands"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "holy-reach",
+            "name": "Holy Reach",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your Smite and Holy Fire spells and the radius of your Prayer of Healing and Holy Nova spells by 10%.",
+            "ranks": [
+                "Increases the range of your Smite and Holy Fire spells and the radius of your Prayer of Healing and Holy Nova spells by 10%.",
+                "Increases the range of your Smite and Holy Fire spells and the radius of your Prayer of Healing and Holy Nova spells by 20%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_purify"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "improved-healing",
+            "name": "Improved Healing",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Mana cost of your Lesser Heal, Heal, Greater Heal, Penance, and Prayer of Mending spells by 5%.",
+            "ranks": [
+                "Reduces the Mana cost of your Lesser Heal, Heal, Greater Heal, Penance, and Prayer of Mending spells by 5%.",
+                "Reduces the Mana cost of your Lesser Heal, Heal, Greater Heal, Penance, and Prayer of Mending spells by 10%.",
+                "Reduces the Mana cost of your Lesser Heal, Heal, Greater Heal, Penance, and Prayer of Mending spells by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_heal02"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "searing-light",
+            "name": "Searing Light",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": "divine-fury",
+            "status": "unchanged",
+            "description": "Increases your Holy damage done by 2%, and gives a 5% chance each time your Holy Fire spell deals periodic damage for your next Holy Nova to cost no Mana.",
+            "ranks": [
+                "Increases your Holy damage done by 2%, and gives a 5% chance each time your Holy Fire spell deals periodic damage for your next Holy Nova to cost no Mana.",
+                "Increases your Holy damage done by 5%, and gives a 10% chance each time your Holy Fire spell deals periodic damage for your next Holy Nova to cost no Mana."
+            ],
+            "skill": null,
+            "icon": "spell_holy_searinglightpriest"
+        },
+        {
+            "row": 4,
+            "col": 4,
+            "slug": "binding-heal",
+            "name": "Binding Heal",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Heals a friendly target and the caster for 247. Low threat.",
+            "ranks": null,
+            "skill": {
+                "cost": "155 Mana",
+                "range": 40,
+                "type": "1.5 sec",
+                "description": "Heals a friendly target and the caster for 247. Low threat."
+            },
+            "icon": "spell_holy_blindingheal"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "litany-of-light",
+            "name": "Litany of Light",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "When you cast a healing spell, gain Mana equal to 5% of the base cost of the spell if your previous heal was a different spell.",
+            "ranks": [
+                "When you cast a healing spell, gain Mana equal to 5% of the base cost of the spell if your previous heal was a different spell.",
+                "When you cast a healing spell, gain Mana equal to 10% of the base cost of the spell if your previous heal was a different spell."
+            ],
+            "skill": null,
+            "icon": "inv_scroll_07"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "spirit-of-redemption",
+            "name": "Spirit of Redemption",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Upon death, the priest becomes the Spirit of Redemption for 15 sec. The Spirit of Redemption cannot move, attack, be attacked or targeted by any spells or effects. While in this form the priest can cast any healing spell free of cost. When the effect ends, the priest dies.",
+            "ranks": [
+                "Upon death, the priest becomes the Spirit of Redemption for 15 sec. The Spirit of Redemption cannot move, attack, be attacked or targeted by any spells or effects. While in this form the priest can cast any healing spell free of cost. When the effect ends, the priest dies."
+            ],
+            "skill": null,
+            "icon": "inv_enchant_essenceeternallarge"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "spiritual-guidance",
+            "name": "Spiritual Guidance",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your spell healing by up to 5% of your total Spirit and your spell damage by up to 1% of your total Spirit.",
+            "ranks": [
+                "Increases your spell healing by up to 5% of your total Spirit and your spell damage by up to 1% of your total Spirit.",
+                "Increases your spell healing by up to 10% of your total Spirit and your spell damage by up to 3% of your total Spirit.",
+                "Increases your spell healing by up to 15% of your total Spirit and your spell damage by up to 5% of your total Spirit.",
+                "Increases your spell healing by up to 20% of your total Spirit and your spell damage by up to 6% of your total Spirit.",
+                "Increases your spell healing by up to 25% of your total Spirit and your spell damage by up to 8% of your total Spirit."
+            ],
+            "skill": null,
+            "icon": "spell_holy_spiritualguidence"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "spiritual-healing",
+            "name": "Spiritual Healing",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the amount healed by your spells by 3%.",
+            "ranks": [
+                "Increases the amount healed by your spells by 3%.",
+                "Increases the amount healed by your spells by 7%.",
+                "Increases the amount healed by your spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_moonglow"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "prayer-of-mending",
+            "name": "Prayer of Mending",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "spirit-of-redemption",
+            "status": "unchanged",
+            "description": "Places a spell on the target that heals them the next time they take damage or receive non-periodic healing. When the heal occurs, Prayer of Mending jumps to a party or raid member within 20 yards. Jumps up to 5 times and lasts 30 sec after each jump. This spell can only be placed on one target at a time per caster.",
+            "ranks": null,
+            "skill": {
+                "cost": "210 Mana",
+                "range": 40,
+                "type": "Instant",
+                "cd": "10 sec",
+                "description": "Places a spell on the target that heals them the next time they take damage or receive non-periodic healing. When the heal occurs, Prayer of Mending jumps to a party or raid member within 20 yards. Jumps up to 5 times and lasts 30 sec after each jump. This spell can only be placed on one target at a time per caster."
+            },
+            "icon": "spell_holy_prayerofmendingtga"
+        }
+    ]
+}

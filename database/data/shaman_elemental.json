@@ -1,0 +1,297 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/shaman/page-data.json (talentData, Elemental tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "convection",
+            "name": "Convection",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 2%.",
+            "ranks": [
+                "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 2%.",
+                "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 4%.",
+                "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 6%.",
+                "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 8%.",
+                "Reduces the mana cost of your Shock, Lightning Bolt, Lava Burst, and Chain Lightning spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_wispsplode"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "concussion",
+            "name": "Concussion",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 1%.",
+            "ranks": [
+                "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 1%.",
+                "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 2%.",
+                "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 3%.",
+                "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 4%.",
+                "Increases the damage done by your Lightning Bolt, Chain Lightning, and Earth Shock spells by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_earthshock"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "elemental-warding",
+            "name": "Elemental Warding",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces damage taken from Fire, Frost, and Nature effects by 3%.",
+            "ranks": [
+                "Reduces damage taken from Fire, Frost, and Nature effects by 3%.",
+                "Reduces damage taken from Fire, Frost, and Nature effects by 7%.",
+                "Reduces damage taken from Fire, Frost, and Nature effects by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_spiritarmor"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "reverberation",
+            "name": "Reverberation",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Shock spells by 0.2 sec.",
+            "ranks": [
+                "Reduces the cooldown of your Shock spells by 0.2 sec.",
+                "Reduces the cooldown of your Shock spells by 0.4 sec.",
+                "Reduces the cooldown of your Shock spells by 0.6 sec.",
+                "Reduces the cooldown of your Shock spells by 0.8 sec.",
+                "Reduces the cooldown of your Shock spells by 1.0 sec."
+            ],
+            "skill": null,
+            "icon": "spell_frost_frostward"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "call-of-flame",
+            "name": "Call of Flame",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 5%.",
+            "ranks": [
+                "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 5%.",
+                "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 10%.",
+                "Increases the damage done by your Fire Totems and by your Flame Shock, Fire Nova, and Lava Burst spells by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_immolation"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "elemental-devastation",
+            "name": "Elemental Devastation",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 3% for 10 sec.",
+            "ranks": [
+                "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 3% for 10 sec.",
+                "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 6% for 10 sec.",
+                "Your offensive spell critical strikes will increase your chance to get a critical strike with melee attacks by 9% for 10 sec."
+            ],
+            "skill": null,
+            "icon": "spell_fire_elementaldevastation"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "elemental-focus",
+            "name": "Elemental Focus",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 10% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell. The Clearcasting state reduces the mana cost of your next damage spell by 100%.",
+            "ranks": [
+                "Gives you a 10% chance to enter a Clearcasting state after casting any Fire, Frost, or Nature damage spell. The Clearcasting state reduces the mana cost of your next damage spell by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_manaburn"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "elemental-alacrity",
+            "name": "Elemental Alacrity",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.17 sec.",
+            "ranks": [
+                "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.17 sec.",
+                "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.33 sec.",
+                "Reduces the cast time of your Lightning Bolt, Chain Lightning, and Lava Burst spells by 0.50 sec."
+            ],
+            "skill": null,
+            "icon": "spell_lightning_lightningbolt01"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "improved-fire-nova",
+            "name": "Improved Fire Nova",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Fire Nova spell by 10% and reduces its cooldown by 2 sec.",
+            "ranks": [
+                "Increases the damage done by your Fire Nova spell by 10% and reduces its cooldown by 2 sec.",
+                "Increases the damage done by your Fire Nova spell by 20% and reduces its cooldown by 4 sec."
+            ],
+            "skill": null,
+            "icon": "spell_fire_sealoffire"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "eye-of-the-storm",
+            "name": "Eye of the Storm",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 23%.",
+            "ranks": [
+                "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 23%.",
+                "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 47%.",
+                "Reduces the pushback suffered from damaging attacks while casting Lightning Bolt, Chain Lightning, and Lava Burst by 70%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_eyeofthestorm"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "call-of-thunder",
+            "name": "Call of Thunder",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": "elemental-alacrity",
+            "status": "unchanged",
+            "description": "Increases the critical strike chance of your Lightning Bolt and Chain Lightning spells by 3%.",
+            "ranks": [
+                "Increases the critical strike chance of your Lightning Bolt and Chain Lightning spells by 3%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_callstorm"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "elemental-reach",
+            "name": "Elemental Reach",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 3 yards, and increases the range of your Flame Shock spell by 8 yards.",
+            "ranks": [
+                "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 3 yards, and increases the range of your Flame Shock spell by 8 yards.",
+                "Increases the range of your Lightning Bolt, Chain Lightning, Fire Nova, and Lava Burst spells by 6 yards, and increases the range of your Flame Shock spell by 15 yards."
+            ],
+            "skill": null,
+            "icon": "spell_nature_stormreach"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "lightning-overload",
+            "name": "Lightning Overload",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Lightning Bolt and Chain Lightning spells a 3% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.",
+            "ranks": [
+                "Gives your Lightning Bolt and Chain Lightning spells a 3% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.",
+                "Gives your Lightning Bolt and Chain Lightning spells a 7% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat.",
+                "Gives your Lightning Bolt and Chain Lightning spells a 10% chance to cast a second, similar spell on the same target at no additional cost that causes half damage and no threat."
+            ],
+            "skill": null,
+            "icon": "spell_nature_lightningoverload"
+        },
+        {
+            "row": 5,
+            "col": 4,
+            "slug": "earthbound",
+            "name": "Earthbound",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Earthbind Totem Immobilizes nearby targets for 5 sec when cast.",
+            "ranks": [
+                "Your Earthbind Totem Immobilizes nearby targets for 5 sec when cast."
+            ],
+            "skill": null,
+            "icon": "spell_nature_stranglevines"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "elemental-fury",
+            "name": "Elemental Fury",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "call-of-thunder",
+            "status": "unchanged",
+            "description": "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 20%.",
+            "ranks": [
+                "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 20%.",
+                "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 40%.",
+                "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 60%.",
+                "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 80%.",
+                "Increases the critical strike damage bonus of your Searing and Magma Totems and your Fire, Frost, and Nature spells by 100%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_volcano"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "lava-burst",
+            "name": "Lava Burst",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "lightning-overload",
+            "status": "unchanged",
+            "description": "You hurl molten lava at the target, dealing 164 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage.",
+            "ranks": null,
+            "skill": {
+                "cost": "165 Mana",
+                "range": 30,
+                "type": "2.5 sec cast",
+                "cd": "10 sec",
+                "description": "You hurl molten lava at the target, dealing 164 Fire damage. If your Flame Shock is on the target, Lava Burst deals 20% increased damage."
+            },
+            "icon": "spell_shaman_lavaburst"
+        }
+    ]
+}

@@ -1,0 +1,298 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/druid/page-data.json (talentData, Balance tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "improved-wrath",
+            "name": "Improved Wrath",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cast time of your Wrath spell by 0.1 sec and its Mana cost by 10%.",
+            "ranks": [
+                "Reduces the cast time of your Wrath spell by 0.1 sec and its Mana cost by 10%.",
+                "Reduces the cast time of your Wrath spell by 0.2 sec and its Mana cost by 20%.",
+                "Reduces the cast time of your Wrath spell by 0.3 sec and its Mana cost by 30%.",
+                "Reduces the cast time of your Wrath spell by 0.4 sec and its Mana cost by 40%.",
+                "Reduces the cast time of your Wrath spell by 0.5 sec and its Mana cost by 50%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_abolishmagic"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "genesis",
+            "name": "Genesis",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the periodic damage and healing done by your spells and abilities by 1%.",
+            "ranks": [
+                "Increases the periodic damage and healing done by your spells and abilities by 1%.",
+                "Increases the periodic damage and healing done by your spells and abilities by 2%.",
+                "Increases the periodic damage and healing done by your spells and abilities by 3%.",
+                "Increases the periodic damage and healing done by your spells and abilities by 4%.",
+                "Increases the periodic damage and healing done by your spells and abilities by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_arcane_arcane03"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "moonglow",
+            "name": "Moonglow",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Mana cost of your damaging spells by 8%.",
+            "ranks": [
+                "Reduces the Mana cost of your damaging spells by 8%.",
+                "Reduces the Mana cost of your damaging spells by 17%.",
+                "Reduces the Mana cost of your damaging spells by 25%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_sentinal"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "improved-moonfire",
+            "name": "Improved Moonfire",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage and critical strike chance of your Moonfire spell by 5%.",
+            "ranks": [
+                "Increases the damage and critical strike chance of your Moonfire spell by 5%.",
+                "Increases the damage and critical strike chance of your Moonfire spell by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_starfall"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "natures-majesty",
+            "name": "Nature's Majesty",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your critical strike chance with spells and melee attacks by 2%.",
+            "ranks": [
+                "Increases your critical strike chance with spells and melee attacks by 2%.",
+                "Increases your critical strike chance with spells and melee attacks by 4%."
+            ],
+            "skill": null,
+            "icon": "inv_staff_01"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "natures-reach",
+            "name": "Nature's Reach",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your offensive Balance spells by 10% and improves your chance to hit by 2%.",
+            "ranks": [
+                "Increases the range of your offensive Balance spells by 10% and improves your chance to hit by 2%.",
+                "Increases the range of your offensive Balance spells by 20% and improves your chance to hit by 4%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_naturetouchgrow"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "improved-entangling-roots",
+            "name": "Improved Entangling Roots",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Entangling Roots spell by 25%, and its victims can take up to 25% more damage without interrupting the effect.",
+            "ranks": [
+                "Increases the damage done by your Entangling Roots spell by 25%, and its victims can take up to 25% more damage without interrupting the effect.",
+                "Increases the damage done by your Entangling Roots spell by 50%, and its victims can take up to 50% more damage without interrupting the effect.",
+                "Increases the damage done by your Entangling Roots spell by 75%, and its victims can take up to 75% more damage without interrupting the effect."
+            ],
+            "skill": null,
+            "icon": "spell_nature_stranglevines"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "natures-splendor",
+            "name": "Nature's Splendor",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": "natures-majesty",
+            "status": "unchanged",
+            "description": "Increases the duration of your Moonfire and Rejuvenation spells by 3 sec, your Regrowth spell by 6 sec, and your Insect Swarm spell by 2 sec.",
+            "ranks": [
+                "Increases the duration of your Moonfire and Rejuvenation spells by 3 sec, your Regrowth spell by 6 sec, and your Insect Swarm spell by 2 sec."
+            ],
+            "skill": null,
+            "icon": "spell_nature_natureresistancetotem"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "insect-swarm",
+            "name": "Insect Swarm",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "The enemy target is swarmed by insects, decreasing their chance to hit with attacks by 2% and causing 48 Nature damage over 12 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "45 Mana",
+                "range": 30,
+                "type": "Instant",
+                "description": "The enemy target is swarmed by insects, decreasing their chance to hit with attacks by 2% and causing 48 Nature damage over 12 sec."
+            },
+            "icon": "spell_nature_insectswarm"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "vengeance",
+            "name": "Vengeance",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "improved-moonfire",
+            "status": "unchanged",
+            "description": "Increases the critical strike damage bonus of your Arcane and Nature spells by 20%.",
+            "ranks": [
+                "Increases the critical strike damage bonus of your Arcane and Nature spells by 20%.",
+                "Increases the critical strike damage bonus of your Arcane and Nature spells by 40%.",
+                "Increases the critical strike damage bonus of your Arcane and Nature spells by 60%.",
+                "Increases the critical strike damage bonus of your Arcane and Nature spells by 80%.",
+                "Increases the critical strike damage bonus of your Arcane and Nature spells by 100%."
+            ],
+            "skill": null,
+            "icon": "ability_warlock_improveddemonictactics"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "improved-starfire",
+            "name": "Improved Starfire",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cast time of Starfire by 0.1 sec and Starfire has a 3% chance to stun its target for 3 sec.",
+            "ranks": [
+                "Reduces the cast time of Starfire by 0.1 sec and Starfire has a 3% chance to stun its target for 3 sec.",
+                "Reduces the cast time of Starfire by 0.2 sec and Starfire has a 6% chance to stun its target for 3 sec.",
+                "Reduces the cast time of Starfire by 0.3 sec and Starfire has a 9% chance to stun its target for 3 sec.",
+                "Reduces the cast time of Starfire by 0.4 sec and Starfire has a 12% chance to stun its target for 3 sec.",
+                "Reduces the cast time of Starfire by 0.5 sec and Starfire has a 15% chance to stun its target for 3 sec."
+            ],
+            "skill": null,
+            "icon": "spell_arcane_starfire"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "overgrowth",
+            "name": "Overgrowth",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the maximum number of targets you may have affected by Entangling Roots by 1.",
+            "ranks": [
+                "Increases the maximum number of targets you may have affected by Entangling Roots by 1.",
+                "Increases the maximum number of targets you may have affected by Entangling Roots by 2."
+            ],
+            "skill": null,
+            "icon": "inv_misc_herb_15"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "natures-grace",
+            "name": "Nature's Grace",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "All non-periodic spell criticals grace you with a blessing of nature, increasing your spellcasting speed and reducing your global cooldown by 10% for 3 sec.",
+            "ranks": [
+                "All non-periodic spell criticals grace you with a blessing of nature, increasing your spellcasting speed and reducing your global cooldown by 10% for 3 sec."
+            ],
+            "skill": null,
+            "icon": "spell_nature_naturesblessing"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "eclipse",
+            "name": "Eclipse",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Wrath spell reduces the cast time of your next 2 Starfire spells by 0.17 sec. Stores up to 4 charges. Lasts 15 sec.",
+            "ranks": [
+                "Your Wrath spell reduces the cast time of your next 2 Starfire spells by 0.17 sec. Stores up to 4 charges. Lasts 15 sec.",
+                "Your Wrath spell reduces the cast time of your next 2 Starfire spells by 0.33 sec. Stores up to 4 charges. Lasts 15 sec.",
+                "Your Wrath spell reduces the cast time of your next 2 Starfire spells by 0.50 sec. Stores up to 4 charges. Lasts 15 sec."
+            ],
+            "skill": null,
+            "icon": "ability_druid_eclipse"
+        },
+        {
+            "row": 6,
+            "col": 2,
+            "slug": "moonfury",
+            "name": "Moonfury",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Arcane and Nature spells by 2%.",
+            "ranks": [
+                "Increases the damage done by your Arcane and Nature spells by 2%.",
+                "Increases the damage done by your Arcane and Nature spells by 4%.",
+                "Increases the damage done by your Arcane and Nature spells by 6%.",
+                "Increases the damage done by your Arcane and Nature spells by 8%.",
+                "Increases the damage done by your Arcane and Nature spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_moonglow"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "moonkin-form",
+            "name": "Moonkin Form",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Transforms the Druid into Moonkin Form. While in this form, the armor contribution from items is increased by 360%, Omen of Clarity gains 100% increased chance to trigger, and all party members within 45 yards have their critical strike chance increased by 3%, exclusive with Leader of the Pack. The Moonkin cannot cast healing spells while shapeshifted. The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.",
+            "ranks": null,
+            "skill": {
+                "cost": "283 Mana",
+                "type": "Instant",
+                "description": "Transforms the Druid into Moonkin Form. While in this form, the armor contribution from items is increased by 360%, Omen of Clarity gains 100% increased chance to trigger, and all party members within 45 yards have their critical strike chance increased by 3%, exclusive with Leader of the Pack. The Moonkin cannot cast healing spells while shapeshifted. The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects."
+            },
+            "icon": "spell_nature_forceofnature"
+        }
+    ]
+}

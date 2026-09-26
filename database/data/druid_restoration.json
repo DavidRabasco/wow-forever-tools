@@ -1,0 +1,308 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/druid/page-data.json (talentData, Restoration tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "natures-focus",
+            "name": "Nature's Focus",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 14% chance to avoid interruption caused by damage while casting Arcane and Nature spells.",
+            "ranks": [
+                "Gives you a 14% chance to avoid interruption caused by damage while casting Arcane and Nature spells.",
+                "Gives you a 28% chance to avoid interruption caused by damage while casting Arcane and Nature spells.",
+                "Gives you a 42% chance to avoid interruption caused by damage while casting Arcane and Nature spells.",
+                "Gives you a 56% chance to avoid interruption caused by damage while casting Arcane and Nature spells.",
+                "Gives you a 70% chance to avoid interruption caused by damage while casting Arcane and Nature spells."
+            ],
+            "skill": null,
+            "icon": "spell_nature_healingwavegreater"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "furor",
+            "name": "Furor",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives you a 20% chance to gain 10 Rage when you shapeshift into Bear Form or Dire Bear Form. When you shift into Cat Form, you will regain 20% of the Energy you had when you were last in Cat Form, plus 2 Energy for each second you spent not in Bear Form, Cat Form, or Dire Bear Form, up to a maximum of 20 Energy.",
+            "ranks": [
+                "Gives you a 20% chance to gain 10 Rage when you shapeshift into Bear Form or Dire Bear Form. When you shift into Cat Form, you will regain 20% of the Energy you had when you were last in Cat Form, plus 2 Energy for each second you spent not in Bear Form, Cat Form, or Dire Bear Form, up to a maximum of 20 Energy.",
+                "Gives you a 40% chance to gain 10 Rage when you shapeshift into Bear Form or Dire Bear Form. When you shift into Cat Form, you will regain 40% of the Energy you had when you were last in Cat Form, plus 4 Energy for each second you spent not in Bear Form, Cat Form, or Dire Bear Form, up to a maximum of 40 Energy.",
+                "Gives you a 60% chance to gain 10 Rage when you shapeshift into Bear Form or Dire Bear Form. When you shift into Cat Form, you will regain 60% of the Energy you had when you were last in Cat Form, plus 6 Energy for each second you spent not in Bear Form, Cat Form, or Dire Bear Form, up to a maximum of 60 Energy.",
+                "Gives you a 80% chance to gain 10 Rage when you shapeshift into Bear Form or Dire Bear Form. When you shift into Cat Form, you will regain 80% of the Energy you had when you were last in Cat Form, plus 8 Energy for each second you spent not in Bear Form, Cat Form, or Dire Bear Form, up to a maximum of 80 Energy.",
+                "Gives you a 100% chance to gain 10 Rage when you shapeshift into Bear Form or Dire Bear Form. When you shift into Cat Form, you will regain 100% of the Energy you had when you were last in Cat Form, plus 10 Energy for each second you spent not in Bear Form, Cat Form, or Dire Bear Form, up to a maximum of 100 Energy."
+            ],
+            "skill": null,
+            "icon": "spell_holy_blessingofstamina"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "naturalist",
+            "name": "Naturalist",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cast time of your Healing Touch spell by 0.1 sec and increases all damage you deal by 1%.",
+            "ranks": [
+                "Reduces the cast time of your Healing Touch spell by 0.1 sec and increases all damage you deal by 1%.",
+                "Reduces the cast time of your Healing Touch spell by 0.2 sec and increases all damage you deal by 2%.",
+                "Reduces the cast time of your Healing Touch spell by 0.3 sec and increases all damage you deal by 3%.",
+                "Reduces the cast time of your Healing Touch spell by 0.4 sec and increases all damage you deal by 4%.",
+                "Reduces the cast time of your Healing Touch spell by 0.5 sec and increases all damage you deal by 5%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_healingtouch"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "subtlety",
+            "name": "Subtlety",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the threat generated by your Nature and Arcane spells by 10%.",
+            "ranks": [
+                "Reduces the threat generated by your Nature and Arcane spells by 10%.",
+                "Reduces the threat generated by your Nature and Arcane spells by 20%.",
+                "Reduces the threat generated by your Nature and Arcane spells by 30%."
+            ],
+            "skill": null,
+            "icon": "ability_eyeoftheowl"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "natural-shapeshifter",
+            "name": "Natural Shapeshifter",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the mana cost of all shapeshifting by 10%.",
+            "ranks": [
+                "Reduces the mana cost of all shapeshifting by 10%.",
+                "Reduces the mana cost of all shapeshifting by 20%.",
+                "Reduces the mana cost of all shapeshifting by 30%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_wispsplode"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "reflection",
+            "name": "Reflection",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Allows 17% of your Mana regeneration to continue while casting.",
+            "ranks": [
+                "Allows 17% of your Mana regeneration to continue while casting.",
+                "Allows 33% of your Mana regeneration to continue while casting.",
+                "Allows 50% of your Mana regeneration to continue while casting."
+            ],
+            "skill": null,
+            "icon": "spell_frost_windwalkon"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "gift-of-nature",
+            "name": "Gift of Nature",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the effect of all your healing spells by 2%.",
+            "ranks": [
+                "Increases the effect of all your healing spells by 2%.",
+                "Increases the effect of all your healing spells by 4%.",
+                "Increases the effect of all your healing spells by 6%.",
+                "Increases the effect of all your healing spells by 8%.",
+                "Increases the effect of all your healing spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_protectionformnature"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "gift-of-the-earthmother",
+            "name": "Gift of the Earthmother",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the global cooldown by 0.5 seconds on your Rejuvenation, Swiftmend, and Wild Growth spells.",
+            "ranks": [
+                "Reduces the global cooldown by 0.5 seconds on your Rejuvenation, Swiftmend, and Wild Growth spells."
+            ],
+            "skill": null,
+            "icon": "spell_nature_spiritarmor"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "tranquil-spirit",
+            "name": "Tranquil Spirit",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the mana cost of your Healing Touch and Tranquility spells by 2%.",
+            "ranks": [
+                "Reduces the mana cost of your Healing Touch and Tranquility spells by 2%.",
+                "Reduces the mana cost of your Healing Touch and Tranquility spells by 4%.",
+                "Reduces the mana cost of your Healing Touch and Tranquility spells by 6%.",
+                "Reduces the mana cost of your Healing Touch and Tranquility spells by 8%.",
+                "Reduces the mana cost of your Healing Touch and Tranquility spells by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_elunesgrace"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "improved-rejuvenation",
+            "name": "Improved Rejuvenation",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the effect of your Rejuvenation spell by 5%.",
+            "ranks": [
+                "Increases the effect of your Rejuvenation spell by 5%.",
+                "Increases the effect of your Rejuvenation spell by 10%.",
+                "Increases the effect of your Rejuvenation spell by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_rejuvenation"
+        },
+        {
+            "row": 4,
+            "col": 4,
+            "slug": "swiftmend",
+            "name": "Swiftmend",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Instantly heals a target with an active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect of one of those spells.",
+            "ranks": null,
+            "skill": {
+                "cost": "162 Mana",
+                "range": 40,
+                "type": "Instant",
+                "cd": "15 sec",
+                "description": "Instantly heals a target with an active Rejuvenation or Regrowth effect for an amount equal to the full duration of the periodic effect of one of those spells."
+            },
+            "icon": "inv_relics_idolofrejuvenation"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "natures-swiftness",
+            "name": "Nature's Swiftness",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "naturalist",
+            "status": "unchanged",
+            "description": "When activated, your next Nature spell becomes an instant cast spell.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "When activated, your next Nature spell becomes an instant cast spell."
+            },
+            "icon": "spell_nature_ravenform"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "living-spirit",
+            "name": "Living Spirit",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Spirit by 5%.",
+            "ranks": [
+                "Increases your Spirit by 5%.",
+                "Increases your Spirit by 10%.",
+                "Increases your Spirit by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_giftofthewaterspirit"
+        },
+        {
+            "row": 5,
+            "col": 4,
+            "slug": "improved-tranquility",
+            "name": "Improved Tranquility",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces threat caused by Tranquility by 50% and its cooldown by 30%.",
+            "ranks": [
+                "Reduces threat caused by Tranquility by 50% and its cooldown by 30%.",
+                "Reduces threat caused by Tranquility by 100% and its cooldown by 60%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_tranquility"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "improved-regrowth",
+            "name": "Improved Regrowth",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "improved-rejuvenation",
+            "status": "unchanged",
+            "description": "Increases the critical effect chance of your Regrowth spell by 10%.",
+            "ranks": [
+                "Increases the critical effect chance of your Regrowth spell by 10%.",
+                "Increases the critical effect chance of your Regrowth spell by 20%.",
+                "Increases the critical effect chance of your Regrowth spell by 30%.",
+                "Increases the critical effect chance of your Regrowth spell by 40%.",
+                "Increases the critical effect chance of your Regrowth spell by 50%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_resistnature"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "wild-growth",
+            "name": "Wild Growth",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "living-spirit",
+            "status": "unchanged",
+            "description": "Heals the target and their party for 280 over 7 sec. Party members must be within 43 yards of target. The amount healed is applied quickly at first, and slows down as Wild Growth reaches its full duration.",
+            "ranks": null,
+            "skill": {
+                "cost": "550 Mana",
+                "range": 40,
+                "type": "Instant",
+                "cd": "6 sec",
+                "description": "Heals the target and their party for 280 over 7 sec. Party members must be within 43 yards of target. The amount healed is applied quickly at first, and slows down as Wild Growth reaches its full duration."
+            },
+            "icon": "ability_druid_flourish"
+        }
+    ]
+}

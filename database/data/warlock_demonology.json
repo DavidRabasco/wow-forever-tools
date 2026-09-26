@@ -1,0 +1,351 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/warlock/page-data.json (talentData, Demonology tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "improved-health-funnel",
+            "name": "Improved Health Funnel",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the amount of Health transferred by your Health Funnel spell by 20%, reduces its health cost by 15%, and reduces all threat your Health Funnel generates by 50%. Allows Health funnel to be used regardless of your demon's health.",
+            "ranks": [
+                "Increases the amount of Health transferred by your Health Funnel spell by 20%, reduces its health cost by 15%, and reduces all threat your Health Funnel generates by 50%. Allows Health funnel to be used regardless of your demon's health.",
+                "Increases the amount of Health transferred by your Health Funnel spell by 40%, reduces its health cost by 30%, and reduces all threat your Health Funnel generates by 100%. Allows Health funnel to be used regardless of your demon's health."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_lifedrain"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "improved-imp",
+            "name": "Improved Imp",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage of your Imp's Firebolt spell by 10% and the effect of its Fire Shield spell by 10%.",
+            "ranks": [
+                "Increases the damage of your Imp's Firebolt spell by 10% and the effect of its Fire Shield spell by 10%.",
+                "Increases the damage of your Imp's Firebolt spell by 20% and the effect of its Fire Shield spell by 20%.",
+                "Increases the damage of your Imp's Firebolt spell by 30% and the effect of its Fire Shield spell by 30%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_summonimp"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "demonic-embrace",
+            "name": "Demonic Embrace",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your total Stamina by 3%.",
+            "ranks": [
+                "Increases your total Stamina by 3%.",
+                "Increases your total Stamina by 6%.",
+                "Increases your total Stamina by 9%.",
+                "Increases your total Stamina by 12%.",
+                "Increases your total Stamina by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_metamorphosis"
+        },
+        {
+            "row": 1,
+            "col": 4,
+            "slug": "unholy-power",
+            "name": "Unholy Power",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases all damage done by your Imp, Voidwalker, Succubus, Incubus, and Felhunter pets by 2%.",
+            "ranks": [
+                "Increases all damage done by your Imp, Voidwalker, Succubus, Incubus, and Felhunter pets by 2%.",
+                "Increases all damage done by your Imp, Voidwalker, Succubus, Incubus, and Felhunter pets by 4%.",
+                "Increases all damage done by your Imp, Voidwalker, Succubus, Incubus, and Felhunter pets by 6%.",
+                "Increases all damage done by your Imp, Voidwalker, Succubus, Incubus, and Felhunter pets by 8%.",
+                "Increases all damage done by your Imp, Voidwalker, Succubus, Incubus, and Felhunter pets by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_shadowworddominate"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "demonic-aegis",
+            "name": "Demonic Aegis",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the effectiveness of your Demon Skin and Demon Armor spells by 15%.",
+            "ranks": [
+                "Increases the effectiveness of your Demon Skin and Demon Armor spells by 15%.",
+                "Increases the effectiveness of your Demon Skin and Demon Armor spells by 30%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_ragingscream"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "improved-voidwalker",
+            "name": "Improved Voidwalker",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the effectiveness of your Voidwalker's Torment, Consume Shadows, Sacrifice, and Suffering spells by 10%.",
+            "ranks": [
+                "Increases the effectiveness of your Voidwalker's Torment, Consume Shadows, Sacrifice, and Suffering spells by 10%.",
+                "Increases the effectiveness of your Voidwalker's Torment, Consume Shadows, Sacrifice, and Suffering spells by 20%.",
+                "Increases the effectiveness of your Voidwalker's Torment, Consume Shadows, Sacrifice, and Suffering spells by 30%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_summonvoidwalker"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "fel-vitality",
+            "name": "Fel Vitality",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the maximum health and Mana of your Imp, Voidwalker, Succubus, Incubus, and Felhunter by 5%, and increases your maximum Mana by 5%.",
+            "ranks": [
+                "Increases the maximum health and Mana of your Imp, Voidwalker, Succubus, Incubus, and Felhunter by 5%, and increases your maximum Mana by 5%.",
+                "Increases the maximum health and Mana of your Imp, Voidwalker, Succubus, Incubus, and Felhunter by 10%, and increases your maximum Mana by 10%.",
+                "Increases the maximum health and Mana of your Imp, Voidwalker, Succubus, Incubus, and Felhunter by 15%, and increases your maximum Mana by 15%.",
+                "Increases the maximum health and Mana of your Imp, Voidwalker, Succubus, Incubus, and Felhunter by 20%, and increases your maximum Mana by 20%.",
+                "Increases the maximum health and Mana of your Imp, Voidwalker, Succubus, Incubus, and Felhunter by 25%, and increases your maximum Mana by 25%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_demonictactics"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "demonic-energies",
+            "name": "Demonic Energies",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "You heal your pet for 8% of all spell damage you deal. When you gain Mana from Life Tap, your summoned demon gains 50% of the Mana you gain.",
+            "ranks": [
+                "You heal your pet for 8% of all spell damage you deal. When you gain Mana from Life Tap, your summoned demon gains 50% of the Mana you gain.",
+                "You heal your pet for 15% of all spell damage you deal. When you gain Mana from Life Tap, your summoned demon gains 100% of the Mana you gain."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_felmending"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "improved-sayaad",
+            "name": "Improved Sayaad",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the effect of your Succubus' and Incubus' Lash of Pain and Soothing Kiss spells by 10%, and increases the duration of your Succubus' and Incubus' Seduction and Lesser Invisibility spells by 10%.",
+            "ranks": [
+                "Increases the effect of your Succubus' and Incubus' Lash of Pain and Soothing Kiss spells by 10%, and increases the duration of your Succubus' and Incubus' Seduction and Lesser Invisibility spells by 10%.",
+                "Increases the effect of your Succubus' and Incubus' Lash of Pain and Soothing Kiss spells by 20%, and increases the duration of your Succubus' and Incubus' Seduction and Lesser Invisibility spells by 20%.",
+                "Increases the effect of your Succubus' and Incubus' Lash of Pain and Soothing Kiss spells by 30%, and increases the duration of your Succubus' and Incubus' Seduction and Lesser Invisibility spells by 30%."
+            ],
+            "skill": null,
+            "icon": "ability_warlock_randomizesuccubusincubus"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "demonic-sacrifice",
+            "name": "Demonic Sacrifice",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "When activated, sacrifices your summoned Demon to enhance the opposing aspect of your power, granting you an effect that lasts 2 hrs. The effect is canceled if any Demon is summoned.",
+            "ranks": null,
+            "skill": {
+                "range": 100,
+                "type": "Instant",
+                "description": "When activated, sacrifices your summoned Demon to enhance the opposing aspect of your power, granting you an effect that lasts 2 hrs. The effect is canceled if any Demon is summoned."
+            },
+            "icon": "spell_shadow_psychicscream"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "master-summoner",
+            "name": "Master Summoner",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the casting time of your Imp, Voidwalker, Succubus, Incubus, and Felhunter Summoning spells by 2 sec and the Mana cost by 20%.",
+            "ranks": [
+                "Reduces the casting time of your Imp, Voidwalker, Succubus, Incubus, and Felhunter Summoning spells by 2 sec and the Mana cost by 20%.",
+                "Reduces the casting time of your Imp, Voidwalker, Succubus, Incubus, and Felhunter Summoning spells by 4 sec and the Mana cost by 40%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_impphaseshift"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "decimation",
+            "name": "Decimation",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Soul Fire spell by 45%. When you cast Shadow Bolt or Searing Pain on an enemy below 35% health, they deal 3% increased damage, and for the next 10 sec your Soul Fire spell has its cast time reduced by 20% and costs no Soul Shards.",
+            "ranks": [
+                "Reduces the cooldown of your Soul Fire spell by 45%. When you cast Shadow Bolt or Searing Pain on an enemy below 35% health, they deal 3% increased damage, and for the next 10 sec your Soul Fire spell has its cast time reduced by 20% and costs no Soul Shards.",
+                "Reduces the cooldown of your Soul Fire spell by 90%. When you cast Shadow Bolt or Searing Pain on an enemy below 35% health, they deal 6% increased damage, and for the next 10 sec your Soul Fire spell has its cast time reduced by 40% and costs no Soul Shards."
+            ],
+            "skill": null,
+            "icon": "spell_fire_fireball02"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "fel-domination",
+            "name": "Fel Domination",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": "master-summoner",
+            "status": "unchanged",
+            "description": "Your next Imp, Voidwalker, Succubus, Incubus, or Felhunter Summon spell has its casting time reduced by 5.5 sec and its Mana cost reduced by 50%.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "5 min",
+                "description": "Your next Imp, Voidwalker, Succubus, Incubus, or Felhunter Summon spell has its casting time reduced by 5.5 sec and its Mana cost reduced by 50%."
+            },
+            "icon": "spell_nature_removecurse"
+        },
+        {
+            "row": 4,
+            "col": 4,
+            "slug": "demonic-brand",
+            "name": "Demonic Brand",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your Searing Pain generates 17% less threat and brands the target for 10 sec. Your pet's next 2 attacks against the target generate high threat and deal Fire or Shadow damage based on the pet.",
+            "ranks": [
+                "Your Searing Pain generates 17% less threat and brands the target for 10 sec. Your pet's next 2 attacks against the target generate high threat and deal Fire or Shadow damage based on the pet.",
+                "Your Searing Pain generates 33% less threat and brands the target for 10 sec. Your pet's next 2 attacks against the target generate high threat and deal Fire or Shadow damage based on the pet.",
+                "Your Searing Pain generates 50% less threat and brands the target for 10 sec. Your pet's next 2 attacks against the target generate high threat and deal Fire or Shadow damage based on the pet."
+            ],
+            "skill": null,
+            "icon": "ability_demonhunter_chaoticimprint_fire"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "improved-felhunter",
+            "name": "Improved Felhunter",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the Attack Power reduction of your Felhunter's Tainted Blood, the healing of its Devour Magic, and the detection level of its Paranoia by 10%, and reduces the cooldown of its Spell Lock by 2 sec.",
+            "ranks": [
+                "Increases the Attack Power reduction of your Felhunter's Tainted Blood, the healing of its Devour Magic, and the detection level of its Paranoia by 10%, and reduces the cooldown of its Spell Lock by 2 sec.",
+                "Increases the Attack Power reduction of your Felhunter's Tainted Blood, the healing of its Devour Magic, and the detection level of its Paranoia by 20%, and reduces the cooldown of its Spell Lock by 4 sec.",
+                "Increases the Attack Power reduction of your Felhunter's Tainted Blood, the healing of its Devour Magic, and the detection level of its Paranoia by 30%, and reduces the cooldown of its Spell Lock by 6 sec."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_summonfelhunter"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "soul-link",
+            "name": "Soul Link",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "demonic-sacrifice",
+            "status": "unchanged",
+            "description": "When active, 30% of all damage taken by the caster is taken by your Imp, Voidwalker, Succubus, Incubus, or Felhunter Demon instead. In addition, both the Demon and the master will inflict 3% more damage. Lasts as long as the Demon is active.",
+            "ranks": null,
+            "skill": {
+                "cost": "173 Mana",
+                "range": 100,
+                "type": "Instant",
+                "description": "When active, 30% of all damage taken by the caster is taken by your Imp, Voidwalker, Succubus, Incubus, or Felhunter Demon instead. In addition, both the Demon and the master will inflict 3% more damage. Lasts as long as the Demon is active."
+            },
+            "icon": "spell_shadow_gathershadows"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "demonic-knowledge",
+            "name": "Demonic Knowledge",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your spell damage and your Demon pet's spell damage by up to 33% of your level while you have a summoned Demon pet active.",
+            "ranks": [
+                "Increases your spell damage and your Demon pet's spell damage by up to 33% of your level while you have a summoned Demon pet active.",
+                "Increases your spell damage and your Demon pet's spell damage by up to 67% of your level while you have a summoned Demon pet active.",
+                "Increases your spell damage and your Demon pet's spell damage by up to 100% of your level while you have a summoned Demon pet active."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_improvedvampiricembrace"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "master-demonologist",
+            "name": "Master Demonologist",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Grants both the Warlock and the summoned demon an effect as long as that demon is active.\n<ul>\n<li>Imp - Increases Fire damage done by 2%.</li>\n<li>Voidwalker - Reduces Physical damage taken by 2%.</li>\n<li>Succubus/Incubus - Increases Shadow damage done by 2%.</li>\n<li>Felhunter - Reduces Magic damage taken by 2%.</li>\n</ul>",
+            "ranks": [
+                "Grants both the Warlock and the summoned demon an effect as long as that demon is active.\n<ul>\n<li>Imp - Increases Fire damage done by 2%.</li>\n<li>Voidwalker - Reduces Physical damage taken by 2%.</li>\n<li>Succubus/Incubus - Increases Shadow damage done by 2%.</li>\n<li>Felhunter - Reduces Magic damage taken by 2%.</li>\n</ul>",
+                "Grants both the Warlock and the summoned demon an effect as long as that demon is active.\n<ul>\n<li>Imp - Increases Fire damage done by 4%.</li>\n<li>Voidwalker - Reduces Physical damage taken by 4%.</li>\n<li>Succubus/Incubus - Increases Shadow damage done by 4%.</li>\n<li>Felhunter - Reduces Magic damage taken by 4%.</li>\n</ul>",
+                "Grants both the Warlock and the summoned demon an effect as long as that demon is active.\n<ul>\n<li>Imp - Increases Fire damage done by 6%.</li>\n<li>Voidwalker - Reduces Physical damage taken by 6%.</li>\n<li>Succubus/Incubus - Increases Shadow damage done by 6%.</li>\n<li>Felhunter - Reduces Magic damage taken by 6%.</li>\n</ul>",
+                "Grants both the Warlock and the summoned demon an effect as long as that demon is active.\n<ul>\n<li>Imp - Increases Fire damage done by 8%.</li>\n<li>Voidwalker - Reduces Physical damage taken by 8%.</li>\n<li>Succubus/Incubus - Increases Shadow damage done by 8%.</li>\n<li>Felhunter - Reduces Magic damage taken by 8%.</li>\n</ul>",
+                "Grants both the Warlock and the summoned demon an effect as long as that demon is active.\n<ul>\n<li>Imp - Increases Fire damage done by 10%.</li>\n<li>Voidwalker - Reduces Physical damage taken by 10%.</li>\n<li>Succubus/Incubus - Increases Shadow damage done by 10%.</li>\n<li>Felhunter - Reduces Magic damage taken by 10%.</li>\n</ul>"
+            ],
+            "skill": null,
+            "icon": "spell_shadow_shadowpact"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "demonic-pact",
+            "name": "Demonic Pact",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "soul-link",
+            "status": "unchanged",
+            "description": "Your Demonic Sacrifice effect is no longer cancelled by summoning a different Demon pet. Resummoning the sacrificed pet will still cancel the effect.",
+            "ranks": [
+                "Your Demonic Sacrifice effect is no longer cancelled by summoning a different Demon pet. Resummoning the sacrificed pet will still cancel the effect."
+            ],
+            "skill": null,
+            "icon": "inv_ability_soulharvesterwarlock_demonicsoul"
+        }
+    ]
+}

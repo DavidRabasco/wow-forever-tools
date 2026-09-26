@@ -1,0 +1,317 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/rogue/page-data.json (talentData, Assassination tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "improved-gouge",
+            "name": "Improved Gouge",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the duration of your Gouge ability by 0.5 sec.",
+            "ranks": [
+                "Increases the duration of your Gouge ability by 0.5 sec.",
+                "Increases the duration of your Gouge ability by 1 sec.",
+                "Increases the duration of your Gouge ability by 1.5 sec."
+            ],
+            "skill": null,
+            "icon": "ability_gouge"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "remorseless-attacks",
+            "name": "Remorseless Attacks",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "After killing a non-trivial enemy, gives you a 20% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, Mutilate, or Ghostly Strike. Lasts 20 sec.",
+            "ranks": [
+                "After killing a non-trivial enemy, gives you a 20% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, Mutilate, or Ghostly Strike. Lasts 20 sec.",
+                "After killing a non-trivial enemy, gives you a 40% increased critical strike chance on your next Sinister Strike, Backstab, Ambush, Mutilate, or Ghostly Strike. Lasts 20 sec."
+            ],
+            "skill": null,
+            "icon": "ability_fiegndead"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "malice",
+            "name": "Malice",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your critical strike chance with all attacks and Poisons by 1%.",
+            "ranks": [
+                "Increases your critical strike chance with all attacks and Poisons by 1%.",
+                "Increases your critical strike chance with all attacks and Poisons by 2%.",
+                "Increases your critical strike chance with all attacks and Poisons by 3%.",
+                "Increases your critical strike chance with all attacks and Poisons by 4%.",
+                "Increases your critical strike chance with all attacks and Poisons by 5%."
+            ],
+            "skill": null,
+            "icon": "ability_racial_bloodrage"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "ruthlessness",
+            "name": "Ruthlessness",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your finishing moves a 20% chance to add a Combo Point to your target.",
+            "ranks": [
+                "Gives your finishing moves a 20% chance to add a Combo Point to your target.",
+                "Gives your finishing moves a 40% chance to add a Combo Point to your target.",
+                "Gives your finishing moves a 60% chance to add a Combo Point to your target."
+            ],
+            "skill": null,
+            "icon": "ability_druid_disembowel"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "murder",
+            "name": "Murder",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases all damage dealt by 2% against Humanoid and Giant targets.",
+            "ranks": [
+                "Increases all damage dealt by 2% against Humanoid and Giant targets.",
+                "Increases all damage dealt by 4% against Humanoid and Giant targets."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_deathscream"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "improved-slice-and-dice",
+            "name": "Improved Slice and Dice",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the duration of your Slice and Dice ability by 15%.",
+            "ranks": [
+                "Increases the duration of your Slice and Dice ability by 15%.",
+                "Increases the duration of your Slice and Dice ability by 30%.",
+                "Increases the duration of your Slice and Dice ability by 45%."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_slicedice"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "relentless-strikes",
+            "name": "Relentless Strikes",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your finishing moves have a 20% chance per Combo Point to restore 25 energy.",
+            "ranks": [
+                "Your finishing moves have a 20% chance per Combo Point to restore 25 energy."
+            ],
+            "skill": null,
+            "icon": "ability_warrior_decisivestrike"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "improved-expose-armor",
+            "name": "Improved Expose Armor",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Energy cost of your Expose Armor ability by 5, and refunds 1 Combo Points when cast with 5 Combo Points.",
+            "ranks": [
+                "Reduces the Energy cost of your Expose Armor ability by 5, and refunds 1 Combo Points when cast with 5 Combo Points.",
+                "Reduces the Energy cost of your Expose Armor ability by 10, and refunds 2 Combo Point when cast with 5 Combo Points."
+            ],
+            "skill": null,
+            "icon": "ability_warrior_riposte"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "lethality",
+            "name": "Lethality",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "malice",
+            "status": "unchanged",
+            "description": "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 4%.",
+            "ranks": [
+                "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 4%.",
+                "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 8%.",
+                "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 12%.",
+                "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 16%.",
+                "Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, Mutilate, Ghostly Strike, and Hemorrhage abilities by 20%."
+            ],
+            "skill": null,
+            "icon": "ability_criticalstrike"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "vile-poisons",
+            "name": "Vile Poisons",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage dealt by your poisons by 4% and gives your poisons an additional 8% chance to resist dispel effects.",
+            "ranks": [
+                "Increases the damage dealt by your poisons by 4% and gives your poisons an additional 8% chance to resist dispel effects.",
+                "Increases the damage dealt by your poisons by 8% and gives your poisons an additional 16% chance to resist dispel effects.",
+                "Increases the damage dealt by your poisons by 12% and gives your poisons an additional 24% chance to resist dispel effects.",
+                "Increases the damage dealt by your poisons by 16% and gives your poisons an additional 32% chance to resist dispel effects.",
+                "Increases the damage dealt by your poisons by 20% and gives your poisons an additional 40% chance to resist dispel effects."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_feigndeath"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "cold-blood",
+            "name": "Cold Blood",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "When activated, increases the critical strike chance of your next Sinister Strike, Backstab, Ambush, Eviscerate, or Mutilate by 100%.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "When activated, increases the critical strike chance of your next Sinister Strike, Backstab, Ambush, Eviscerate, or Mutilate by 100%."
+            },
+            "icon": "spell_ice_lament"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "improved-poisons",
+            "name": "Improved Poisons",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the chance to apply Poisons to your target by 2%, and gives Poison applications a 10% chance to not consume a charge.",
+            "ranks": [
+                "Increases the chance to apply Poisons to your target by 2%, and gives Poison applications a 10% chance to not consume a charge.",
+                "Increases the chance to apply Poisons to your target by 4%, and gives Poison applications a 20% chance to not consume a charge.",
+                "Increases the chance to apply Poisons to your target by 6%, and gives Poison applications a 30% chance to not consume a charge.",
+                "Increases the chance to apply Poisons to your target by 8%, and gives Poison applications a 40% chance to not consume a charge.",
+                "Increases the chance to apply Poisons to your target by 10%, and gives Poison applications a 50% chance to not consume a charge."
+            ],
+            "skill": null,
+            "icon": "ability_poisons"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "vigor",
+            "name": "Vigor",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your maximum Energy by 5.",
+            "ranks": [
+                "Increases your maximum Energy by 5.",
+                "Increases your maximum Energy by 10."
+            ],
+            "skill": null,
+            "icon": "spell_nature_earthbindtotem"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "mutilate",
+            "name": "Mutilate",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Instantly attacks with both weapons for 75% weapon damage plus an additional 17.25 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points.",
+            "ranks": null,
+            "skill": {
+                "cost": "60 Energy",
+                "range": "Melee",
+                "type": "Instant",
+                "description": "Instantly attacks with both weapons for 75% weapon damage plus an additional 17.25 with each weapon. Damage increased by 20% against Poisoned targets. Awards 2 Combo Points."
+            },
+            "icon": "ability_rogue_deadlybrew"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "improved-kidney-shot",
+            "name": "Improved Kidney Shot",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Enemies Stunned by your Kidney Shot ability take 5% increased damage from your poisons and attacks.",
+            "ranks": [
+                "Enemies Stunned by your Kidney Shot ability take 5% increased damage from your poisons and attacks.",
+                "Enemies Stunned by your Kidney Shot ability take 10% increased damage from your poisons and attacks."
+            ],
+            "skill": null,
+            "icon": "ability_rogue_kidneyshot"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "seal-fate",
+            "name": "Seal Fate",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Your critical strikes from abilities that add Combo Points have a 20% chance to add an additional combo point.",
+            "ranks": [
+                "Your critical strikes from abilities that add Combo Points have a 20% chance to add an additional combo point.",
+                "Your critical strikes from abilities that add Combo Points have a 40% chance to add an additional combo point.",
+                "Your critical strikes from abilities that add Combo Points have a 60% chance to add an additional combo point.",
+                "Your critical strikes from abilities that add Combo Points have a 80% chance to add an additional combo point.",
+                "Your critical strikes from abilities that add Combo Points have a 100% chance to add an additional combo point."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_chilltouch"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "venom",
+            "name": "Venom",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "mutilate",
+            "status": "unchanged",
+            "description": "Finishing move that increases the damage of your Poisons by 30% and your chance to apply Poisons by 10%. Lasts longer per combo point:",
+            "ranks": null,
+            "skill": {
+                "cost": "25 Energy",
+                "type": "Instant",
+                "description": "Finishing move that increases the damage of your Poisons by 30% and your chance to apply Poisons by 10%. Lasts longer per combo point:"
+            },
+            "icon": "inv_sword_31"
+        }
+    ]
+}

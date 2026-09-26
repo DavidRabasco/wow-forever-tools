@@ -1,0 +1,309 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/hunter/page-data.json (talentData, Marksmanship tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "hawk-eye",
+            "name": "Hawk Eye",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the range of your ranged weapons by 2 yards.",
+            "ranks": [
+                "Increases the range of your ranged weapons by 2 yards.",
+                "Increases the range of your ranged weapons by 4 yards.",
+                "Increases the range of your ranged weapons by 6 yards."
+            ],
+            "skill": null,
+            "icon": "ability_townwatch"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "improved-concussive-shot",
+            "name": "Improved Concussive Shot",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives your Concussive Shot a 4% chance to stun the target for 3 sec.",
+            "ranks": [
+                "Gives your Concussive Shot a 4% chance to stun the target for 3 sec.",
+                "Gives your Concussive Shot a 8% chance to stun the target for 3 sec.",
+                "Gives your Concussive Shot a 12% chance to stun the target for 3 sec.",
+                "Gives your Concussive Shot a 16% chance to stun the target for 3 sec.",
+                "Gives your Concussive Shot a 20% chance to stun the target for 3 sec."
+            ],
+            "skill": null,
+            "icon": "spell_frost_stun"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "lethal-attacks",
+            "name": "Lethal Attacks",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your critical strike chance with all attacks by 1%.",
+            "ranks": [
+                "Increases your critical strike chance with all attacks by 1%.",
+                "Increases your critical strike chance with all attacks by 2%.",
+                "Increases your critical strike chance with all attacks by 3%.",
+                "Increases your critical strike chance with all attacks by 4%.",
+                "Increases your critical strike chance with all attacks by 5%."
+            ],
+            "skill": null,
+            "icon": "ability_searingarrow"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "improved-stings",
+            "name": "Improved Stings",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increased the damage of your Serpent Sting ability by 6%, reduces the cooldown of your Viper Sting ability by 2 sec, and increases the duration of your Scorpid Sting abllity by 15 sec.",
+            "ranks": [
+                "Increased the damage of your Serpent Sting ability by 6%, reduces the cooldown of your Viper Sting ability by 2 sec, and increases the duration of your Scorpid Sting abllity by 15 sec.",
+                "Increased the damage of your Serpent Sting ability by 13%, reduces the cooldown of your Viper Sting ability by 4 sec, and increases the duration of your Scorpid Sting abllity by 30 sec.",
+                "Increased the damage of your Serpent Sting ability by 20%, reduces the cooldown of your Viper Sting ability by 6 sec, and increases the duration of your Scorpid Sting abllity by 45 sec."
+            ],
+            "skill": null,
+            "icon": "hunter_pvp_spidersting"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "efficiency",
+            "name": "Efficiency",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the Mana cost of your Shots, Stings, and melee abilities by 3%.",
+            "ranks": [
+                "Reduces the Mana cost of your Shots, Stings, and melee abilities by 3%.",
+                "Reduces the Mana cost of your Shots, Stings, and melee abilities by 6%.",
+                "Reduces the Mana cost of your Shots, Stings, and melee abilities by 9%.",
+                "Reduces the Mana cost of your Shots, Stings, and melee abilities by 12%.",
+                "Reduces the Mana cost of your Shots, Stings, and melee abilities by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_frost_wizardmark"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "careful-aim",
+            "name": "Careful Aim",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Attack Power by 20% of your Intellect.",
+            "ranks": [
+                "Increases your Attack Power by 20% of your Intellect.",
+                "Increases your Attack Power by 40% of your Intellect.",
+                "Increases your Attack Power by 60% of your Intellect.",
+                "Increases your Attack Power by 80% of your Intellect.",
+                "Increases your Attack Power by 100% of your Intellect."
+            ],
+            "skill": null,
+            "icon": "ability_hunter_zenarchery"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "rapid-killing",
+            "name": "Rapid Killing",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown on your Rapid Fire ability by 1 min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rapid Killing, Increasing the damage of your next Shot ability within 20 sec by 10%.",
+            "ranks": [
+                "Reduces the cooldown on your Rapid Fire ability by 1 min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rapid Killing, Increasing the damage of your next Shot ability within 20 sec by 10%.",
+                "Reduces the cooldown on your Rapid Fire ability by 2 min. In addition, when you kill a non-trivial enemy or it dies while afflicted by your Serpent Sting, you gain Rapid Killing, Increasing the damage of your next Shot ability within 20 sec by 20%."
+            ],
+            "skill": null,
+            "icon": "ability_hunter_rapidkilling"
+        },
+        {
+            "row": 3,
+            "col": 2,
+            "slug": "improved-arcane-shot",
+            "name": "Improved Arcane Shot",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cooldown of your Arcane Shot by 0.3 sec. Does not affect the cooldown of abilities which share a cooldown with Arcane Shot.",
+            "ranks": [
+                "Reduces the cooldown of your Arcane Shot by 0.3 sec. Does not affect the cooldown of abilities which share a cooldown with Arcane Shot.",
+                "Reduces the cooldown of your Arcane Shot by 0.6 sec. Does not affect the cooldown of abilities which share a cooldown with Arcane Shot.",
+                "Reduces the cooldown of your Arcane Shot by 0.9 sec. Does not affect the cooldown of abilities which share a cooldown with Arcane Shot.",
+                "Reduces the cooldown of your Arcane Shot by 1.2 sec. Does not affect the cooldown of abilities which share a cooldown with Arcane Shot.",
+                "Reduces the cooldown of your Arcane Shot by 1.5 sec. Does not affect the cooldown of abilities which share a cooldown with Arcane Shot."
+            ],
+            "skill": null,
+            "icon": "ability_impalingbolt"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "lone-wolf",
+            "name": "Lone Wolf",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "You deal 20% increased damage with all attacks while you do not have an active pet.",
+            "ranks": [
+                "You deal 20% increased damage with all attacks while you do not have an active pet."
+            ],
+            "skill": null,
+            "icon": "ability_mount_whitedirewolf"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "trueshot-aura",
+            "name": "Trueshot Aura",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the Ranged Attack Power of party members within 45 yards by 30. Lasts 30 min.",
+            "ranks": null,
+            "skill": {
+                "cost": "180 Mana",
+                "type": "Instant",
+                "description": "Increases the Ranged Attack Power of party members within 45 yards by 30. Lasts 30 min."
+            },
+            "icon": "ability_trueshot"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "mortal-shots",
+            "name": "Mortal Shots",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "careful-aim",
+            "status": "unchanged",
+            "description": "Increases the critical strike damage bonus on all ranged abilities by 6%.",
+            "ranks": [
+                "Increases the critical strike damage bonus on all ranged abilities by 6%.",
+                "Increases the critical strike damage bonus on all ranged abilities by 12%.",
+                "Increases the critical strike damage bonus on all ranged abilities by 18%.",
+                "Increases the critical strike damage bonus on all ranged abilities by 24%.",
+                "Increases the critical strike damage bonus on all ranged abilities by 30%."
+            ],
+            "skill": null,
+            "icon": "ability_piercedamage"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "rapid-recuperation",
+            "name": "Rapid Recuperation",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": "rapid-killing",
+            "status": "unchanged",
+            "description": "Hitting a target with your Serpent Sting ability grants you 25% and consuming Rapid Killing grants you 50% of your Mana regeneration while casting for the next 15 sec.",
+            "ranks": [
+                "Hitting a target with your Serpent Sting ability grants you 25% and consuming Rapid Killing grants you 50% of your Mana regeneration while casting for the next 15 sec.",
+                "Hitting a target with your Serpent Sting ability grants you 50% and consuming Rapid Killing grants you 100% of your Mana regeneration while casting for the next 15 sec."
+            ],
+            "skill": null,
+            "icon": "ability_hunter_rapidregeneration"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "barrage",
+            "name": "Barrage",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 3%.",
+            "ranks": [
+                "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 3%.",
+                "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 7%.",
+                "Increases the damage done by your Multi-Shot, Aimed Shot, and Volley abilities by 10%."
+            ],
+            "skill": null,
+            "icon": "ability_upgrademoonglaive"
+        },
+        {
+            "row": 5,
+            "col": 4,
+            "slug": "scatter-shot",
+            "name": "Scatter Shot",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "A short-range shot that deals 50% weapon damage and disorients the target for 4 sec. Any damage caused will remove the effect. Turns off your attack when used.",
+            "ranks": null,
+            "skill": {
+                "cost": "84 Mana",
+                "range": 15,
+                "type": "Instant",
+                "cd": "30 sec",
+                "description": "A short-range shot that deals 50% weapon damage and disorients the target for 4 sec. Any damage caused will remove the effect. Turns off your attack when used."
+            },
+            "icon": "ability_golemstormbolt"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "ranged-weapon-specialization",
+            "name": "Ranged Weapon Specialization",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage you deal with ranged weapons by 1%.",
+            "ranks": [
+                "Increases the damage you deal with ranged weapons by 1%.",
+                "Increases the damage you deal with ranged weapons by 2%.",
+                "Increases the damage you deal with ranged weapons by 3%.",
+                "Increases the damage you deal with ranged weapons by 4%.",
+                "Increases the damage you deal with ranged weapons by 5%."
+            ],
+            "skill": null,
+            "icon": "inv_weapon_rifle_06"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "sniper-shot",
+            "name": "Sniper Shot",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "trueshot-aura",
+            "status": "unchanged",
+            "description": "A steady snipe that increases ranged damage by 160.",
+            "ranks": null,
+            "skill": {
+                "cost": "365 Mana",
+                "range": "8-35",
+                "type": "4 sec cast",
+                "cd": "15 sec",
+                "description": "A steady snipe that increases ranged damage by 160."
+            },
+            "icon": "hunter_pvp_snipershot"
+        }
+    ]
+}

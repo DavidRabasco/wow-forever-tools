@@ -52,6 +52,188 @@
                     "spec_icon": "ability_warrior_defensivestance"
                 }
             }
+        },
+        "druid": {
+            "name": "Druid",
+            "trees": {
+                "balance": {
+                    "name": "Balance",
+                    "order": 1,
+                    "file": "druid_balance.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/balance_druid.jpg",
+                    "spec_icon": "spell_nature_starfall"
+                },
+                "feral-combat": {
+                    "name": "Feral Combat",
+                    "order": 2,
+                    "file": "druid_feral-combat.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/feral_combat_druid.jpg",
+                    "spec_icon": "ability_druid_catform"
+                },
+                "restoration": {
+                    "name": "Restoration",
+                    "order": 3,
+                    "file": "druid_restoration.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/restoration_druid.jpg",
+                    "spec_icon": "spell_nature_healingtouch"
+                }
+            }
+        },
+        "hunter": {
+            "name": "Hunter",
+            "trees": {
+                "beast-mastery": {
+                    "name": "Beast Mastery",
+                    "order": 1,
+                    "file": "hunter_beast-mastery.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/beast_mastery_hunter.jpg",
+                    "spec_icon": "ability_hunter_bestialdiscipline"
+                },
+                "marksmanship": {
+                    "name": "Marksmanship",
+                    "order": 2,
+                    "file": "hunter_marksmanship.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/marksmanship_hunter.jpg",
+                    "spec_icon": "ability_marksmanship"
+                },
+                "survival": {
+                    "name": "Survival",
+                    "order": 3,
+                    "file": "hunter_survival.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/survival_hunter.jpg",
+                    "spec_icon": "ability_hunter_swiftstrike"
+                }
+            }
+        },
+        "mage": {
+            "name": "Mage",
+            "trees": {
+                "arcane": {
+                    "name": "Arcane",
+                    "order": 1,
+                    "file": "mage_arcane.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/arcane_mage.jpg",
+                    "spec_icon": "spell_arcane_blast"
+                },
+                "fire": {
+                    "name": "Fire",
+                    "order": 2,
+                    "file": "mage_fire.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/fire_mage.jpg",
+                    "spec_icon": "spell_fire_firebolt02"
+                },
+                "frost": {
+                    "name": "Frost",
+                    "order": 3,
+                    "file": "mage_frost.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/frost_mage.jpg",
+                    "spec_icon": "spell_frost_frostbolt02"
+                }
+            }
+        },
+        "priest": {
+            "name": "Priest",
+            "trees": {
+                "discipline": {
+                    "name": "Discipline",
+                    "order": 1,
+                    "file": "priest_discipline.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/discipline_priest.jpg",
+                    "spec_icon": "spell_holy_powerwordshield"
+                },
+                "holy": {
+                    "name": "Holy",
+                    "order": 2,
+                    "file": "priest_holy.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/holy_priest.jpg",
+                    "spec_icon": "spell_holy_guardianspirit"
+                },
+                "shadow": {
+                    "name": "Shadow",
+                    "order": 3,
+                    "file": "priest_shadow.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/shadow_priest.jpg",
+                    "spec_icon": "spell_shadow_shadowwordpain"
+                }
+            }
+        },
+        "rogue": {
+            "name": "Rogue",
+            "trees": {
+                "assassination": {
+                    "name": "Assassination",
+                    "order": 1,
+                    "file": "rogue_assassination.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/assassination_rogue.jpg",
+                    "spec_icon": "ability_rogue_deadlybrew"
+                },
+                "combat": {
+                    "name": "Combat",
+                    "order": 2,
+                    "file": "rogue_combat.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/combat_rogue.jpg",
+                    "spec_icon": "ability_backstab"
+                },
+                "subtlety": {
+                    "name": "Subtlety",
+                    "order": 3,
+                    "file": "rogue_subtlety.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/subtlety_rogue.jpg",
+                    "spec_icon": "ability_stealth"
+                }
+            }
+        },
+        "shaman": {
+            "name": "Shaman",
+            "trees": {
+                "elemental": {
+                    "name": "Elemental",
+                    "order": 1,
+                    "file": "shaman_elemental.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/elemental_shaman.jpg",
+                    "spec_icon": "spell_nature_lightning"
+                },
+                "enhancement": {
+                    "name": "Enhancement",
+                    "order": 2,
+                    "file": "shaman_enhancement.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/enhancement_shaman.jpg",
+                    "spec_icon": "spell_nature_lightningshield"
+                },
+                "restoration": {
+                    "name": "Restoration",
+                    "order": 3,
+                    "file": "shaman_restoration.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/restoration_shaman.jpg",
+                    "spec_icon": "spell_nature_healingwavegreater"
+                }
+            }
+        },
+        "warlock": {
+            "name": "Warlock",
+            "trees": {
+                "affliction": {
+                    "name": "Affliction",
+                    "order": 1,
+                    "file": "warlock_affliction.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/affliction_warlock.jpg",
+                    "spec_icon": "spell_shadow_deathcoil"
+                },
+                "demonology": {
+                    "name": "Demonology",
+                    "order": 2,
+                    "file": "warlock_demonology.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/demonology_warlock.jpg",
+                    "spec_icon": "spell_shadow_metamorphosis"
+                },
+                "destruction": {
+                    "name": "Destruction",
+                    "order": 3,
+                    "file": "warlock_destruction.json",
+                    "background": "https://sunderarmor.com/WOW/Calculator/Backgrounds/NEW/destruction_warlock.jpg",
+                    "spec_icon": "spell_shadow_rainoffire"
+                }
+            }
         }
     }
 }

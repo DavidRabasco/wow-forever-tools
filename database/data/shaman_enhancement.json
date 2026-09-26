@@ -1,0 +1,334 @@
+{
+    "_source": "https://wowtbc.gg/page-data/warcraftforever/talent-calculator/shaman/page-data.json (talentData, Enhancement tree).",
+    "_attribution": "Data (c) wowtbc.gg / Blizzard. Educational use. Icons (c) Blizzard via wow.zamimg.com, short names only.",
+    "_notes": "Auto-imported by forever:import (verbatim ranks). is_gold follows the 1-rank-at-row-5+ heuristic; VERIFY on Wowhead Forever once the beta opens. status=unchanged provisional.",
+    "talents": [
+        {
+            "row": 1,
+            "col": 1,
+            "slug": "earths-grasp",
+            "name": "Earth's Grasp",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the health of your Stoneclaw Totem by 25% and the radius of your Earthbind Totem by 10%.",
+            "ranks": [
+                "Increases the health of your Stoneclaw Totem by 25% and the radius of your Earthbind Totem by 10%.",
+                "Increases the health of your Stoneclaw Totem by 50% and the radius of your Earthbind Totem by 20%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_stoneclawtotem"
+        },
+        {
+            "row": 1,
+            "col": 2,
+            "slug": "thundering-strikes",
+            "name": "Thundering Strikes",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Improves your chance to get a critical strike with all spells and attacks by 1%.",
+            "ranks": [
+                "Improves your chance to get a critical strike with all spells and attacks by 1%.",
+                "Improves your chance to get a critical strike with all spells and attacks by 2%.",
+                "Improves your chance to get a critical strike with all spells and attacks by 3%.",
+                "Improves your chance to get a critical strike with all spells and attacks by 4%.",
+                "Improves your chance to get a critical strike with all spells and attacks by 5%."
+            ],
+            "skill": null,
+            "icon": "ability_thunderbolt"
+        },
+        {
+            "row": 1,
+            "col": 3,
+            "slug": "ancestral-knowledge",
+            "name": "Ancestral Knowledge",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Intellect by 2%.",
+            "ranks": [
+                "Increases your Intellect by 2%.",
+                "Increases your Intellect by 4%.",
+                "Increases your Intellect by 6%.",
+                "Increases your Intellect by 8%.",
+                "Increases your Intellect by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_shadow_grimward"
+        },
+        {
+            "row": 2,
+            "col": 1,
+            "slug": "guardian-totems",
+            "name": "Guardian Totems",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 10% and reduces the cooldown of your Grounding Totem by 1 sec.",
+            "ranks": [
+                "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 10% and reduces the cooldown of your Grounding Totem by 1 sec.",
+                "Increases the amount of damage reduced by your Stoneskin Totem and Windwall Totem by 20% and reduces the cooldown of your Grounding Totem by 2 sec."
+            ],
+            "skill": null,
+            "icon": "spell_nature_stoneskintotem"
+        },
+        {
+            "row": 2,
+            "col": 2,
+            "slug": "mental-dexterity",
+            "name": "Mental Dexterity",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Attack Power by an amount equal to 33% of your Intellect.",
+            "ranks": [
+                "Increases your Attack Power by an amount equal to 33% of your Intellect.",
+                "Increases your Attack Power by an amount equal to 67% of your Intellect.",
+                "Increases your Attack Power by an amount equal to 100% of your Intellect."
+            ],
+            "skill": null,
+            "icon": "spell_nature_mentalquickness"
+        },
+        {
+            "row": 2,
+            "col": 3,
+            "slug": "improved-ghost-wolf",
+            "name": "Improved Ghost Wolf",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the cast time of your Ghost Wolf spell by 1.0 sec, and Ghost Wolf may be used indoors.",
+            "ranks": [
+                "Reduces the cast time of your Ghost Wolf spell by 1.0 sec, and Ghost Wolf may be used indoors.",
+                "Reduces the cast time of your Ghost Wolf spell by 3.0 sec, and Ghost Wolf may be used indoors."
+            ],
+            "skill": null,
+            "icon": "spell_nature_spiritwolf"
+        },
+        {
+            "row": 2,
+            "col": 4,
+            "slug": "improved-lightning-shield",
+            "name": "Improved Lightning Shield",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the damage done by your Lightning Shield orbs by 5%.",
+            "ranks": [
+                "Increases the damage done by your Lightning Shield orbs by 5%.",
+                "Increases the damage done by your Lightning Shield orbs by 10%.",
+                "Increases the damage done by your Lightning Shield orbs by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_lightningshield"
+        },
+        {
+            "row": 3,
+            "col": 1,
+            "slug": "elemental-weapons",
+            "name": "Elemental Weapons",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases the melee attack power bonus of your Rockbiter Weapon by 7%, your Windfury Weapon effect by 13% and increases the damage caused by your Flametongue Weapon and Frostbrand Weapon by 5%.",
+            "ranks": [
+                "Increases the melee attack power bonus of your Rockbiter Weapon by 7%, your Windfury Weapon effect by 13% and increases the damage caused by your Flametongue Weapon and Frostbrand Weapon by 5%.",
+                "Increases the melee attack power bonus of your Rockbiter Weapon by 14%, your Windfury Weapon effect by 27% and increases the damage caused by your Flametongue Weapon and Frostbrand Weapon by 10%.",
+                "Increases the melee attack power bonus of your Rockbiter Weapon by 20%, your Windfury Weapon effect by 40% and increases the damage caused by your Flametongue Weapon and Frostbrand Weapon by 15%."
+            ],
+            "skill": null,
+            "icon": "spell_fire_flametounge"
+        },
+        {
+            "row": 3,
+            "col": 3,
+            "slug": "shamanistic-focus",
+            "name": "Shamanistic Focus",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Reduces the mana cost of your Shock and Lightning Shield spells by 45%.",
+            "ranks": [
+                "Reduces the mana cost of your Shock and Lightning Shield spells by 45%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_elementalabsorption"
+        },
+        {
+            "row": 3,
+            "col": 4,
+            "slug": "anticipation",
+            "name": "Anticipation",
+            "max_rank": 3,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your chance to dodge by an additional 2%.",
+            "ranks": [
+                "Increases your chance to dodge by an additional 2%.",
+                "Increases your chance to dodge by an additional 4%.",
+                "Increases your chance to dodge by an additional 6%."
+            ],
+            "skill": null,
+            "icon": "spell_nature_mirrorimage"
+        },
+        {
+            "row": 4,
+            "col": 1,
+            "slug": "toughness",
+            "name": "Toughness",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your Stamina by 2%.",
+            "ranks": [
+                "Increases your Stamina by 2%.",
+                "Increases your Stamina by 4%.",
+                "Increases your Stamina by 6%.",
+                "Increases your Stamina by 8%.",
+                "Increases your Stamina by 10%."
+            ],
+            "skill": null,
+            "icon": "spell_holy_devotion"
+        },
+        {
+            "row": 4,
+            "col": 2,
+            "slug": "flurry",
+            "name": "Flurry",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": "mental-dexterity",
+            "status": "unchanged",
+            "description": "Increases your melee attack speed by 5% for your next 3 swings after dealing a melee critical strike.",
+            "ranks": [
+                "Increases your melee attack speed by 5% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your melee attack speed by 10% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your melee attack speed by 15% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your melee attack speed by 20% for your next 3 swings after dealing a melee critical strike.",
+                "Increases your melee attack speed by 25% for your next 3 swings after dealing a melee critical strike."
+            ],
+            "skill": null,
+            "icon": "ability_ghoulfrenzy"
+        },
+        {
+            "row": 4,
+            "col": 3,
+            "slug": "stormstrike",
+            "name": "Stormstrike",
+            "max_rank": 1,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Instantly strike for normal weapon damage and increase the damage you deal to the target with your next Lightning Bolt, Chain Lightning, or Earth Shock spell by 20% for 12 sec.",
+            "ranks": null,
+            "skill": {
+                "cost": "125 Mana",
+                "range": "Melee",
+                "type": "Instant",
+                "cd": "8 sec",
+                "description": "Instantly strike for normal weapon damage and increase the damage you deal to the target with your next Lightning Bolt, Chain Lightning, or Earth Shock spell by 20% for 12 sec."
+            },
+            "icon": "ability_shaman_stormstrike"
+        },
+        {
+            "row": 5,
+            "col": 1,
+            "slug": "spirit-weapons",
+            "name": "Spirit Weapons",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Gives a chance to parry enemy melee attacks, reduces all threat generated by your attacks by 30% while Rockbiter Weapon is not active, and increases all threat generated by 30% while Rockbiter Weapon is active.",
+            "ranks": [
+                "Gives a chance to parry enemy melee attacks, reduces all threat generated by your attacks by 30% while Rockbiter Weapon is not active, and increases all threat generated by 30% while Rockbiter Weapon is active."
+            ],
+            "skill": null,
+            "icon": "ability_parry"
+        },
+        {
+            "row": 5,
+            "col": 2,
+            "slug": "mental-quickness",
+            "name": "Mental Quickness",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "Increases your spell damage and healing by up to 15% of your Intellect.",
+            "ranks": [
+                "Increases your spell damage and healing by up to 15% of your Intellect.",
+                "Increases your spell damage and healing by up to 30% of your Intellect."
+            ],
+            "skill": null,
+            "icon": "spell_nature_sleep"
+        },
+        {
+            "row": 5,
+            "col": 3,
+            "slug": "improved-stormstrike",
+            "name": "Improved Stormstrike",
+            "max_rank": 2,
+            "is_gold": false,
+            "requires_slug": "stormstrike",
+            "status": "unchanged",
+            "description": "When you Stormstrike, you have a 50% chance to gain 50% mana regeneration while casting spells for 15 sec, and Stormstrike's cooldown has a 50% chance to reset each time you Dodge or Parry.",
+            "ranks": [
+                "When you Stormstrike, you have a 50% chance to gain 50% mana regeneration while casting spells for 15 sec, and Stormstrike's cooldown has a 50% chance to reset each time you Dodge or Parry.",
+                "When you Stormstrike, you have a 100% chance to gain 50% mana regeneration while casting spells for 15 sec, and Stormstrike's cooldown has a 100% chance to reset each time you Dodge or Parry."
+            ],
+            "skill": null,
+            "icon": "spell_shaman_improvedstormstrike"
+        },
+        {
+            "row": 6,
+            "col": 3,
+            "slug": "maelstrom-weapon",
+            "name": "Maelstrom Weapon",
+            "max_rank": 5,
+            "is_gold": false,
+            "requires_slug": null,
+            "status": "unchanged",
+            "description": "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 4%. Stacks up to 5 times. Lasts 30 sec.",
+            "ranks": [
+                "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 4%. Stacks up to 5 times. Lasts 30 sec.",
+                "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 8%. Stacks up to 5 times. Lasts 30 sec.",
+                "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 12%. Stacks up to 5 times. Lasts 30 sec.",
+                "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 16%. Stacks up to 5 times. Lasts 30 sec.",
+                "When you deal damage with a melee attack, you have a chance to reduce the cast time and Mana cost of your next Lightning Bolt spell by 20%. Stacks up to 5 times. Lasts 30 sec."
+            ],
+            "skill": null,
+            "icon": "spell_shaman_maelstromweapon"
+        },
+        {
+            "row": 7,
+            "col": 2,
+            "slug": "rage-of-the-farseer",
+            "name": "Rage of the Farseer",
+            "max_rank": 1,
+            "is_gold": true,
+            "requires_slug": "mental-quickness",
+            "status": "unchanged",
+            "description": "Increases your attack speed by 30% for 25 sec.",
+            "ranks": null,
+            "skill": {
+                "type": "Instant",
+                "cd": "3 min",
+                "description": "Increases your attack speed by 30% for 25 sec."
+            },
+            "icon": "spell_nature_bloodlust"
+        }
+    ]
+}

@@ -7,8 +7,11 @@
 //
 // Implemented classic/Forever rules (same for the 3 trees, 51-point pool shared):
 //  1. Per-talent cap: state[slug] <= max_rank.
-//  2. Row gate: row R needs (R-1)*5 points spent in ITS tree.
-//     E.g. row 2 needs 5, row 7 needs 30.
+//  2. Row gate (per-row, strict): row R needs (R-1)*5 points in the rows
+//     ABOVE it (rows 1..R-1 only; its own points never count).
+//     E.g. row 2 needs 5 in row 1, row 7 needs 30 in rows 1-6.
+//     Consequence: removing from row 1 with 5+1 leaves 4 supporting row 2,
+//     so it is blocked (row 7 needs no exemption: its gate counts rows above).
 //  3. Prerequisite: if requires_talent_id, the required talent must be maxed.
 //  4. Global 51 cap: a level 60 only has 51 talent points across ALL trees.
 //  5. Removing points (right click): not allowed if it would break the row gate
@@ -70,6 +73,13 @@ fetch('/api/paladin')
         return tree.talents.reduce((acumulado, talent) => acumulado + (state[talent.slug] || 0), 0);
     }
 
+    // Points spent in the rows ABOVE the given row (rows 1..row-1).
+    // This is what row gates count: a row's own points never unlock itself.
+    // `st` defaults to the live state; canRemove passes its simulated state.
+    function pointsAbove(tree, row, st = state){
+        return tree.talents.reduce((total, t) => total + (t.row < row ? (st[t.slug] || 0) : 0), 0);
+    }
+
     // Global total across all trees (the shared 51-point pool).
     function totalPoints(){
         return data.trees.reduce((acumulado, t) =>
@@ -93,8 +103,8 @@ fetch('/api/paladin')
             if(!requiredTalent || state[requiredTalent.slug] < requiredTalent.max_rank) return false;
         }
 
-        // Row gate: each row needs 5 points per previous row.
-        if(pointsInTree(tree) < (talent.row-1)*5) return false;
+        // Row gate (strict per-row): the rows above must hold 5 per previous row.
+        if(pointsAbove(tree, talent.row) < (talent.row-1)*5) return false;
         return true;
     }
 
@@ -106,11 +116,11 @@ fetch('/api/paladin')
         if(state[talent.slug] <= 0) return false;
         // Simulated state with 1 point less on this talent.
         const sim = { ...state, [talent.slug]: state[talent.slug] - 1 };
-        const pointsIn = (tr) => tr.talents.reduce((a, t) => a + (sim[t.slug] || 0), 0);
-        // Every skilled talent must still meet its row gate and prerequisite.
+        // Every skilled talent must still meet its row gate (rows above only)
+        // and its prerequisite under the simulated state.
         for(const t of tree.talents){
             if((sim[t.slug] || 0) <= 0) continue; // unskilled talents don't block
-            if(pointsIn(tree) < (t.row-1)*5) return false; // broken row gate
+            if(pointsAbove(tree, t.row, sim) < (t.row-1)*5) return false; // broken row gate
             if(t.requires_talent_id){
                 const req = tree.talents.find(item => item.id === t.requires_talent_id);
                 if(!req || (sim[req.slug] || 0) < req.max_rank) return false; // broken prerequisite
@@ -380,10 +390,10 @@ fetch('/api/paladin')
         html += `<div style="color:#fff">Rank ${pts}/${talent.max_rank}</div>`;
         // Yellow description (the DB holds a summary of all ranks).
         if(talent.description) html += `<div style="color:#ffd100;margin-top:4px">${talent.description}</div>`;
-        // Red requirements: row gate (in THIS tree) and unmaxed parent talent.
+        // Red requirements: strict row gate (rows above only) and unmaxed parent.
         const missing = [];
         const needPts = rowRequirement(talent);
-        if(pointsInTree(tree) < needPts) missing.push(`Requires ${needPts} points in ${tree.name} Talents`);
+        if(pointsAbove(tree, talent.row) < needPts) missing.push(`Requires ${needPts} points in ${tree.name} rows above`);
         if(talent.requires_talent_id){
             const parent = tree.talents.find(item => item.id === talent.requires_talent_id);
             if(parent && (state[parent.slug] || 0) < parent.max_rank)

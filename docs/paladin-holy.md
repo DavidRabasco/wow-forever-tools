@@ -42,7 +42,7 @@ text fallback.
 
 Classic grants 1 point per level from 10 → **51 points** at 60 (`MAX_TOTAL_POINTS`).
 - Per talent: `state <= max_rank`.
-- Row R needs `(R-1)*5` tree points (row 7 = 30 pts).
+- Row R needs `(R-1)*5` points in the rows ABOVE it (rows 1..R-1; its own points never count). Row 7 needs 30 above, so no exemption is required for the 1-point capstone.
 - Prerequisite: the required talent must be maxed
   (`illumination ← reverence`, `divine-precision ← holy-shock`, `lights-vigil ← holy-shock`).
 - Removal: the state with −1 is simulated and rejected if it breaks a row gate or prerequisite.

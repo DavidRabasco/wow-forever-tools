@@ -55,11 +55,14 @@ class="flex flex-col items-center gap-1 rounded p-1 border-2 border-neutral-700 
 <div class="flex flex-row min-[1200px]:flex-col items-center min-[1200px]:items-end gap-2">
 <button id="reset-build" type="button" title="Remove all points and restore the 51-point pool"
 class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#3a0d0d] hover:bg-[#5a1414] text-sm font-bold" style="color:#ffd100">Reset</button>
+<button id="share-build" type="button" title="Save this build and copy its link"
+class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#0d2a3a] hover:bg-[#143d55] text-sm font-bold" style="color:#ffd100">Share</button>
 <span id="points-remaining" class="text-sm text-neutral-300">51 remaining</span>
+<div id="share-status" class="text-xs text-neutral-400"></div>
 </div>
 </div>
-{{-- data-api tells calculator.js which class endpoint to load. --}}
-<div id="trees" class="min-w-0" data-api="/api/classes/{{ $wowClass->slug }}">Loading...</div>
+{{-- data-api/class tell calculator.js which class endpoint to load. --}}
+<div id="trees" class="min-w-0" data-api="/api/classes/{{ $wowClass->slug }}" data-class="{{ $wowClass->slug }}">Loading...</div>
 {{-- Height-capped to the trees by JS (syncPanelHeight): inline max-height makes
      the list scroll inside instead of growing the page. flex-col + min-h-0
      on the <ol> are required for that inner scroll to work. --}}

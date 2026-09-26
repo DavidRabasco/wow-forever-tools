@@ -31,9 +31,11 @@
 // artwork URL dies, the dark panel base still shows.
 // Icons (c) Blizzard, educational use: the DB stores only 'spell_holy_x', the
 // wow.zamimg.com URL is built here. Missing/broken icons fall back to text.
-// The API URL travels in #trees data-api so this file serves every class.
+// The API URL and class slug travel in #trees data attributes so this file
+// serves every class (data-api="/api/classes/warrior", data-class="warrior").
 const apiMount = document.getElementById('trees');
 const API_URL = apiMount?.dataset.api || '/api/classes/paladin';
+const PAGE_CLASS = apiMount?.dataset.class || 'paladin';
 fetch(API_URL)
 // If the API fails (500, 404, network down), response.ok is false: show the
 // error in #trees instead of crashing with "Cannot read properties of undefined".
@@ -307,6 +309,22 @@ fetch(API_URL)
         const el = document.getElementById('points-remaining');
         if(!el) return; // safety: toolbar missing from the template
         el.textContent = `${MAX_TOTAL_POINTS - totalPoints()} remaining`;
+    }
+
+    // One-line status under the toolbar (share feedback, load errors...).
+    function setShareStatus(message){
+        const el = document.getElementById('share-status');
+        if(el) el.textContent = message;
+    }
+
+    // Find a talent plus its tree view by slug (needed to replay shared picks
+    // through canSpend, which requires the tree).
+    function findTalentView(slug){
+        for(const view of views){
+            const talent = view.tree.talents.find(t => t.slug === slug);
+            if(talent) return { talent, view };
+        }
+        return null;
     }
 
     // Pick-order panel (right side): one line per spent point, in learn order.
@@ -593,8 +611,63 @@ fetch(API_URL)
         Object.keys(state).forEach(slug => state[slug] = 0);
         pickOrder.length = 0;
         hideTooltip(); // it may show a stale rank
+        setShareStatus('');
+        // Drop ?build= from the URL: the page no longer shows a saved build.
+        history.replaceState('', '', location.pathname);
         refreshAll();
     });
+    // Share: POST the pick order, then turn the page URL into the share link
+    // (?build=hash) and copy it to the clipboard.
+    const shareBtn = document.getElementById('share-build');
+    if(shareBtn) shareBtn.addEventListener('click', async () => {
+        if(pickOrder.length === 0){ setShareStatus('Spend at least 1 point first.'); return; }
+        setShareStatus('Saving...');
+        try {
+            const res = await fetch('/api/builds', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ class_slug: PAGE_CLASS, picks: pickOrder }),
+            });
+            if(!res.ok) throw new Error(`save failed (${res.status})`);
+            const { hash } = await res.json();
+            const url = `${location.origin}/${PAGE_CLASS}?build=${hash}`;
+            history.replaceState('', '', `/${PAGE_CLASS}?build=${hash}`);
+            try {
+                await navigator.clipboard.writeText(url);
+                setShareStatus('Link copied!');
+            } catch {
+                setShareStatus(url); // clipboard blocked: show the link to copy by hand
+            }
+        } catch(error) {
+            setShareStatus(`Could not save: ${error.message}`);
+        }
+    });
+    // Load a shared build (?build=hash): replay its picks in order through the
+    // same rules (canSpend), so a tampered link can never produce odd states.
+    // A build of another class redirects to its own page with the same hash.
+    (async function loadSharedBuild(){
+        const hash = new URLSearchParams(location.search).get('build');
+        if(!hash) return;
+        try {
+            const res = await fetch(`/api/builds/${encodeURIComponent(hash)}`, { headers: { 'Accept': 'application/json' } });
+            if(!res.ok) throw new Error(`build not found (${res.status})`);
+            const build = await res.json();
+            if(build.class_slug !== PAGE_CLASS){
+                location.href = `/${build.class_slug}?build=${encodeURIComponent(hash)}`;
+                return;
+            }
+            Object.keys(state).forEach(slug => state[slug] = 0);
+            pickOrder.length = 0;
+            for(const slug of build.picks || []){
+                const entry = Object.keys(talentBySlug).includes(slug) ? findTalentView(slug) : null;
+                if(entry && canSpend(entry.talent, entry.view.tree)){ state[slug]++; pickOrder.push(slug); }
+            }
+            refreshAll();
+            setShareStatus(`Loaded shared build ${hash}.`);
+        } catch(error) {
+            setShareStatus(`Could not load build: ${error.message}`);
+        }
+    })();
     // Trace dependency arrows (cells must exist first so they can be measured).
     views.forEach(drawArrows);
     syncPanelHeight();

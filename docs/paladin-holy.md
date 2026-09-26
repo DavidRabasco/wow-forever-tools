@@ -42,6 +42,9 @@ text fallback.
 | `app/Console/Commands/ImportForeverClass.php` | `php artisan forever:import {class}`: scrapes wowtbc page-data into `database/data/{class}_{tree}.json` (verbatim ranks, resolved icons/backgrounds, manifest merge). |
 | `database/data/classes.json` | Class manifest: trees, files, backgrounds, spec icons. |
 | `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes (scoped slugs, 2 passes). |
+| `app/Models/Build.php` | `builds` rows: 6-char hash, class slug, `{picks:[...]}`. |
+| `app/Http/Controllers/Api/BuildController.php` | `POST /api/builds` (replays picks server-side with calculator rules; 422 on illegal) + `GET /api/builds/{hash}`. |
+| `tests/Feature/BuildTest.php` | 4 tests: valid store, unknown talent, row-gate violation, load roundtrip. |
 | `database/migrations/2026_09_26_005315_add_presentation_to_talent_trees.php` | Adds `background` (full artwork URL) + `spec_icon` (zamimg short name) to `talent_trees`. |
 
 ## 3. Rules (level 60 = 51 points)
@@ -112,9 +115,16 @@ Line *i* = level 10+*i*, rank shown is the running count. Header shows the
 character level (9 + spent points; 51 pts = 60). Spending appends, removing
 drops that talent's most recent pick, so the list is always a valid sequence.
 
-## 9. Pending
+## 10. Shareable builds (2026-09-26, done)
+
+`Share` posts the pick order; the backend replays it with the exact calculator
+rules (cap, pool, prerequisites, strict rows-above gate) and returns a 6-char
+hash, or 422 on illegal sequences. Identical pick orders reuse the existing hash
+(200, no new row), so sharing 40 times creates 1 row. The page URL becomes `/{class}?build={hash}`
+and is copied to the clipboard. Opening the link replays the picks (cross-class
+links redirect to their own page). Covered by `tests/Feature/BuildTest.php` (4 tests).
+
+## 11. Pending
 
 1. `status`: everything is `unchanged` today; diff against Classic to flag `new/changed/moved/now_baseline`.
-2. `builds` (6-char hash): shareable save/load builds — table created, API pending.
-3. All 9 classes live (2026-09-26, done): 466 talents via `forever:import`, icons 466/466 (2 hand-fixed: primal-bite, blood-frenzy), backgrounds verified, spec icons retail-official (doubtful ones visually inspected), `/druid ... /warlock` 200.
-4. Paladin `description` summaries: optionally re-import verbatim ranks via the importer for Next-Rank tooltips.
+2. Paladin `description` summaries: optionally re-import verbatim ranks via the importer for Next-Rank tooltips.

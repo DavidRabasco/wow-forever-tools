@@ -14,9 +14,12 @@
 //     cuando haya multi-arbol, totalPoints = suma de los 3 arboles.
 //  5. Quitar puntos (click derecho): no se puede si rompe la puerta de fila de
 //     otro talento con puntos, ni si un dependiente sigue con puntos.
-//  6. Visual estilo WoW: al maximo = borde dorado; disponible = color normal;
-//     bloqueado (sin puerta de fila, sin prerequisito o tope 51) = gris
+//  6. Visual estilo WoW: celda = solo icono + rango superpuesto (sin rectangulos).
+//     Borde verde fino = disponible, amarillo = al maximo, gris = bloqueado
 //     (icono en escala de grises + apagado). Se repinta en cada click.
+//  7. Flechas de dependencia estilo WoW: SVG superpuesto al grid con una linea
+//     del requisito al dependiente (illumination<-reverence, etc.). Gris si el
+//     requisito no esta al maximo, dorada cuando se cumple. Se redibuja en resize.
 //
 // Controles: click izquierdo suma, click derecho resta (con menu bloqueado).
 // Iconos (c) Blizzard, uso educativo: en DB solo 'spell_holy_x', aqui se monta
@@ -49,7 +52,7 @@ fetch('/api/paladin')
     div.appendChild(counter);
 
     const grid = document.createElement('div');
-    grid.className = 'grid grid-cols-4 gap-2 max-w-md';
+    grid.className = 'grid grid-cols-4 gap-2 max-w-md relative'; // relative: el SVG de flechas se posiciona sobre el grid
     grid.style.gridTemplateRows = 'repeat(7, 64px)';
     div.appendChild(grid);
 
@@ -126,13 +129,113 @@ fetch('/api/paladin')
     // Mapa slug -> celda DOM, para repintar estados sin reconstruir el grid.
     const cells = {};
 
+    // Flechas de dependencia estilo WoW (SVG superpuesto, sin librerias).
+    // ------------------------------------------------------------------
+    // Cada talento con requires_talent_id lleva una flecha de su requisito a el:
+    // illumination<-reverence y lights-vigil<-holy-shock (verticales),
+    // divine-precision<-holy-shock (horizontal). La linea va de borde a borde
+    // de icono por el pasillo entre celdas; si atraviesa una casilla vacia
+    // (fila 6 entre holy-shock y light's-vigil) es normal, como en el juego.
+    // Gris = requisito sin maxear, dorada = requisito cumplido.
+    const arrows = []; // {line, parent} para repintar colores sin volver a medir
+    let arrowSvg = null; // capa SVG sobre el grid (pointer-events-none: no roba clicks)
+
+    // Pinta el color de las flechas segun el estado. Separado del trazado para
+    // poder llamarlo en cada click sin medir el DOM otra vez.
+    function paintArrows(){
+        for(const arrow of arrows){
+            const done = state[arrow.parent.slug] >= arrow.parent.max_rank;
+            arrow.line.setAttribute('stroke', done ? '#ffd100' : '#6b7280');
+            arrow.line.setAttribute('marker-end', done ? 'url(#arrow-gold)' : 'url(#arrow-gray)');
+        }
+    }
+
+    // Extremos de la flecha: centros alineados al eje dominante, del borde del
+    // icono padre al borde del icono hijo (o de la celda si el <img> fallo).
+    // Todo en px relativos al grid, que es el sistema de coordenadas del SVG.
+    function arrowEndpoints(fromCell, toCell){
+        const fromBox = fromCell.querySelector('img') || fromCell;
+        const toBox = toCell.querySelector('img') || toCell;
+        const gridRect = grid.getBoundingClientRect();
+        const fr = fromBox.getBoundingClientRect();
+        const tr = toBox.getBoundingClientRect();
+        const fx = fr.left + fr.width / 2 - gridRect.left;
+        const fy = fr.top + fr.height / 2 - gridRect.top;
+        const tx = tr.left + tr.width / 2 - gridRect.left;
+        const ty = tr.top + tr.height / 2 - gridRect.top;
+        // Eje dominante: las conexiones del arbol son rectas (misma fila o columna).
+        if(Math.abs(ty - fy) >= Math.abs(tx - fx)){
+            const x = (fx + tx) / 2;
+            return ty > fy
+                ? { x1: x, y1: fr.bottom - gridRect.top, x2: x, y2: tr.top - gridRect.top }
+                : { x1: x, y1: fr.top - gridRect.top, x2: x, y2: tr.bottom - gridRect.top };
+        }
+        const y = (fy + ty) / 2;
+        return tx > fx
+            ? { x1: fr.right - gridRect.left, y1: y, x2: tr.left - gridRect.left, y2: y }
+            : { x1: fr.left - gridRect.left, y1: y, x2: tr.right - gridRect.left, y2: y };
+    }
+
+    // Crea la capa SVG y traza una linea por dependencia. Se llama al inicio y
+    // en cada resize (las coordenadas dependen del ancho real del grid).
+    function drawArrows(){
+        // Limpia el trazado anterior (en resize se vuelve a medir todo).
+        arrows.length = 0;
+        if(arrowSvg) arrowSvg.remove();
+        const NS = 'http://www.w3.org/2000/svg';
+        arrowSvg = document.createElementNS(NS, 'svg');
+        arrowSvg.setAttribute('class', 'absolute inset-0 pointer-events-none');
+        arrowSvg.setAttribute('width', grid.clientWidth);
+        arrowSvg.setAttribute('height', grid.clientHeight);
+        // Puntas de flecha: una gris y una dorada (tamano fijo, no escalan).
+        const defs = document.createElementNS(NS, 'defs');
+        const heads = [['arrow-gray', '#6b7280'], ['arrow-gold', '#ffd100']];
+        for(const head of heads){
+            const marker = document.createElementNS(NS, 'marker');
+            marker.setAttribute('id', head[0]);
+            marker.setAttribute('markerWidth', '7');
+            marker.setAttribute('markerHeight', '7');
+            marker.setAttribute('refX', '5.5');
+            marker.setAttribute('refY', '3.5');
+            marker.setAttribute('orient', 'auto');
+            marker.setAttribute('markerUnits', 'userSpaceOnUse');
+            const tip = document.createElementNS(NS, 'path');
+            tip.setAttribute('d', 'M0,0 L7,3.5 L0,7 z');
+            tip.setAttribute('fill', head[1]);
+            marker.appendChild(tip);
+            defs.appendChild(marker);
+        }
+        arrowSvg.appendChild(defs);
+        // Detras de los iconos: se inserta primero para no taparlos.
+        grid.insertBefore(arrowSvg, grid.firstChild);
+        // Una linea por talento con requisito, del padre al hijo.
+        for(const talent of tree.talents){
+            if(!talent.requires_talent_id) continue; // sin requisito = sin flecha
+            const parent = tree.talents.find(item => item.id === talent.requires_talent_id);
+            const fromCell = parent && cells[parent.slug];
+            const toCell = cells[talent.slug];
+            if(!parent || !fromCell || !toCell) continue; // seguridad: dato roto, sin flecha
+            const p = arrowEndpoints(fromCell, toCell);
+            const line = document.createElementNS(NS, 'line');
+            line.setAttribute('x1', p.x1);
+            line.setAttribute('y1', p.y1);
+            line.setAttribute('x2', p.x2);
+            line.setAttribute('y2', p.y2);
+            line.setAttribute('stroke-width', '2');
+            arrowSvg.appendChild(line);
+            arrows.push({ line, parent });
+        }
+        paintArrows();
+    }
+
     // Pinta cada talento segun su estado, como en el WoW original:
-    //  - al maximo (state == max_rank): borde dorado, icono a todo color.
-    //  - disponible (canSpend): icono a todo color, cursor de click.
-    //  - bloqueado (falta puerta de fila, falta prerequisito o tope 51): gris,
-    //    icono en escala de grises + apagado, texto atenuado, cursor bloqueado.
-    // Se llama al inicio y despues de cada click, porque gastar/quitar puntos
-    // en un talento puede bloquear o desbloquear a los demas (puertas de fila).
+    //  - al maximo (state == max_rank): borde AMARILLO, icono a todo color.
+    //  - disponible (canSpend): borde VERDE fino, icono a todo color, cursor de click.
+    //  - bloqueado (falta puerta de fila, falta prerequisito o tope 51): borde GRIS,
+    //    icono en escala de grises + apagado, cursor bloqueado.
+    // El color va en el borde del <img> (la celda ya no tiene caja). Se llama al
+    // inicio y despues de cada click, porque gastar/quitar puntos en un talento
+    // puede bloquear o desbloquear a los demas (puertas de fila).
     function updateVisuals(){
         for(const talent of tree.talents){
             const cell = cells[talent.slug];
@@ -142,18 +245,18 @@ fetch('/api/paladin')
             const maxed = state[talent.slug] >= talent.max_rank;
             const available = canSpend(talent, tree);
             const blocked = !maxed && !available;
-            // Borde dorado al completar (los is_gold llevan outline propio por tipo; no se toca).
-            cell.style.borderColor = maxed ? '#facc15' : '';
+            // Borde del icono: amarillo = maximo, verde = disponible, gris = bloqueado.
+            if(icon) icon.style.borderColor = maxed ? '#ffd100' : (available ? '#22ff22' : '#6b7280');
             cell.style.cursor = available ? 'pointer' : (maxed ? 'default' : 'not-allowed');
             // Icono gris + apagado solo si bloqueado; a todo color si disponible o al maximo.
             if(icon) icon.style.filter = blocked ? 'grayscale(100%)' : '';
             if(icon) icon.style.opacity = blocked ? '0.35' : '';
-            // Celda y texto atenuados si bloqueado y aun sin puntos (si ya tiene puntos
+            // Rango atenuado si bloqueado y aun sin puntos (si ya tiene puntos
             // pero el tope 51 lo bloquea, se queda legible para poder quitarle).
-            const dimmed = blocked && state[talent.slug] === 0;
-            cell.style.opacity = dimmed ? '0.55' : '';
-            if(label) label.style.opacity = dimmed ? '0.6' : '';
+            if(label) label.style.opacity = (blocked && state[talent.slug] === 0) ? '0.6' : '';
         }
+        // Las flechas tambien cambian (gris -> dorada) al maxear requisitos.
+        paintArrows();
     }
 
     // 7x4 = 28 celdas (algunas vacias: Holy real tiene 17 talentos)
@@ -162,38 +265,51 @@ fetch('/api/paladin')
 
         const talent = tree.talents.find(item => item.row===r && item.col===c);
         const cell = document.createElement('div');
-        cell.className = 'rounded border flex items-center justify-center text-xs h-16 ' +
-        (talent ? 'bg-amber-800 border-amber-500 cursor-pointer' : 'bg-neutral-800 border-neutral-700 opacity-40');
         cell.style.gridRow = r;
         cell.style.gridColumn = c;
-        // Si hay icono (nombre corto en DB), pinta imagen de wow.zamimg + texto de puntos.
-        // Si no hay icono o falla la carga, deja solo el texto (placeholder).
-        if (talent) {
-            const iconSrc = iconUrl(talent, 'medium');
-            if (iconSrc) {
-                const iconImage = document.createElement('img');
-                iconImage.src = iconSrc;
-                iconImage.alt = talent.name;
-                iconImage.className = 'w-8 h-8 rounded mr-1';
-                iconImage.onerror = () => iconImage.remove();
-                cell.appendChild(iconImage);
-            }
-            const label = document.createElement('span');
-            label.textContent = `${talent.name} 0/${talent.max_rank}`;
-            cell.appendChild(label);
-            // Dorado: resalta borde si is_gold (talentos 21/31 pts como Holy Shock / Light's Vigil)
-            if(talent.is_gold) cell.style.outline = '2px solid gold';
+        // Casilla vacia: en WoW no hay caja, solo el fondo. Se deja el hueco
+        // del grid transparente para no pintar rectangulos fantasma.
+        if(!talent){
+            cell.className = 'h-16';
         } else {
-            cell.textContent = '';
+            // Casilla estilo WoW: UNICAMENTE el icono (44px) centrado + rango "0/5"
+            // superpuesto abajo-derecha. Sin nombre, sin fondo, sin rectangulo.
+            cell.className = 'relative flex items-center justify-center h-16';
+            const iconImage = document.createElement('img');
+            iconImage.alt = talent.name;
+            // Borde de 2px cuyo color pone updateVisuals(): verde = disponible,
+            // amarillo = al maximo, gris = bloqueado.
+            iconImage.className = 'w-11 h-11 rounded border-2';
+            iconImage.style.borderStyle = 'solid';
+            const iconSrc = iconUrl(talent, 'medium');
+            if(iconSrc){
+                iconImage.src = iconSrc;
+                // Si el icono falla (URL muerta), se quita y queda el rango como placeholder.
+                iconImage.onerror = () => iconImage.remove();
+            }
+            cell.appendChild(iconImage);
+            // Rango superpuesto como en el juego: esquina inferior derecha DEL ICONO
+            // (contenedor relativo), sombra negra para legibilidad, sin interceptar
+            // clicks (pointer-events-none). El <div> evita confundirlo con el <span>.
+            const iconWrap = document.createElement('div');
+            iconWrap.className = 'relative leading-none';
+            iconImage.replaceWith(iconWrap);
+            iconWrap.appendChild(iconImage);
+            const label = document.createElement('span');
+            label.className = 'absolute bottom-0 right-0 text-[11px] leading-none text-white pointer-events-none';
+            label.style.textShadow = '1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000';
+            label.textContent = `0/${talent.max_rank}`;
+            iconWrap.appendChild(label);
         }
-        if(talent) cell.title = `${talent.description} [${talent.status}]`; // Muestra la descripcion del talento al pasar el mouse
+        // Tooltip con nombre + descripcion + estado (el nombre ya no se pinta en la celda).
+        if(talent) cell.title = `${talent.name}: ${talent.description} [${talent.status}]`;
 
 
         //Clicks en los talentos: actualizan state y solo el <span> del texto (sin borrar el <img>).
         if(talent){
         const refreshLabel = () => {
             const label = cell.querySelector('span');
-            if (label) label.textContent = `${talent.name} ${state[talent.slug]}/${talent.max_rank}`;
+            if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
         };
         cell.onclick = () => { // Click izquierdo para gastar puntos
             if(canSpend(talent, tree)){ state[talent.slug]++; refreshLabel();
@@ -211,6 +327,10 @@ fetch('/api/paladin')
     }
     // Estado inicial: con 0 puntos solo la fila 1 esta disponible; el resto sale en gris.
     updateVisuals();
+    // Dibuja las flechas de dependencia (necesita las celdas ya creadas para medir).
+    drawArrows();
+    // Al cambiar el ancho (responsive) las coordenadas cambian: redibujar.
+    window.addEventListener('resize', drawArrows);
 })
 // Captura cualquier fallo (red, API 500, JSON sin trees) y lo muestra en pantalla.
 // Sin este catch el error seria "Cannot read properties of undefined (reading '0')"

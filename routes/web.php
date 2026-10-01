@@ -3,8 +3,12 @@
 use App\Http\Controllers\ClassController;
 use Illuminate\Support\Facades\Route;
 
+// Root redirects to the default class (first in the config/forever.php
+// catalog, currently /druid) so the app lands directly on a calculator.
 Route::get('/', function () {
-    return view('welcome');
+    $default = array_key_first(config('forever.classes')) ?? 'druid';
+
+    return redirect()->to('/'.$default);
 });
 
 // Calculator pages: /paladin, /warrior, ... (slug must exist in DB,

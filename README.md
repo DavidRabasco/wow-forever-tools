@@ -1,58 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# WoW Forever Tools — Talent Calculator
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Talent calculator for **WoW Forever** (Classic, level 60 / 51 talent points).
+Plan, preview and share builds for all **9 classes**, each with its 3 classic
+7×4 talent trees, WoW-style artwork, icons and tooltips.
 
-## About Laravel
+Open `/{class}` in the browser — e.g. `/paladin`, `/warrior`, `/druid`,
+`/hunter`, `/mage`, `/priest`, `/rogue`, `/shaman`, `/warlock` — and start
+clicking talents.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## What it does
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Interactive trees** (`resources/js/calculator.js`): 3 side-by-side 7×4
+  grids sharing one 51-point pool, with per-tree counters and a remaining-points
+  counter. Left-click adds a point, right-click removes one.
+- **Classic rules enforced in JS + re-validated on the server**:
+  per-talent cap, 51-point pool, row gate (`(R-1)*5` points in rows above),
+  prerequisites must be maxed (e.g. Illumination ← Reverence).
+- **WoW-style presentation**: official Blizzard tree artwork as background,
+  bronze/gold frames, spec icons, talent icons from `wow.zamimg.com`,
+  tooltip with verbatim rank text + `Next Rank` while skilling.
+- **Pick-order panel**: one line per spent point in learn order
+  (`Level 10 - Divine Strength 1/5`, …). Header shows the character level
+  (9 + spent points; 51 pts = 60). Removing a point drops that talent's most
+  recent pick, so the list is always a valid sequence.
+- **Level selector (10–60)**: caps the pool to `level - 9` points to plan
+  leveling builds. Lowering the level trims picks from the end; reset restores 60.
+- **Shareable builds**: `Share` POSTs the pick order, the backend replays it
+  with the exact calculator rules (422 on illegal sequences) and returns a
+  6-char hash. Identical pick orders reuse the hash. The URL becomes
+  `/{class}?build={hash}[&level=N]` and is copied to the clipboard.
+  Opening the link replays the picks; cross-class links redirect to their class.
+- **Class bar**: all 9 Forever classes across the top; seeded classes link to
+  their page (current one glows gold), the rest show as coming soon.
+- **JSON API** for every class plus builds (see Routes below).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Routes
 
-## Learning Laravel
+| Method | Path | What |
+|---|---|---|
+| `GET` | `/{class}` | Calculator page (`App\Http\Controllers\ClassController@show`), 404 when the slug is not seeded |
+| `GET` | `/api/classes/{slug}` | Class + ordered trees + talents by row/col, incl. `background`/`spec_icon`/`ranks`/`skill` (`Api\WowClassController`) |
+| `GET` | `/api/paladin` | Legacy alias for `/api/classes/paladin` |
+| `POST` | `/api/builds` | Store a pick order `{class_slug, picks[]}` → `{hash}`; 422 on illegal sequence (`Api\BuildController@store`) |
+| `GET` | `/api/builds/{hash}` | Load a build `{hash, class_slug, picks[], version}` |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tech stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Laravel 13 · PHP 8.3 · SQLite (local) · Vite + Tailwind CSS 4 · vanilla JS
+(no SPA framework). Tests: PHPUnit (`tests/Feature/BuildTest.php`).
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Quickstart
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```sh
+composer install
+cp .env.example .env   # or use composer setup below
+php artisan key:generate
+php artisan migrate --force
+php artisan db:seed --class="Database\Seeders\ForeverClassSeeder" --force
+npm install
+npm run build          # or npm run dev for Vite HMR
+php artisan test
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Shortcut (install + migrate + build):
 
-## Contributing
+```sh
+composer setup
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Then visit `http://localhost:8000/paladin` (serve with `php artisan serve`
+or `composer dev`).
 
-## Code of Conduct
+## Data pipeline
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+No hand-written talent data per class. The flow is manifest-driven:
 
-## Security Vulnerabilities
+1. `php artisan forever:import {class}` (`App\Console\Commands\ImportForeverClass`)
+   downloads the wowtbc.gg `page-data.json` for the class, writes
+   `database/data/{class}_{tree}.json` with verbatim `ranks[]` + `skill` blocks,
+   resolves icons against Wowhead Forever data, probes artwork backgrounds and
+   merges `database/data/classes.json` (spec icons are filled by hand after a
+   zamimg 200-check).
+2. `Database\Seeders\ForeverClassSeeder` loads everything from
+   `database/data/classes.json` (scoped slugs, 2 passes for prerequisites).
+3. `GET /api/classes/{slug}` serves the DB content; `calculator.js` renders it
+   generically (API URL from `#trees data-api`).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Key files:
 
-## License
+| File | Role |
+|---|---|
+| `database/data/classes.json` | Class manifest: trees, data files, backgrounds, spec icons |
+| `database/data/*_{tree}.json` | Source of truth per tree (row/col/slug/max_rank/requires_slug/status/description/ranks/skill/icon) |
+| `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes |
+| `resources/js/calculator.js` | Generic calculator (51-point pool, gates, tooltip, pick order, level cap, share) |
+| `resources/views/calculator.blade.php` | Generic `/{class}` view: class bar + `#trees` slot + pick-order panel |
+| `app/Models/Build.php` + `Api\BuildController.php` | Shareable builds (6-char hash, server-side replay) |
+| `docs/calculator.md` | Build notes: scraping source, rules, icon/presentation status |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Attribution
+
+Talent data (c) wowtbc.gg / Blizzard. Icons (c) Blizzard via
+`wow.zamimg.com` (short names only, hotlinked with text fallback). Tree
+artwork hotlinked for educational use. See `docs/calculator.md` for the full
+scraping and verification notes.

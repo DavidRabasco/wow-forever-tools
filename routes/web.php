@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\PaladinController;
-use App\Http\Controllers\Api\WowClassController;
 use App\Http\Controllers\ClassController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

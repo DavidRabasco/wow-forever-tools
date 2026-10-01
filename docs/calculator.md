@@ -36,7 +36,6 @@ text fallback.
 | `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes (scoped slugs, 2 passes). |
 | `resources/js/calculator.js` | Generic calculator (API URL from `#trees data-api`): 3 side-by-side 7×4 grids sharing the 51-point pool, per-tree counters, WoW-style borders/arrows/tooltip with verbatim ranks + Next Rank. Commented in English. |
 | `resources/views/calculator.blade.php` | Generic `/{class}` view: backend-driven class bar + `#trees` slot (JS-owned) + right-side pick-order panel (`#pick-level`, `#pick-order`). |
-| `app/Http/Controllers/Api/PaladinController.php` | Legacy alias: `GET /api/paladin` delegates to `WowClassController@show('paladin')`. |
 | `app/Http/Controllers/Api/WowClassController.php` | `GET /api/classes/{slug}` → class + ordered trees + talents by row/col. |
 | `app/Http/Controllers/ClassController.php` | `GET /{class}` → `calculator` view with the 9-class bar (catalog from `config/forever.php`, backend-driven availability). |
 | `app/Console/Commands/ImportForeverClass.php` | `php artisan forever:import {class}`: scrapes wowtbc page-data into `database/data/{class}_{tree}.json` (verbatim ranks, resolved icons/backgrounds, manifest merge). |

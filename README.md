@@ -8,6 +8,53 @@ Open `/{class}` in the browser — e.g. `/paladin`, `/warrior`, `/druid`,
 `/hunter`, `/mage`, `/priest`, `/rogue`, `/shaman`, `/warlock` — and start
 clicking talents.
 
+## Screenshots
+
+> To show your own captures, drop the PNG files into `docs/screenshots/`
+> (same names as below) and they will render here automatically on GitHub —
+> see *How to add them* at the end of this section.
+
+![Talent trees with points spent](docs/screenshots/calculator.png)
+*The 3 trees sharing the 51-point pool, with per-tree counters.*
+
+![Tooltip and pick-order panel](docs/screenshots/tooltip-pick-order.png)
+*Verbatim rank tooltip with Next Rank + the pick-order list (Level 10, 11, …).*
+
+![Level selector and share link](docs/screenshots/share-level.png)
+*Level cap (10–60) and the shareable `?build={hash}` URL.*
+
+<details>
+<summary><strong>How to add them (1 min)</strong></summary>
+
+1. Run the app (`php artisan serve` / `composer dev`) and open e.g.
+   `http://localhost:8000/paladin`.
+2. Take 3 captures (browser fullscreen looks best, ~1600px wide):
+   - a build with points spent → save as `calculator.png`
+   - hovering a talent with the pick-order panel visible → save as
+     `tooltip-pick-order.png`
+   - the level selector + shared URL → save as `share-level.png`
+   On Windows: `Win + Shift + S`; on macOS: `Cmd + Shift + 4`.
+3. Copy them into this repo folder (create it if missing):
+
+   ```sh
+   mkdir -p docs/screenshots
+   ```
+
+   Keep the exact file names (lowercase, `.png`): GitHub renders the
+   relative paths used above, no extra config needed.
+4. Commit and push:
+
+   ```sh
+   git add docs/screenshots/*.png README.md
+   git commit -m "docs: add calculator screenshots"
+   git push
+   ```
+
+Tips: prefer PNG, max ~1–2 MB each (resize if needed); avoid personal data
+in the captures; `docs/` is versioned (not in `.gitignore`), unlike
+`public/build`.
+</details>
+
 ## What it does
 
 - **Interactive trees** (`resources/js/calculator.js`): 3 side-by-side 7×4
@@ -40,7 +87,6 @@ clicking talents.
 |---|---|---|
 | `GET` | `/{class}` | Calculator page (`App\Http\Controllers\ClassController@show`), 404 when the slug is not seeded |
 | `GET` | `/api/classes/{slug}` | Class + ordered trees + talents by row/col, incl. `background`/`spec_icon`/`ranks`/`skill` (`Api\WowClassController`) |
-| `GET` | `/api/paladin` | Legacy alias for `/api/classes/paladin` |
 | `POST` | `/api/builds` | Store a pick order `{class_slug, picks[]}` → `{hash}`; 422 on illegal sequence (`Api\BuildController@store`) |
 | `GET` | `/api/builds/{hash}` | Load a build `{hash, class_slug, picks[], version}` |
 

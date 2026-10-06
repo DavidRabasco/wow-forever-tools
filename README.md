@@ -33,14 +33,13 @@ clicking talents.
   recent pick, so the list is always a valid sequence.
 - **Level selector (10–60)**: caps the pool to `level - 9` points to plan
   leveling builds. Lowering the level trims picks from the end; reset restores 60.
-- **Shareable builds**: `Share` POSTs the pick order, the backend replays it
-  with the exact calculator rules (422 on illegal sequences) and returns a
-  6-char hash. Identical pick orders reuse the hash. The URL becomes
-  `/{class}?build={hash}[&level=N]` and is copied to the clipboard.
-  Opening the link replays the picks; cross-class links redirect to their class.
+- **Shareable builds**: `Share` packs the pick order into the page URL
+  (`/{class}?b={code}[&level=N]`, ~22 chars for 19 picks) as base64url 6-bit
+  talent indices — no storage, identical builds share identical links. Opening
+  the link replays the picks through the same rules, so tampering stays legal.
 - **Class bar**: all 9 Forever classes across the top; seeded classes link to
   their page (current one glows gold), the rest show as coming soon.
-- **JSON API** for every class plus builds (see Routes below).
+- **JSON API** for every class (see Routes below).
 
 ## Routes
 
@@ -48,13 +47,11 @@ clicking talents.
 |---|---|---|
 | `GET` | `/{class}` | Calculator page (`App\Http\Controllers\ClassController@show`), 404 when the slug is not seeded |
 | `GET` | `/api/classes/{slug}` | Class + ordered trees + talents by row/col, incl. `background`/`spec_icon`/`ranks`/`skill` (`Api\WowClassController`) |
-| `POST` | `/api/builds` | Store a pick order `{class_slug, picks[]}` → `{hash}`; 422 on illegal sequence (`Api\BuildController@store`) |
-| `GET` | `/api/builds/{hash}` | Load a build `{hash, class_slug, picks[], version}` |
 
 ## Tech stack
 
 Laravel 13 · PHP 8.3 · SQLite (local) · Vite + Tailwind CSS 4 · vanilla JS
-(no SPA framework). Tests: PHPUnit (`tests/Feature/BuildTest.php`).
+(no SPA framework). Tests: PHPUnit (`tests/Feature/MageDataIntegrityTest.php`).
 
 ## Quickstart
 

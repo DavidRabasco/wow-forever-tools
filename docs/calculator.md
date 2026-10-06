@@ -41,9 +41,11 @@ text fallback.
 | `app/Console/Commands/ImportForeverClass.php` | `php artisan forever:import {class}`: scrapes wowtbc page-data into `database/data/{class}_{tree}.json` (verbatim ranks, resolved icons/backgrounds, manifest merge). |
 | `database/data/classes.json` | Class manifest: trees, files, backgrounds, spec icons. |
 | `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes (scoped slugs, 2 passes). |
-| `app/Models/Build.php` | `builds` rows: 6-char hash, class slug, `{picks:[...]}`. |
-| `app/Http/Controllers/Api/BuildController.php` | `POST /api/builds` (replays picks server-side with calculator rules; 422 on illegal) + `GET /api/builds/{hash}`. |
-| `tests/Feature/BuildTest.php` | 4 tests: valid store, unknown talent, row-gate violation, load roundtrip. |
+| `app/Models/Talent.php` | `talents` rows with `ranks`/`skill` array casts. |
+| `app/Http/Controllers/Api/WowClassController.php` | `GET /api/classes/{slug}` → class + ordered trees + talents by row/col. |
+| `database/migrations/2026_10_06_005709_drop_builds_table.php` | Removes `builds` (superseded by URL-encoded sharing). |
+| `app/Console/Commands/ForeverExport.php` | `php artisan forever:export [dist]`: static no-backend site (JSON + HTML + assets + picker). |
+| `.github/workflows/pages.yml` | CI: install, build, export, deploy `dist/` to GitHub Pages on push to main. |
 | `database/migrations/2026_09_26_005315_add_presentation_to_talent_trees.php` | Adds `background` (full artwork URL) + `spec_icon` (zamimg short name) to `talent_trees`. |
 
 ## 3. Rules (level 60 = 51 points)
@@ -114,14 +116,14 @@ Line *i* = level 10+*i*, rank shown is the running count. Header shows the
 character level (9 + spent points; 51 pts = 60). Spending appends, removing
 drops that talent's most recent pick, so the list is always a valid sequence.
 
-## 9. Shareable builds (2026-09-26, done)
+## 9. Shareable builds via URL (2026-10-06, done — supersedes DB hashes)
 
-`Share` posts the pick order; the backend replays it with the exact calculator
-rules (cap, pool, prerequisites, strict rows-above gate) and returns a 6-char
-hash, or 422 on illegal sequences. Identical pick orders reuse the existing hash
-(200, no new row), so sharing 40 times creates 1 row. The page URL becomes `/{class}?build={hash}`
-and is copied to the clipboard. Opening the link replays the picks (cross-class
-links redirect to their own page). Covered by `tests/Feature/BuildTest.php` (5 tests).
+`Share` packs the pick order into `/{class}?b={code}[&level=N]` — base64url of
+`[pick count][6-bit talent indices]` in deterministic API order (~22 chars for
+19 picks, ~54 for 51). No storage: identical builds share identical links, and
+old `?build={hash}` links no longer resolve (`builds` table dropped). Opening a
+link decodes and replays the picks through `canSpend`, so tampering stays legal
+(extra indices beyond the count byte are ignored, unknown indices reject).
 
 ## 10. Level selector (2026-09-26, done)
 
@@ -130,7 +132,17 @@ builds. Lowering trims picks from the end of the learn order; reset restores
 60. The level travels in shared URLs (`&level=30`, omitted at 60); the server
 keeps enforcing the absolute 51 cap.
 
-## 11. Pending
+## 12. Static deploy (2026-10-06, done)
+
+`php artisan forever:export [dist]` renders the whole site without PHP or DB:
+`{class}.json` in exact API shape (sequential ids, requires resolved),
+`{class}.html` with relative asset/data/page links, class picker `index.html`,
+Vite bundle copy, `.nojekyll`. Needs no database (manifest + data files only);
+a stale `public/hot` is moved aside so `@vite` emits manifest tags.
+`.github/workflows/pages.yml` builds + deploys to GitHub Pages on push to main
+(enable once: Settings -> Pages -> Source: GitHub Actions).
+
+## 13. Pending
 
 1. `status`: everything is `unchanged` today; diff against Classic to flag `new/changed/moved/now_baseline`.
 2. Paladin `description` summaries: optionally re-import verbatim ranks via the importer for Next-Rank tooltips.

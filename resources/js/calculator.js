@@ -672,69 +672,102 @@ fetch(API_URL)
         Object.keys(state).forEach(slug => state[slug] = 0);
         pickOrder.length = 0;
         setShareStatus('');
-        // Drop ?build= from the URL: the page no longer shows a saved build.
+        // Drop the share query (?b=) from the URL: the page shows no saved build.
         history.replaceState('', '', location.pathname);
         setLevel(60); // full 51-point pool back (refreshes everything)
     });
-    // Share: POST the pick order, then turn the page URL into the share link
-    // (?build=hash) and copy it to the clipboard.
+    // Share: encode the pick order into the page URL (?b=...) and copy it.
+    // No server storage: identical builds produce identical links for free.
     const shareBtn = document.getElementById('share-build');
     if(shareBtn) shareBtn.addEventListener('click', async () => {
         if(pickOrder.length === 0){ setShareStatus('Spend at least 1 point first.'); return; }
-        setShareStatus('Saving...');
+        const code = encodePicks();
+        if(!code){ setShareStatus('Could not encode build.'); return; }
+        // Level travels in the URL too (omitted at 60 for clean links).
+        // Pathname-based (not /{class}) so the same code serves Laravel pages
+        // (/paladin) and static exports (/paladin.html on any subpath).
+        const params = new URLSearchParams();
+        params.set('b', code);
+        if(currentLevel < 60) params.set('level', currentLevel);
+        const query = `?${params.toString()}`;
+        history.replaceState('', query);
+        const url = `${location.origin}${location.pathname}${query}`;
         try {
-            const res = await fetch('/api/builds', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ class_slug: PAGE_CLASS, picks: pickOrder }),
-            });
-            if(!res.ok) throw new Error(`save failed (${res.status})`);
-            const { hash } = await res.json();
-            // Level travels in the URL too (omitted at 60 for clean links).
-            const levelQuery = currentLevel < 60 ? `&level=${currentLevel}` : '';
-            const url = `${location.origin}/${PAGE_CLASS}?build=${hash}${levelQuery}`;
-            history.replaceState('', '', `/${PAGE_CLASS}?build=${hash}${levelQuery}`);
-            try {
-                await navigator.clipboard.writeText(url);
-                setShareStatus('Link copied!');
-            } catch {
-                setShareStatus(url); // clipboard blocked: show the link to copy by hand
-            }
-        } catch(error) {
-            setShareStatus(`Could not save: ${error.message}`);
+            await navigator.clipboard.writeText(url);
+            setShareStatus('Link copied!');
+        } catch {
+            setShareStatus(url); // clipboard blocked: show the link to copy by hand
         }
     });
-    // Load a shared build (?build=hash): replay its picks in order through the
+    // The build travels in ?b= as packed 6-bit talent indices (see encodePicks).
+    // Deterministic API order (trees by order, talents by row/col) keeps both
+    // ends in sync without any database.
+    function orderedTalents(){ return data.trees.flatMap(tree => tree.talents); }
+    // Pack: [pick count byte][6 bits per pick] -> base64url, no padding.
+    // The leading count byte disambiguates padding zeros from real picks.
+    function encodePicks(){
+        const list = orderedTalents();
+        if(pickOrder.length === 0 || pickOrder.length > MAX_TOTAL_POINTS) return null;
+        const bytes = [pickOrder.length];
+        let acc = 0, bits = 0;
+        for(const slug of pickOrder){
+            const idx = list.findIndex(t => t.slug === slug);
+            if(idx < 0 || idx > 63) return null; // unknown talent or out of 6-bit range
+            acc = (acc << 6) | idx;
+            bits += 6;
+            while(bits >= 8){ bits -= 8; bytes.push((acc >> bits) & 0xFF); }
+        }
+        if(bits > 0) bytes.push((acc << (8 - bits)) & 0xFF);
+        let bin = '';
+        for(const b of bytes) bin += String.fromCharCode(b);
+        return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+    // Unpack, validating length and indices; null on any tampering.
+    function decodePicks(code){
+        const list = orderedTalents();
+        let bin;
+        try {
+            bin = atob(code.replace(/-/g, '+').replace(/_/g, '/'));
+        } catch {
+            return null;
+        }
+        if(bin.length === 0) return null;
+        const count = bin.charCodeAt(0);
+        if(count === 0 || count > MAX_TOTAL_POINTS) return null;
+        const picks = [];
+        let acc = 0, bits = 0;
+        for(let i = 1; i < bin.length && picks.length < count; i++){
+            acc = (acc << 8) | bin.charCodeAt(i);
+            bits += 8;
+            while(bits >= 6 && picks.length < count){
+                bits -= 6;
+                const idx = (acc >> bits) & 0x3F;
+                if(idx >= list.length) return null;
+                picks.push(list[idx].slug);
+            }
+        }
+        return picks.length === count ? picks : null;
+    }
+    // Load a shared build (?b=code): replay its picks in order through the
     // same rules (canSpend), so a tampered link can never produce odd states.
-    // A build of another class redirects to its own page with the same hash.
-    (async function loadSharedBuild(){
+    (function loadSharedBuild(){
         const params = new URLSearchParams(location.search);
-        const hash = params.get('build');
         // Shared level cap applies before replaying (extra picks are refused
         // by canSpend, so a tampered URL stays legal).
         const sharedLevel = parseInt(params.get('level') || '', 10);
-        if(!hash && !sharedLevel) return;
-        if(sharedLevel >= 9 && sharedLevel <= 60) setLevel(sharedLevel);
-        if(!hash) return;
-        try {
-            const res = await fetch(`/api/builds/${encodeURIComponent(hash)}`, { headers: { 'Accept': 'application/json' } });
-            if(!res.ok) throw new Error(`build not found (${res.status})`);
-            const build = await res.json();
-            if(build.class_slug !== PAGE_CLASS){
-                location.href = `/${build.class_slug}?build=${encodeURIComponent(hash)}`;
-                return;
-            }
-            Object.keys(state).forEach(slug => state[slug] = 0);
-            pickOrder.length = 0;
-            for(const slug of build.picks || []){
-                const entry = Object.keys(talentBySlug).includes(slug) ? findTalentView(slug) : null;
-                if(entry && canSpend(entry.talent, entry.view.tree)){ state[slug]++; pickOrder.push(slug); }
-            }
-            refreshAll();
-            setShareStatus(`Loaded shared build ${hash}.`);
-        } catch(error) {
-            setShareStatus(`Could not load build: ${error.message}`);
+        if(sharedLevel >= 10 && sharedLevel <= 60) setLevel(sharedLevel);
+        const code = params.get('b');
+        if(!code) return;
+        const slugs = decodePicks(code);
+        if(!slugs){ setShareStatus('Could not load build: bad link.'); return; }
+        Object.keys(state).forEach(slug => state[slug] = 0);
+        pickOrder.length = 0;
+        for(const slug of slugs){
+            const entry = findTalentView(slug);
+            if(entry && canSpend(entry.talent, entry.view.tree)){ state[slug]++; pickOrder.push(slug); }
         }
+        refreshAll();
+        setShareStatus(`Loaded shared build (${pickOrder.length} picks).`);
     })();
     // Trace dependency arrows (cells must exist first so they can be measured).
     views.forEach(drawArrows);

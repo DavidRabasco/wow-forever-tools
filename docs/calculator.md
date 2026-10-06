@@ -124,6 +124,8 @@ drops that talent's most recent pick, so the list is always a valid sequence.
 old `?build={hash}` links no longer resolve (`builds` table dropped). Opening a
 link decodes and replays the picks through `canSpend`, so tampering stays legal
 (extra indices beyond the count byte are ignored, unknown indices reject).
+The address bar stays live-synced on every spend/remove/level change
+(`syncShareUrl`, replaceState without history spam); Share only copies it.
 
 ## 10. Level selector (2026-09-26, done)
 

@@ -292,7 +292,7 @@ fetch(API_URL)
                 if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
             };
             cell.onclick = (event) => { // Left click spends a point.
-                if(canSpend(talent, tree)){ state[talent.slug]++; pickOrder.push(talent.slug); refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event); }
+                if(canSpend(talent, tree)){ state[talent.slug]++; pickOrder.push(talent.slug); refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event); }
             };
             cell.oncontextmenu = (event) => { // Right click removes a point.
                 event.preventDefault();
@@ -302,7 +302,7 @@ fetch(API_URL)
                     // valid learn sequence (canRemove guarantees one exists).
                     const lastPick = pickOrder.lastIndexOf(talent.slug);
                     if(lastPick !== -1) pickOrder.splice(lastPick, 1);
-                    refreshLabel(); refreshAll(); refreshTooltip(talent, tree, event);
+                    refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event);
                 }
             };
             // Wowhead-style hover: show on enter, follow the mouse, hide on leave.
@@ -665,6 +665,7 @@ fetch(API_URL)
         }
         hideTooltip();
         refreshAll();
+        syncShareUrl(); // address bar follows level trims too
     }
     // Global reset: wipe every point, empty the pick order, restore the pool.
     const resetBtn = document.getElementById('reset-build');
@@ -672,34 +673,37 @@ fetch(API_URL)
         Object.keys(state).forEach(slug => state[slug] = 0);
         pickOrder.length = 0;
         setShareStatus('');
-        // Drop the share query (?b=) from the URL: the page shows no saved build.
-        history.replaceState('', '', location.pathname);
-        setLevel(60); // full 51-point pool back (refreshes everything)
+        setLevel(60); // full 51-point pool back (refreshes + clears the URL)
     });
-    // Share: encode the pick order into the page URL (?b=...) and copy it.
-    // No server storage: identical builds produce identical links for free.
+    // Share is now just copy: the address bar already holds the live link
+    // (syncShareUrl runs on every change).
     const shareBtn = document.getElementById('share-build');
     if(shareBtn) shareBtn.addEventListener('click', async () => {
         if(pickOrder.length === 0){ setShareStatus('Spend at least 1 point first.'); return; }
+        syncShareUrl();
+        try {
+            await navigator.clipboard.writeText(location.href);
+            setShareStatus('Link copied!');
+        } catch {
+            setShareStatus(location.href); // clipboard blocked: show the link to copy by hand
+        }
+    });
+    // Live URL sync: every spend/remove keeps ?b= (+ &level) up to date via
+    // replaceState (no reload, no history spam), so the address bar is always
+    // the share link. The Share button stays for one-click clipboard copy.
+    // Skipped when empty (clears the query instead).
+    function syncShareUrl(){
+        if(pickOrder.length === 0){
+            if(location.search !== '') history.replaceState('', location.pathname);
+            return;
+        }
         const code = encodePicks();
-        if(!code){ setShareStatus('Could not encode build.'); return; }
-        // Level travels in the URL too (omitted at 60 for clean links).
-        // Pathname-based (not /{class}) so the same code serves Laravel pages
-        // (/paladin) and static exports (/paladin.html on any subpath).
+        if(!code) return;
         const params = new URLSearchParams();
         params.set('b', code);
         if(currentLevel < 60) params.set('level', currentLevel);
-        const query = `?${params.toString()}`;
-        history.replaceState('', query);
-        const url = `${location.origin}${location.pathname}${query}`;
-        try {
-            await navigator.clipboard.writeText(url);
-            setShareStatus('Link copied!');
-        } catch {
-            setShareStatus(url); // clipboard blocked: show the link to copy by hand
-        }
-    });
-    // The build travels in ?b= as packed 6-bit talent indices (see encodePicks).
+        history.replaceState('', `?${params.toString()}`);
+    }
     // Deterministic API order (trees by order, talents by row/col) keeps both
     // ends in sync without any database.
     function orderedTalents(){ return data.trees.flatMap(tree => tree.talents); }
@@ -767,6 +771,7 @@ fetch(API_URL)
             if(entry && canSpend(entry.talent, entry.view.tree)){ state[slug]++; pickOrder.push(slug); }
         }
         refreshAll();
+        syncShareUrl(); // normalize the URL to the loaded build
         setShareStatus(`Loaded shared build (${pickOrder.length} picks).`);
     })();
     // Trace dependency arrows (cells must exist first so they can be measured).

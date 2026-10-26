@@ -20,7 +20,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Reusable CI workflow: rules, data integrity, build and export must pass
+  # before the deploy job can publish anything.
+  test:
+    uses: ./.github/workflows/ci.yml
+
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

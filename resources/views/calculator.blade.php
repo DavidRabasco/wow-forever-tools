@@ -1,25 +1,26 @@
+@php
+    $siteUrl = rtrim(config('forever.site_url') ?? '', '/');
+    $title = $wowClass->name . ' Talent Calculator - WoW Forever Tools';
+    $description = 'Plan, preview and share ' . $wowClass->name
+        . ' talent builds for WoW Forever: three classic trees, 51 points, level scaling and URL sharing.';
+    $canonical = $siteUrl ? $siteUrl . '/' . $wowClass->slug . '.html' : null;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $wowClass->name }} - WoW Forever</title>
+    @include('partials.meta', [
+        'title' => $title,
+        'description' => $description,
+        'canonical' => $canonical,
+    ])
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @vite(['resources/css/app.css', 'resources/js/calculator.js'])
 </head>
-<body class="bg-neutral-900 text-white p-4">
-{{-- Top navbar: logo + site name pinned left, section links after it.
-     To add future tools, append more <a> links inside <nav>.
-     Logo hotlinked (sunderarmor/wowtbc.gg, educational use); if it ever
-     dies the onerror drops it and the site name still shows. --}}
-<header class="sticky top-0 z-40 -m-4 mb-4 border-b border-[#6b5a2e] bg-black/80 backdrop-blur">
-<nav class="flex items-center gap-6 px-4 py-2">
-<a href="/{{ $wowClass->slug }}" class="flex items-center gap-2">
-<img src="https://sunderarmor.com/WOWFOREVER/UI/logo_icon_4.png" alt="WoW Forever logo" class="h-8 w-8" onerror="this.remove()">
-<span class="text-lg font-bold" style="color:#ffd100">WoW Forever Tools</span>
-</a>
-<a href="/{{ $wowClass->slug }}" class="text-sm font-semibold text-white border-b-2 border-[#ffd100] pb-0.5">Talent Calculator</a>
-</nav>
-</header>
+<body class="flex min-h-screen flex-col bg-neutral-900 text-white">
+@include('partials.navbar', ['current' => 'calculator', 'calculatorSlug' => $wowClass->slug])
+<main class="min-w-0 flex-1 px-4 py-4">
 {{-- Class selector bar: the 9 Forever classes, left to right, driven by the
      backend ($classes: icon/available/selected). Seeded classes link to their
      page and the current one glows gold; the rest render dimmed with a
@@ -28,16 +29,16 @@
 @foreach ($classes as $class)
 @if ($class['available'])
 <a href="/{{ $class['slug'] }}" title="{{ $class['name'] }}"
-class="flex flex-col items-center gap-1 rounded p-1 border-2 {{ $class['selected'] ? 'border-[#ffd100]' : 'border-neutral-700 opacity-50 hover:opacity-100' }}"
+class="flex flex-col items-center gap-1 rounded p-1 border-2 {{ $class['selected'] ? 'border-[#ffd100]' : 'border-neutral-700 hover:border-[#6b5a2e]' }}"
 @if ($class['selected']) style="box-shadow:0 0 12px rgba(255,209,0,0.8)" @endif>
-<img src="{{ $class['icon'] }}" alt="{{ $class['name'] }}" class="w-12 h-12 rounded" onerror="this.remove()">
-<span class="text-[11px] leading-none {{ $class['selected'] ? 'font-bold' : 'text-neutral-400' }}" @if ($class['selected']) style="color:#ffd100" @endif>{{ $class['name'] }}</span>
+<img src="{{ $class['icon'] }}" alt="{{ $class['name'] }}" width="48" height="48" class="w-12 h-12 rounded" onerror="this.remove()">
+<span class="text-[11px] leading-none {{ $class['selected'] ? 'font-bold' : 'text-neutral-300' }}" @if ($class['selected']) style="color:#ffd100" @endif>{{ $class['name'] }}</span>
 </a>
 @else
 <button type="button" title="{{ $class['name'] }} (coming soon)"
-class="flex flex-col items-center gap-1 rounded p-1 border-2 border-neutral-700 opacity-50 hover:opacity-100">
-<img src="{{ $class['icon'] }}" alt="{{ $class['name'] }}" class="w-12 h-12 rounded" onerror="this.remove()">
-<span class="text-[11px] leading-none text-neutral-400">{{ $class['name'] }}</span>
+class="flex flex-col items-center gap-1 rounded p-1 border-2 border-neutral-700 opacity-80 hover:opacity-100">
+<img src="{{ $class['icon'] }}" alt="{{ $class['name'] }}" width="48" height="48" class="w-12 h-12 rounded" onerror="this.remove()">
+<span class="text-[11px] leading-none text-neutral-300">{{ $class['name'] }}</span>
 </button>
 @endif
 @endforeach
@@ -52,20 +53,29 @@ class="flex flex-col items-center gap-1 rounded p-1 border-2 border-neutral-700 
      fixed 300px width balances the right pick panel so the trees stay exactly
      centered (equal side widths); content right-aligns toward the trees. --}}
 <div class="min-[1200px]:justify-self-end min-[1200px]:w-[300px]">
-<div class="flex flex-row min-[1200px]:flex-col items-center min-[1200px]:items-end gap-2">
+<div class="flex flex-row flex-wrap justify-center min-[1200px]:flex-col items-center min-[1200px]:items-end gap-2">
 <label class="text-sm text-neutral-300">Level
 <select id="level-select" title="Cap the point pool to simulate lower levels (60 = full 51 points)"
 class="bg-neutral-800 border border-neutral-700 rounded text-sm px-1 py-0.5"></select>
 </label>
 <button id="reset-build" type="button" title="Remove all points and restore the 51-point pool"
 class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#3a0d0d] hover:bg-[#5a1414] text-sm font-bold" style="color:#ffd100">Reset</button>
-<button id="share-build" type="button" title="Save this build and copy its link"
+<button id="share-build" type="button" title="Copy this build's link"
 class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#0d2a3a] hover:bg-[#143d55] text-sm font-bold" style="color:#ffd100">Share</button>
-<span id="points-remaining" class="text-sm text-neutral-300">51 remaining</span>
-<div id="share-status" class="text-xs text-neutral-400"></div>
+<span id="points-remaining" class="whitespace-nowrap text-sm text-neutral-300">51 remaining</span>
+<div id="share-status" class="max-w-full break-all text-xs text-neutral-400"></div>
 </div>
 </div>
+{{-- Static export: inline the class payload so the first render does not
+     wait for a JSON request. Laravel dev pages omit it and fall back to the
+     data-api endpoint. --}}
+@isset($talentData)
+<script type="application/json" id="talent-data">{!! json_encode($talentData, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
+@endisset
 {{-- data-api/class tell calculator.js which class endpoint to load. --}}
+<p class="sr-only">
+    Use Tab to move between talents. Enter or Space adds a point, Delete removes one.
+</p>
 <div id="trees" class="min-w-0" data-api="/api/classes/{{ $wowClass->slug }}" data-class="{{ $wowClass->slug }}">Loading...</div>
 {{-- Height-capped to the trees by JS (syncPanelHeight): inline max-height makes
      the list scroll inside instead of growing the page. flex-col + min-h-0
@@ -77,5 +87,8 @@ class="px-4 py-1 rounded border-2 border-[#6b5a2e] bg-[#0d2a3a] hover:bg-[#143d5
 <ol id="pick-order" class="flex-1 min-h-0 overflow-y-auto"></ol>
 </aside>
 </div>
+</main>
+@include('partials.footer')
+@include('partials.analytics')
 </body>
 </html>

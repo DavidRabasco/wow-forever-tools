@@ -34,16 +34,40 @@
 // wow.zamimg.com URL is built here. Missing/broken icons fall back to text.
 // The API URL and class slug travel in #trees data attributes so this file
 // serves every class (data-api="/api/classes/warrior", data-class="warrior").
+import { MAX_TOTAL_POINTS } from './calculator/constants.js';
+import {
+    canRemove as canRemoveRule,
+    canSpend as canSpendRule,
+    levelCap as levelCapRule,
+    pointsAbove as pointsAboveRule,
+    pointsInTree as pointsInTreeRule,
+    rowRequirement as rowRequirementRule,
+    totalPoints as totalPointsRule,
+} from './calculator/rules.js';
+import {
+    decodePicks as decodePicksRule,
+    encodePicks as encodePicksRule,
+    orderedTalents as orderedTalentsRule,
+} from './calculator/codec.js';
+
 const apiMount = document.getElementById('trees');
 const API_URL = apiMount?.dataset.api || '/api/classes/paladin';
 const PAGE_CLASS = apiMount?.dataset.class || 'paladin';
-fetch(API_URL)
-// If the API fails (500, 404, network down), response.ok is false: show the
-// error in #trees instead of crashing with "Cannot read properties of undefined".
-.then(response => {
-    if(!response.ok) throw new Error(`API ${API_URL} returned ${response.status}`);
-    return response.json();
-})
+
+// Static pages inline the payload next to the mount. That removes a network
+// request and the layout shift that came with it. Laravel dev pages omit the
+// script and fall back to the API endpoint.
+const inlineData = document.getElementById('talent-data');
+const dataPromise = inlineData
+    ? Promise.resolve().then(() => JSON.parse(inlineData.textContent))
+    : fetch(API_URL).then(response => {
+        // If the API fails (500, 404, network down), response.ok is false:
+        // show the error in #trees instead of crashing later.
+        if(!response.ok) throw new Error(`API ${API_URL} returned ${response.status}`);
+        return response.json();
+    });
+
+dataPromise
 .then(data => {
     // The API must return { trees: [...] }. On an error JSON or parsed HTML,
     // data.trees does not exist: warn on screen instead of failing at data.trees[0].
@@ -51,9 +75,8 @@ fetch(API_URL)
         throw new Error('API returned no data: data.trees is empty. Check storage/logs/laravel.log');
     }
     // Level 60 in Classic/Forever = 51 talent points (1 per level from 10).
-    const MAX_TOTAL_POINTS = 51;
+    // MAX_TOTAL_POINTS is imported so the tests and the browser share it.
     // Active pool cap, lowered by the level selector (level 30 -> 21 points).
-    // The server still enforces the absolute 51 cap; this is a view constraint.
     let pointCap = MAX_TOTAL_POINTS;
     let currentLevel = 60;
 
@@ -89,68 +112,22 @@ fetch(API_URL)
         return `https://wow.zamimg.com/images/wow/icons/${size}/${talent.icon}.jpg`;
     }
 
-    // Points spent in one talent tree.
-    function pointsInTree(tree){
-        // Sum state[slug] over the tree.
-        // acumulado = running total, talent = current talent. Starts at 0.
-        return tree.talents.reduce((acumulado, talent) => acumulado + (state[talent.slug] || 0), 0);
-    }
+    // Thin wrappers around the pure rules module. Keeping the live state here
+    // means the click handlers and the render code stay unchanged.
+    function pointsInTree(tree){ return pointsInTreeRule(tree, state); }
 
-    // Points spent in the rows ABOVE the given row (rows 1..row-1).
-    // This is what row gates count: a row's own points never unlock itself.
     // `st` defaults to the live state; canRemove passes its simulated state.
-    function pointsAbove(tree, row, st = state){
-        return tree.talents.reduce((total, t) => total + (t.row < row ? (st[t.slug] || 0) : 0), 0);
-    }
+    function pointsAbove(tree, row, st = state){ return pointsAboveRule(tree, row, st); }
 
-    // Global total across all trees (the shared 51-point pool).
-    function totalPoints(){
-        return data.trees.reduce((acumulado, t) =>
-            acumulado + t.talents.reduce((s, talent) => s + (state[talent.slug] || 0), 0), 0);
-    }
+    function totalPoints(){ return totalPointsRule(data.trees, state); }
 
-    // Branch points required by a row (0 on row 1, 5 on row 2... 30 on row 7).
-    function rowRequirement(talent){ return (talent.row - 1) * 5; }
+    function rowRequirement(talent){ return rowRequirementRule(talent); }
 
-    // Rules for SPENDING a point (left click).
     function canSpend(talent, tree){
-        // Already maxed, nothing more to spend.
-        if(state[talent.slug] >= talent.max_rank) return false;
-
-        // Capped pool (level selector): never exceed the active cap.
-        if(totalPoints() >= pointCap) return false;
-
-        // Prerequisite talent must be maxed first.
-        if(talent.requires_talent_id){
-            const requiredTalent = tree.talents.find(item => item.id === talent.requires_talent_id);
-            if(!requiredTalent || state[requiredTalent.slug] < requiredTalent.max_rank) return false;
-        }
-
-        // Row gate (strict per-row): the rows above must hold 5 per previous row.
-        if(pointsAbove(tree, talent.row) < (talent.row-1)*5) return false;
-        return true;
+        return canSpendRule(talent, tree, data.trees, state, pointCap);
     }
 
-    // Rules for REMOVING a point (right click).
-    // Simulates removing 1 point and checks that no skilled talent is left illegal:
-    // neither by row gate nor by broken prerequisite.
-    function canRemove(talent, tree){
-        // Nothing to remove.
-        if(state[talent.slug] <= 0) return false;
-        // Simulated state with 1 point less on this talent.
-        const sim = { ...state, [talent.slug]: state[talent.slug] - 1 };
-        // Every skilled talent must still meet its row gate (rows above only)
-        // and its prerequisite under the simulated state.
-        for(const t of tree.talents){
-            if((sim[t.slug] || 0) <= 0) continue; // unskilled talents don't block
-            if(pointsAbove(tree, t.row, sim) < (t.row-1)*5) return false; // broken row gate
-            if(t.requires_talent_id){
-                const req = tree.talents.find(item => item.id === t.requires_talent_id);
-                if(!req || (sim[req.slug] || 0) < req.max_rank) return false; // broken prerequisite
-            }
-        }
-        return true;
-    }
+    function canRemove(talent, tree){ return canRemoveRule(talent, tree, state); }
 
     // One view per tree: { tree, grid, counter, arrows, svg }.
     // Views share `state` (the 51-point pool) but paint independently.
@@ -186,6 +163,8 @@ fetch(API_URL)
             specImg.src = `https://wow.zamimg.com/images/wow/icons/large/${tree.spec_icon}.jpg`;
             specImg.alt = `${tree.name} specialization`;
             specImg.className = 'w-10 h-10 rounded';
+            specImg.width = 40;
+            specImg.height = 40;
             specImg.style.border = '2px solid #c9b037';
             // Dead icon URL: drop the img, the name still shows.
             specImg.onerror = () => specImg.remove();
@@ -215,7 +194,7 @@ fetch(API_URL)
         const treeReset = document.createElement('button');
         treeReset.type = 'button';
         treeReset.title = `Reset ${tree.name} only`;
-        treeReset.className = 'text-xs px-2 py-0.5 mt-1 rounded border border-neutral-700 bg-black/40 text-neutral-400 hover:text-red-400 hover:border-red-800';
+        treeReset.className = 'text-xs px-2 py-0.5 mt-1 rounded border border-neutral-700 bg-black/40 text-neutral-300 hover:text-red-400 hover:border-red-800';
         treeReset.textContent = 'reset';
         treeReset.addEventListener('click', () => {
             for(const slug of treeSlugs) state[slug] = 0;
@@ -248,11 +227,14 @@ fetch(API_URL)
                 cell.className = 'relative flex items-center justify-center h-16';
                 const iconImage = document.createElement('img');
                 iconImage.alt = talent.name;
+                iconImage.width = 44;
+                iconImage.height = 44;
                 // 2px border colored by updateVisuals(): green = available,
                 // yellow = maxed, gray = locked.
                 iconImage.className = 'w-11 h-11 rounded border-2';
                 iconImage.style.borderStyle = 'solid';
-                const iconSrc = iconUrl(talent, 'medium');
+                // Large source for retina displays; the cell renders it at 44px.
+                const iconSrc = iconUrl(talent, 'large');
                 if(iconSrc){
                     iconImage.src = iconSrc;
                     // Dead icon URL: drop the img, the rank stays as placeholder.
@@ -290,26 +272,64 @@ fetch(API_URL)
             const refreshLabel = () => {
                 const label = cell.querySelector('span');
                 if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
+                updateCellAria();
             };
-            cell.onclick = (event) => { // Left click spends a point.
-                if(canSpend(talent, tree)){ state[talent.slug]++; pickOrder.push(talent.slug); refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event); }
+            const updateCellAria = () => {
+                cell.setAttribute('aria-label', `${talent.name}, ${state[talent.slug]}/${talent.max_rank}`);
             };
+            const spend = (event) => {
+                if(!canSpend(talent, tree)) return;
+                state[talent.slug]++;
+                pickOrder.push(talent.slug);
+                refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event);
+            };
+            const remove = (event) => {
+                if(!canRemove(talent, tree)) return;
+                state[talent.slug]--;
+                // Drop this talent's most recent pick so the list stays a
+                // valid learn sequence (canRemove guarantees one exists).
+                const lastPick = pickOrder.lastIndexOf(talent.slug);
+                if(lastPick !== -1) pickOrder.splice(lastPick, 1);
+                refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event);
+            };
+            cell.tabIndex = 0;
+            cell.setAttribute('role', 'button');
+            updateCellAria();
+            cell.onclick = (event) => spend(event); // Left click adds a point.
             cell.oncontextmenu = (event) => { // Right click removes a point.
                 event.preventDefault();
-                if(canRemove(talent, tree)){
-                    state[talent.slug]--;
-                    // Drop this talent's most recent pick so the list stays a
-                    // valid learn sequence (canRemove guarantees one exists).
-                    const lastPick = pickOrder.lastIndexOf(talent.slug);
-                    if(lastPick !== -1) pickOrder.splice(lastPick, 1);
-                    refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event);
-                }
+                remove(event);
             };
+            // Keyboard path: Enter/Space add, Delete/Backspace remove. Tab moves
+            // between talents; focus also opens the tooltip for keyboard users.
+            cell.addEventListener('keydown', (event) => {
+                if(event.key === 'Enter' || event.key === ' '){
+                    event.preventDefault();
+                    spend(null);
+                } else if(event.key === 'Delete' || event.key === 'Backspace'){
+                    event.preventDefault();
+                    remove(null);
+                }
+            });
+            cell.addEventListener('focus', () => {
+                cell.style.outline = '2px solid #ffd100';
+                cell.style.outlineOffset = '2px';
+                const rect = cell.getBoundingClientRect();
+                showTooltip({
+                    clientX: rect.left + rect.width / 2,
+                    clientY: rect.top + rect.height / 2,
+                }, talent, tree);
+            });
+            cell.addEventListener('blur', () => {
+                cell.style.outline = 'none';
+                hideTooltip();
+            });
             // Wowhead-style hover: show on enter, follow the mouse, hide on leave.
-            // Talent cells only.
             cell.addEventListener('mouseenter', (event) => showTooltip(event, talent, tree));
             cell.addEventListener('mousemove', placeTooltip);
-            cell.addEventListener('mouseleave', hideTooltip);
+            cell.addEventListener('mouseleave', () => {
+                if(document.activeElement !== cell) hideTooltip();
+            });
             cells[talent.slug] = cell; // Keep the cell to repaint its state in updateVisuals()
             }
             grid.appendChild(cell);
@@ -334,7 +354,10 @@ fetch(API_URL)
         for(const slug of Object.keys(cells)){
             const talent = talentBySlug[slug];
             const label = cells[slug].querySelector('span');
-            if(talent && label) label.textContent = `${state[slug] || 0}/${talent.max_rank}`;
+            if(talent && label){
+                label.textContent = `${state[slug] || 0}/${talent.max_rank}`;
+                cells[slug].setAttribute('aria-label', `${talent.name}, ${state[slug] || 0}/${talent.max_rank}`);
+            }
         }
     }
 
@@ -374,7 +397,7 @@ fetch(API_URL)
         list.innerHTML = '';
         if(pickOrder.length === 0){
             const empty = document.createElement('li');
-            empty.className = 'text-neutral-500 text-sm';
+            empty.className = 'text-neutral-400 text-sm';
             empty.textContent = 'No talents learned yet.';
             list.appendChild(empty);
         }
@@ -599,6 +622,7 @@ fetch(API_URL)
     // Place the tooltip next to the cursor without leaving the viewport (flips
     // to the other side when it does not fit right or below).
     function placeTooltip(event){
+        if(!event || typeof event.clientX !== 'number' || typeof event.clientY !== 'number') return;
         const pad = 16;
         tooltip.style.display = 'block';
         const w = tooltip.offsetWidth, h = tooltip.offsetHeight;
@@ -658,7 +682,7 @@ fetch(API_URL)
         if(!Number.isInteger(level)) return;
         currentLevel = Math.min(Math.max(level, 10), 60);
         if(levelSelect) levelSelect.value = String(currentLevel);
-        pointCap = Math.min(Math.max(currentLevel - 9, 0), MAX_TOTAL_POINTS);
+        pointCap = levelCapRule(currentLevel);
         while(totalPoints() > pointCap && pickOrder.length > 0){
             const slug = pickOrder.pop();
             if(state[slug] > 0) state[slug]--;
@@ -705,53 +729,10 @@ fetch(API_URL)
         history.replaceState('', `?${params.toString()}`);
     }
     // Deterministic API order (trees by order, talents by row/col) keeps both
-    // ends in sync without any database.
-    function orderedTalents(){ return data.trees.flatMap(tree => tree.talents); }
-    // Pack: [pick count byte][6 bits per pick] -> base64url, no padding.
-    // The leading count byte disambiguates padding zeros from real picks.
-    function encodePicks(){
-        const list = orderedTalents();
-        if(pickOrder.length === 0 || pickOrder.length > MAX_TOTAL_POINTS) return null;
-        const bytes = [pickOrder.length];
-        let acc = 0, bits = 0;
-        for(const slug of pickOrder){
-            const idx = list.findIndex(t => t.slug === slug);
-            if(idx < 0 || idx > 63) return null; // unknown talent or out of 6-bit range
-            acc = (acc << 6) | idx;
-            bits += 6;
-            while(bits >= 8){ bits -= 8; bytes.push((acc >> bits) & 0xFF); }
-        }
-        if(bits > 0) bytes.push((acc << (8 - bits)) & 0xFF);
-        let bin = '';
-        for(const b of bytes) bin += String.fromCharCode(b);
-        return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-    }
-    // Unpack, validating length and indices; null on any tampering.
-    function decodePicks(code){
-        const list = orderedTalents();
-        let bin;
-        try {
-            bin = atob(code.replace(/-/g, '+').replace(/_/g, '/'));
-        } catch {
-            return null;
-        }
-        if(bin.length === 0) return null;
-        const count = bin.charCodeAt(0);
-        if(count === 0 || count > MAX_TOTAL_POINTS) return null;
-        const picks = [];
-        let acc = 0, bits = 0;
-        for(let i = 1; i < bin.length && picks.length < count; i++){
-            acc = (acc << 8) | bin.charCodeAt(i);
-            bits += 8;
-            while(bits >= 6 && picks.length < count){
-                bits -= 6;
-                const idx = (acc >> bits) & 0x3F;
-                if(idx >= list.length) return null;
-                picks.push(list[idx].slug);
-            }
-        }
-        return picks.length === count ? picks : null;
-    }
+    // ends in sync without any database. The codec itself is a pure module.
+    function orderedTalents(){ return orderedTalentsRule(data.trees); }
+    function encodePicks(){ return encodePicksRule(pickOrder, data.trees); }
+    function decodePicks(code){ return decodePicksRule(code, data.trees); }
     // Load a shared build (?b=code): replay its picks in order through the
     // same rules (canSpend), so a tampered link can never produce odd states.
     (function loadSharedBuild(){

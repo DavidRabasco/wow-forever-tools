@@ -1,0 +1,45 @@
+name: CI
+
+# Runs the same verification locally and in CI:
+#   npm test, npm run build, php artisan test, forever:export
+# Pull requests run it directly. The Pages deploy calls it as a required job,
+# so a push to main cannot deploy when the rules, data or export are broken.
+on:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_sqlite
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: composer install --prefer-dist --no-interaction
+
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+
+      - run: npm ci
+
+      - run: npm test
+      - run: npm run build
+
+      - run: php artisan test
+      - run: php artisan forever:export dist
+
+      - run: node --check resources/js/calculator.js

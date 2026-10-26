@@ -355,8 +355,8 @@ until the reviewer signs off.
 - The planning docs and agent files are committed.
 - The JS rules and URL codec have Vitest coverage; the PHP suite covers all-class
   data integrity and the static export.
-- Next: answer the eight Phase 1 decisions, then run Step 3 (spec) before any
-  Phase 2 code.
+- Next: review `docs/decisions/2026-10-26-phase-1-defaults.md`, confirm the eight
+  decisions, and approve the Phase 1 spec. Phase 2 code starts after that.
 - `opencode auth list` may show `0 credentials` in a plain terminal even when the
   running session reaches Go through its own profile. Check the log for the real
   model error before changing the configuration.

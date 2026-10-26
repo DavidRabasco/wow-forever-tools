@@ -8,7 +8,7 @@ Source of truth for scope: `docs/brief.md`. Execution order and prompts:
 | Phase | What | Status |
 |---|---|---|
 | 0 | Baseline: docs, tests, CI, agent workflow | Complete |
-| 1 | Spec: routes, data schemas, hosting, ads, legal | Waiting for owner decisions |
+| 1 | Spec: routes, data schemas, hosting, ads, legal | Draft ready; waiting for owner decisions |
 | 2 | Site shell and SEO foundation | Not started |
 | 3 | Talent refresh and data hygiene | Not started |
 | 4 | Raid Comp MVP | Not started |
@@ -36,6 +36,19 @@ Verification: 17 Vitest tests, 10 PHPUnit tests (4,923 assertions), Vite build,
 and a 9-class / 466-talent static export with no dev-server or absolute asset
 references.
 
+## Phase 1 checklist
+
+- [x] Route map and URL compatibility plan.
+- [x] Data schemas for specs, buffs, debuffs and BiS.
+- [x] Hosting comparison (`docs/hosting.md`).
+- [x] Ad and legal plan (`docs/legal/plan.md`).
+- [x] Wireframes for home, calculator, Raid Comp and BiS
+      (`docs/design/wireframes.md`).
+- [x] Decision record with recommended defaults
+      (`docs/decisions/2026-10-26-phase-1-defaults.md`).
+- [ ] Owner confirms or changes the eight decisions.
+- [ ] Owner approves the spec, which unlocks Phase 2.
+
 ## Phase 1 decisions (owner)
 
 1. Hosting and domain: GitHub Pages or Cloudflare Pages.
@@ -47,11 +60,12 @@ references.
 7. BiS pilot specs and supported phases.
 8. Launch scope.
 
-Recommended defaults are in `docs/brief.md` and the Step 1 plan.
+Recommended defaults are in
+`docs/decisions/2026-10-26-phase-1-defaults.md`.
 
-## Next after Phase 0
+## Next after Phase 1
 
-1. Answer the Phase 1 decisions.
-2. Lock the route map and schemas.
-3. Design the home, Raid Comp and BiS wireframes.
-4. Start Phase 2 only after the spec is approved.
+1. Confirm the eight decisions.
+2. Approve the spec.
+3. Start Phase 2 with the designer and implementer.
+4. Do not start data work until the verification access in decision 6 is clear.

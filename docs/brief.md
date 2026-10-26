@@ -1,6 +1,6 @@
 # WoW Forever Tools: public site brief
 
-Status: draft for owner approval
+Status: Phase 0 complete; Phase 1 draft ready for owner approval
 Last updated: 2026-10-26
 Owner: David
 

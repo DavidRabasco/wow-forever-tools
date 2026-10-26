@@ -3,6 +3,13 @@
 Project language: English only (no localization planned). All user-facing
 strings, data, comments and docs are in English.
 
+> Status (2026-10-26): Phase 0 moved the rules and URL codec into
+> `resources/js/calculator/` with Vitest coverage. The current static export is
+> still flat (`{class}.html`); the directory URLs in `docs/brief.md` are Phase 2.
+> This file keeps the historical build notes. `docs/architecture.md` is the
+> current design. Sections are numbered in the order they were added, not in
+> reading order.
+
 ## 1. Data source (scraping)
 
 Yes, it can be scraped. Wowhead Forever (`wowhead.com/forever/talent-calc`) is a
@@ -34,7 +41,7 @@ text fallback.
 | `database/data/paladin_retribution.json` | Same schema: 17 Retribution talents. |
 | `database/data/paladin_holy_template.json` | Original empty template, kept as a field reference. |
 | `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes (scoped slugs, 2 passes). |
-| `resources/js/calculator.js` | Generic calculator (API URL from `#trees data-api`): 3 side-by-side 7×4 grids sharing the 51-point pool, per-tree counters, WoW-style borders/arrows/tooltip with verbatim ranks + Next Rank. Commented in English. |
+| `resources/js/calculator.js` | Calculator entry point (API URL from `#trees data-api`): 3 side-by-side 7×4 grids, per-tree counters, WoW-style borders/arrows/tooltip, pick order, level selector and URL sync. Rules and codec live in `resources/js/calculator/`. |
 | `resources/views/calculator.blade.php` | Generic `/{class}` view: backend-driven class bar + `#trees` slot (JS-owned) + right-side pick-order panel (`#pick-level`, `#pick-order`). |
 | `app/Http/Controllers/Api/WowClassController.php` | `GET /api/classes/{slug}` → class + ordered trees + talents by row/col. |
 | `app/Http/Controllers/ClassController.php` | `GET /{class}` → `calculator` view with the 9-class bar (catalog from `config/forever.php`, backend-driven availability). |
@@ -42,10 +49,10 @@ text fallback.
 | `database/data/classes.json` | Class manifest: trees, files, backgrounds, spec icons. |
 | `database/seeders/ForeverClassSeeder.php` | Manifest-driven seeder for all classes (scoped slugs, 2 passes). |
 | `app/Models/Talent.php` | `talents` rows with `ranks`/`skill` array casts. |
-| `app/Http/Controllers/Api/WowClassController.php` | `GET /api/classes/{slug}` → class + ordered trees + talents by row/col. |
 | `database/migrations/2026_10_06_005709_drop_builds_table.php` | Removes `builds` (superseded by URL-encoded sharing). |
 | `app/Console/Commands/ForeverExport.php` | `php artisan forever:export [dist]`: static no-backend site (JSON + HTML + assets + picker). |
-| `.github/workflows/pages.yml` | CI: install, build, export, deploy `dist/` to GitHub Pages on push to main. |
+| `.github/workflows/ci.yml` | Tests, build and export on pull requests and as the deploy gate. |
+| `.github/workflows/pages.yml` | Deploy `dist/` to GitHub Pages on push to main, after CI passes. |
 | `database/migrations/2026_09_26_005315_add_presentation_to_talent_trees.php` | Adds `background` (full artwork URL) + `spec_icon` (zamimg short name) to `talent_trees`. |
 
 ## 3. Rules (level 60 = 51 points)
@@ -69,8 +76,10 @@ php artisan db:seed --class="Database\Seeders\ForeverClassSeeder" --force
 npm run build   # or npm run dev for Vite
 ```
 
-Verified: 50/50 talents (17 Holy + 16 Protection + 17 Retribution), 7 prerequisites resolved, `php artisan test` 2/2 OK,
-`node --check resources/js/calculator.js` OK.
+Verified at the time: 50/50 Paladin talents (17 Holy + 16 Protection + 17
+Retribution) and 7 prerequisites. Current verification is the test suite:
+`php artisan test`, `npm test`, `npm run build` and
+`php artisan forever:export dist`.
 
 ## 8. Multi-class pipeline (Warrior pilot + full batch, 2026-09-26, done)
 
@@ -131,8 +140,8 @@ The address bar stays live-synced on every spend/remove/level change
 
 Levels 10-60 cap the pool to level-9 points (30 -> 21) for planning leveling
 builds. Lowering trims picks from the end of the learn order; reset restores
-60. The level travels in shared URLs (`&level=30`, omitted at 60); the server
-keeps enforcing the absolute 51 cap.
+60. The level travels in shared URLs (`&level=30`, omitted at 60). The client
+enforces the absolute 51 cap; there is no server-side build validation.
 
 ## 12. Static deploy (2026-10-06, done)
 
@@ -146,5 +155,15 @@ a stale `public/hot` is moved aside so `@vite` emits manifest tags.
 
 ## 13. Pending
 
-1. `status`: everything is `unchanged` today; diff against Classic to flag `new/changed/moved/now_baseline`.
-2. Paladin `description` summaries: optionally re-import verbatim ranks via the importer for Next-Rank tooltips.
+See `docs/roadmap.md` for the current phase and acceptance criteria. Data work
+still open:
+
+1. `status`: everything is `unchanged` today; diff against Classic to flag
+   `new/changed/moved/now_baseline`.
+2. Paladin `description` summaries: re-import verbatim ranks via the importer so
+   the Next Rank tooltip is consistent with the other classes.
+3. `is_gold`: verify the gold markers against the current data.
+4. Accessibility: keyboard interaction and the touch equivalent of the hover
+   tooltip.
+5. Static URLs: move the flat `{class}.html` pages to directory URLs with
+   compatibility stubs.

@@ -20,10 +20,9 @@ step-by-step order, model per step, and copy-paste prompts live in
 | `reviewer` | subagent | `deepseek-v4-pro` | Read-only review and test runs | Any edit |
 | `legal-seo` | subagent | `glm-5.2` | `resources/views/legal/**`, `public/**`, `docs/legal/**` | Gameplay data, calculator logic |
 
-Models are left unset in the agent files so they inherit the session model.
-After subscribing to OpenCode Go, add the recommended `model:` line to each
-frontmatter. Verify the exact IDs with `/models`; the provider prefix is
-`opencode-go`.
+The agent files pin the models above with the `opencode-go/` prefix. Verify the
+exact IDs with `/models` before changing them. If Go is unavailable, remove the
+`model:` line from an agent and it inherits the session model.
 
 ## Handoff protocol
 

@@ -34,6 +34,22 @@
 // wow.zamimg.com URL is built here. Missing/broken icons fall back to text.
 // The API URL and class slug travel in #trees data attributes so this file
 // serves every class (data-api="/api/classes/warrior", data-class="warrior").
+import { MAX_TOTAL_POINTS } from './calculator/constants.js';
+import {
+    canRemove as canRemoveRule,
+    canSpend as canSpendRule,
+    levelCap as levelCapRule,
+    pointsAbove as pointsAboveRule,
+    pointsInTree as pointsInTreeRule,
+    rowRequirement as rowRequirementRule,
+    totalPoints as totalPointsRule,
+} from './calculator/rules.js';
+import {
+    decodePicks as decodePicksRule,
+    encodePicks as encodePicksRule,
+    orderedTalents as orderedTalentsRule,
+} from './calculator/codec.js';
+
 const apiMount = document.getElementById('trees');
 const API_URL = apiMount?.dataset.api || '/api/classes/paladin';
 const PAGE_CLASS = apiMount?.dataset.class || 'paladin';
@@ -51,9 +67,8 @@ fetch(API_URL)
         throw new Error('API returned no data: data.trees is empty. Check storage/logs/laravel.log');
     }
     // Level 60 in Classic/Forever = 51 talent points (1 per level from 10).
-    const MAX_TOTAL_POINTS = 51;
+    // MAX_TOTAL_POINTS is imported so the tests and the browser share it.
     // Active pool cap, lowered by the level selector (level 30 -> 21 points).
-    // The server still enforces the absolute 51 cap; this is a view constraint.
     let pointCap = MAX_TOTAL_POINTS;
     let currentLevel = 60;
 
@@ -89,68 +104,22 @@ fetch(API_URL)
         return `https://wow.zamimg.com/images/wow/icons/${size}/${talent.icon}.jpg`;
     }
 
-    // Points spent in one talent tree.
-    function pointsInTree(tree){
-        // Sum state[slug] over the tree.
-        // acumulado = running total, talent = current talent. Starts at 0.
-        return tree.talents.reduce((acumulado, talent) => acumulado + (state[talent.slug] || 0), 0);
-    }
+    // Thin wrappers around the pure rules module. Keeping the live state here
+    // means the click handlers and the render code stay unchanged.
+    function pointsInTree(tree){ return pointsInTreeRule(tree, state); }
 
-    // Points spent in the rows ABOVE the given row (rows 1..row-1).
-    // This is what row gates count: a row's own points never unlock itself.
     // `st` defaults to the live state; canRemove passes its simulated state.
-    function pointsAbove(tree, row, st = state){
-        return tree.talents.reduce((total, t) => total + (t.row < row ? (st[t.slug] || 0) : 0), 0);
-    }
+    function pointsAbove(tree, row, st = state){ return pointsAboveRule(tree, row, st); }
 
-    // Global total across all trees (the shared 51-point pool).
-    function totalPoints(){
-        return data.trees.reduce((acumulado, t) =>
-            acumulado + t.talents.reduce((s, talent) => s + (state[talent.slug] || 0), 0), 0);
-    }
+    function totalPoints(){ return totalPointsRule(data.trees, state); }
 
-    // Branch points required by a row (0 on row 1, 5 on row 2... 30 on row 7).
-    function rowRequirement(talent){ return (talent.row - 1) * 5; }
+    function rowRequirement(talent){ return rowRequirementRule(talent); }
 
-    // Rules for SPENDING a point (left click).
     function canSpend(talent, tree){
-        // Already maxed, nothing more to spend.
-        if(state[talent.slug] >= talent.max_rank) return false;
-
-        // Capped pool (level selector): never exceed the active cap.
-        if(totalPoints() >= pointCap) return false;
-
-        // Prerequisite talent must be maxed first.
-        if(talent.requires_talent_id){
-            const requiredTalent = tree.talents.find(item => item.id === talent.requires_talent_id);
-            if(!requiredTalent || state[requiredTalent.slug] < requiredTalent.max_rank) return false;
-        }
-
-        // Row gate (strict per-row): the rows above must hold 5 per previous row.
-        if(pointsAbove(tree, talent.row) < (talent.row-1)*5) return false;
-        return true;
+        return canSpendRule(talent, tree, data.trees, state, pointCap);
     }
 
-    // Rules for REMOVING a point (right click).
-    // Simulates removing 1 point and checks that no skilled talent is left illegal:
-    // neither by row gate nor by broken prerequisite.
-    function canRemove(talent, tree){
-        // Nothing to remove.
-        if(state[talent.slug] <= 0) return false;
-        // Simulated state with 1 point less on this talent.
-        const sim = { ...state, [talent.slug]: state[talent.slug] - 1 };
-        // Every skilled talent must still meet its row gate (rows above only)
-        // and its prerequisite under the simulated state.
-        for(const t of tree.talents){
-            if((sim[t.slug] || 0) <= 0) continue; // unskilled talents don't block
-            if(pointsAbove(tree, t.row, sim) < (t.row-1)*5) return false; // broken row gate
-            if(t.requires_talent_id){
-                const req = tree.talents.find(item => item.id === t.requires_talent_id);
-                if(!req || (sim[req.slug] || 0) < req.max_rank) return false; // broken prerequisite
-            }
-        }
-        return true;
-    }
+    function canRemove(talent, tree){ return canRemoveRule(talent, tree, state); }
 
     // One view per tree: { tree, grid, counter, arrows, svg }.
     // Views share `state` (the 51-point pool) but paint independently.
@@ -658,7 +627,7 @@ fetch(API_URL)
         if(!Number.isInteger(level)) return;
         currentLevel = Math.min(Math.max(level, 10), 60);
         if(levelSelect) levelSelect.value = String(currentLevel);
-        pointCap = Math.min(Math.max(currentLevel - 9, 0), MAX_TOTAL_POINTS);
+        pointCap = levelCapRule(currentLevel);
         while(totalPoints() > pointCap && pickOrder.length > 0){
             const slug = pickOrder.pop();
             if(state[slug] > 0) state[slug]--;
@@ -705,53 +674,10 @@ fetch(API_URL)
         history.replaceState('', `?${params.toString()}`);
     }
     // Deterministic API order (trees by order, talents by row/col) keeps both
-    // ends in sync without any database.
-    function orderedTalents(){ return data.trees.flatMap(tree => tree.talents); }
-    // Pack: [pick count byte][6 bits per pick] -> base64url, no padding.
-    // The leading count byte disambiguates padding zeros from real picks.
-    function encodePicks(){
-        const list = orderedTalents();
-        if(pickOrder.length === 0 || pickOrder.length > MAX_TOTAL_POINTS) return null;
-        const bytes = [pickOrder.length];
-        let acc = 0, bits = 0;
-        for(const slug of pickOrder){
-            const idx = list.findIndex(t => t.slug === slug);
-            if(idx < 0 || idx > 63) return null; // unknown talent or out of 6-bit range
-            acc = (acc << 6) | idx;
-            bits += 6;
-            while(bits >= 8){ bits -= 8; bytes.push((acc >> bits) & 0xFF); }
-        }
-        if(bits > 0) bytes.push((acc << (8 - bits)) & 0xFF);
-        let bin = '';
-        for(const b of bytes) bin += String.fromCharCode(b);
-        return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-    }
-    // Unpack, validating length and indices; null on any tampering.
-    function decodePicks(code){
-        const list = orderedTalents();
-        let bin;
-        try {
-            bin = atob(code.replace(/-/g, '+').replace(/_/g, '/'));
-        } catch {
-            return null;
-        }
-        if(bin.length === 0) return null;
-        const count = bin.charCodeAt(0);
-        if(count === 0 || count > MAX_TOTAL_POINTS) return null;
-        const picks = [];
-        let acc = 0, bits = 0;
-        for(let i = 1; i < bin.length && picks.length < count; i++){
-            acc = (acc << 8) | bin.charCodeAt(i);
-            bits += 8;
-            while(bits >= 6 && picks.length < count){
-                bits -= 6;
-                const idx = (acc >> bits) & 0x3F;
-                if(idx >= list.length) return null;
-                picks.push(list[idx].slug);
-            }
-        }
-        return picks.length === count ? picks : null;
-    }
+    // ends in sync without any database. The codec itself is a pure module.
+    function orderedTalents(){ return orderedTalentsRule(data.trees); }
+    function encodePicks(){ return encodePicksRule(pickOrder, data.trees); }
+    function decodePicks(code){ return decodePicksRule(code, data.trees); }
     // Load a shared build (?b=code): replay its picks in order through the
     // same rules (canSpend), so a tampered link can never produce odd states.
     (function loadSharedBuild(){

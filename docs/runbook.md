@@ -351,17 +351,15 @@ until the reviewer signs off.
 
 ## Current state at the time of writing
 
-- `opencode auth list` returned `0 credentials`: no provider connected in the
-  CLI yet.
-- `docs/brief.md`, `docs/agents.md`, and `.opencode/agents/` are new and
-  uncommitted.
-- The agents already pin the models above.
-- The first commit to make:
-
-```sh
-git add docs/brief.md docs/agents.md .opencode/agents
-git commit -m "Add public site brief and agent workflow"
-```
-
-Start with Step 1. Do not skip to Phase 2 because the calculator already works;
-the baseline is what keeps the rest from breaking.
+- Phase 0 is complete on `feat/phase-0-baseline`.
+- The planning docs and agent files are committed.
+- The JS rules and URL codec have Vitest coverage; the PHP suite covers all-class
+  data integrity and the static export.
+- Next: answer the eight Phase 1 decisions, then run Step 3 (spec) before any
+  Phase 2 code.
+- `opencode auth list` may show `0 credentials` in a plain terminal even when the
+  running session reaches Go through its own profile. Check the log for the real
+  model error before changing the configuration.
+- Start with Step 1 if the Phase 0 baseline is not complete. Do not skip to
+  Phase 2 because the calculator already works; the baseline is what keeps the
+  rest from breaking.

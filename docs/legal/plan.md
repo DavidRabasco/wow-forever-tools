@@ -41,11 +41,14 @@ Do not copy policy text. Write original prose and link to the source.
 
 ## Owner inputs needed
 
-- Public site name or brand.
-- Contact email for privacy, data errors and copyright.
-- Country/jurisdiction (default Spain, EU).
-- Whether a company name or only a personal name appears.
-- Whether affiliate links will ever be used (default: no).
+- Public site name or brand: **WoW Forever Tools** (decided).
+- Contact email for privacy, data errors and copyright: **pending**. The pages
+  use `contact@wowforevertools.com` as a provisional address and stay `noindex`
+  until the real address exists.
+- Country/jurisdiction: Spain, EU (default).
+- Whether a company name or only a personal name appears: pending; the current
+  drafts use the project brand.
+- Whether affiliate links will ever be used: no (default).
 
 ## Drafting order
 

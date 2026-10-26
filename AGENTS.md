@@ -71,6 +71,6 @@ Production is `dist/`. It must work with no PHP and no database.
 
 ## Current phase
 
-Phase 0 (baseline and guardrails) is complete. Phase 1 is the written spec and
-is waiting for the eight owner decisions in `docs/brief.md`. See
-`docs/roadmap.md`.
+Phase 0 (baseline and guardrails), Phase 1 (spec) and Phase 2 (site shell and
+SEO foundation) are complete. Phase 3 (talent refresh and data hygiene) is next.
+See `docs/roadmap.md` and `docs/decisions/2026-10-26-phase-1-defaults.md`.

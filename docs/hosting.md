@@ -1,6 +1,7 @@
 # Hosting
 
-Status: draft, pending owner decision.
+Status: decided for Phase 2. Stay on GitHub Pages until launch. No domain yet;
+the Cloudflare Pages migration is deferred to the launch phase.
 
 ## Requirements
 
@@ -35,12 +36,12 @@ Status: draft, pending owner decision.
   repository secret.
 - Better fit if the site will use ads, many redirects and a custom domain.
 
-## Recommendation
+## Decision
 
-Use **Cloudflare Pages** when a custom domain and ads become part of the launch.
-Keep the exporter host-agnostic and keep GitHub Pages working until the domain is
-ready. If adding a Cloudflare token is not acceptable, stay on GitHub Pages and
-use meta-refresh stubs for the old URLs.
+Use **GitHub Pages** for now. There is no domain yet, the current workflow needs
+no secrets, and the site is not public at scale. Keep the exporter host-agnostic.
+Revisit **Cloudflare Pages** at launch, when a domain, redirects and analytics
+matter. Do not add hosting credentials before then.
 
 ## Migration checklist
 
@@ -55,8 +56,12 @@ use meta-refresh stubs for the old URLs.
 7. Submit the domain to Search Console and update the sitemap.
 8. Keep GitHub Pages as a fallback until the first successful crawl.
 
-## Open decision
+## Deferred to launch
 
-- GitHub Pages or Cloudflare Pages?
-- Domain name and registrar?
-- Is a Cloudflare API token acceptable as a repository secret?
+- Domain name and registrar.
+- Cloudflare Pages migration and API token.
+- Search Console verification and sitemap submission.
+
+Until then, set `SITE_URL` only when the final URL exists. Without it the
+exporter skips canonical links and `sitemap.xml`, and `robots.txt` has no
+sitemap line.

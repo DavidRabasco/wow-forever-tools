@@ -91,11 +91,22 @@ npm run build
 php artisan forever:export dist
 ```
 
-The exporter writes `{class}.html` and `{class}.json` for all 9 classes, a
-minimal class picker `index.html`, the Vite bundle, and `.nojekyll`. It moves a
-stale `public/hot` aside while rendering so `@vite` emits manifest tags, never
-dev-server tags. `.github/workflows/pages.yml` builds and deploys `dist/` to
-GitHub Pages on every push to `main`.
+The exporter writes `{class}.html` and `{class}.json` for all 9 classes, the
+home `index.html`, `about.html`, `sources.html`, the legal drafts (`privacy`,
+`terms`, `contact`), the Raid Comp and BiS placeholders, `404.html`,
+`favicon.svg`, `robots.txt`, and `sitemap.xml` when `SITE_URL` is set. It copies
+the Vite bundle and `.nojekyll`, and moves a stale `public/hot` aside while
+rendering so `@vite` emits manifest tags, never dev-server tags.
+`.github/workflows/pages.yml` builds and deploys `dist/` to GitHub Pages on every
+push to `main`, after the CI job passes.
+
+Set the public URL before launch:
+
+```sh
+SITE_URL=https://your-domain.example
+```
+
+Without `SITE_URL`, canonical links and the sitemap are skipped on purpose.
 
 ## Data pipeline
 

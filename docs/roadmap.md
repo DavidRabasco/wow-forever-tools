@@ -8,9 +8,9 @@ Source of truth for scope: `docs/brief.md`. Execution order and prompts:
 | Phase | What | Status |
 |---|---|---|
 | 0 | Baseline: docs, tests, CI, agent workflow | Complete |
-| 1 | Spec: routes, data schemas, hosting, ads, legal | Draft ready; waiting for owner decisions |
-| 2 | Site shell and SEO foundation | Not started |
-| 3 | Talent refresh and data hygiene | Not started |
+| 1 | Spec: routes, data schemas, hosting, ads, legal | Approved with changes |
+| 2 | Site shell and SEO foundation | Complete |
+| 3 | Talent refresh and data hygiene | Next |
 | 4 | Raid Comp MVP | Not started |
 | 5 | BiS MVP | Not started |
 | 6 | Monetization and launch | Not started |
@@ -46,8 +46,35 @@ references.
       (`docs/design/wireframes.md`).
 - [x] Decision record with recommended defaults
       (`docs/decisions/2026-10-26-phase-1-defaults.md`).
-- [ ] Owner confirms or changes the eight decisions.
-- [ ] Owner approves the spec, which unlocks Phase 2.
+- [x] Owner confirms or changes the eight decisions.
+- [x] Owner approves the spec, which unlocks Phase 2.
+
+## Phase 2 checklist
+
+- [x] Shared site layout, navbar, footer and meta partials.
+- [x] Home with class grid and tool cards.
+- [x] About and Sources pages.
+- [x] Privacy, Terms and Contact drafts (`noindex` until launch).
+- [x] Raid Comp and BiS "in development" pages.
+- [x] 404 page.
+- [x] Favicon, robots.txt and optional sitemap.xml.
+- [x] Relative URL rewriting for every static page.
+- [x] Exporter tests for the new pages and metadata.
+- [x] Lighthouse SEO and accessibility check.
+- [x] Visual QA at 1440px and 390px.
+- [x] Commit Phase 2.
+
+Results:
+
+- Home Lighthouse: performance 100, accessibility 100, best practices 100, SEO 100.
+- Calculator Lighthouse: accessibility 100, SEO 100, best practices 96,
+  performance 67. Accessibility and SEO meet the Phase 2 target. Performance is
+  a Phase 6 follow-up (image delivery, cache, LCP).
+- Desktop and 390px layouts were checked with headless Chrome. The 390px
+  screenshots use an iframe because headless Chrome enforces a wider minimum
+  window; the iframe viewport is a true 390px.
+- The calculator inlines its class JSON, so the first render does not wait for
+  a request. The `data-api` fallback remains for Laravel dev pages.
 
 ## Phase 1 decisions (owner)
 

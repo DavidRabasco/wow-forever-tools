@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\File;
 //  2. Renders calculator.blade.php per class to {class}.html, rewriting
 //     absolute paths to relative ones (./build/..., ./x.json, ./y.html)
 //     so the site works from any subpath.
-//  3. Copies public/build (Vite bundle), writes an index picker + .nojekyll.
-//  4. Temporarily moves public/hot aside so @vite emits manifest tags,
+//  3. Renders the static pages (home, about, sources, legal, 404) to
+//     sibling .html files.
+//  4. Copies public/build (Vite bundle) and favicon.svg, writes robots.txt,
+//     sitemap.xml when SITE_URL is configured, and .nojekyll.
+//  5. Temporarily moves public/hot aside so @vite emits manifest tags,
 //     never dev-server tags (restored afterwards).
 //
 // Share links keep working statically: builds travel in ?b= (see JS).
@@ -50,11 +53,24 @@ class ForeverExport extends Command
 
         try {
             foreach ($classes as $classSlug => $class) {
-                $this->exportClassJson($out, $classSlug, $class);
-                $this->exportClassPage($out, $classSlug, $class);
+                $talentData = $this->exportClassJson($out, $classSlug, $class);
+                $this->exportClassPage($out, $classSlug, $class, $talentData);
             }
-            $this->exportIndex($out, $classes);
-            File::copyDirectory(public_path('build'), $out.'/build');
+
+            $this->exportSitePages($out);
+            $this->exportSitemap($out);
+            $this->exportRobots($out);
+
+            if (File::isDirectory(public_path('build'))) {
+                File::copyDirectory(public_path('build'), $out.'/build');
+            } else {
+                $this->warn('public/build is missing: run npm run build first.');
+            }
+
+            if (File::exists(public_path('favicon.svg'))) {
+                File::copy(public_path('favicon.svg'), $out.'/favicon.svg');
+            }
+
             File::put($out.'/.nojekyll', '');
         } finally {
             if ($hotMoved) {
@@ -68,7 +84,7 @@ class ForeverExport extends Command
 
     // {class}.json in API shape: ids assigned sequentially in API order,
     // requires_slug resolved to the matching numeric id.
-    private function exportClassJson(string $out, string $classSlug, array $class): void
+    private function exportClassJson(string $out, string $classSlug, array $class): array
     {
         $trees = [];
         $nextId = 1;
@@ -109,18 +125,155 @@ class ForeverExport extends Command
             ];
         }
         usort($trees, fn($a, $b) => $a['order'] <=> $b['order']);
+
+        $payload = ['slug' => $classSlug, 'name' => $class['name'], 'trees' => $trees];
+
         File::put($out."/{$classSlug}.json", json_encode(
-            ['slug' => $classSlug, 'name' => $class['name'], 'trees' => $trees],
+            $payload,
             JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
         ));
         $this->line("wrote {$classSlug}.json");
+
+        return $payload;
     }
 
     // {class}.html: server-rendered view with relative asset/data/page links.
-    private function exportClassPage(string $out, string $classSlug, array $class): void
+    // The same payload is inlined so the calculator renders without a fetch.
+    private function exportClassPage(string $out, string $classSlug, array $class, array $talentData): void
     {
         // The view only reads ->slug/->name: a plain object suffices (no DB).
         $wowClass = (object) ['slug' => $classSlug, 'name' => $class['name']];
+
+        $html = view('calculator', [
+            'wowClass' => $wowClass,
+            'classes' => $this->classBar($classSlug),
+            'talentData' => $talentData,
+        ])->render();
+
+        File::put($out."/{$classSlug}.html", $this->relativize($html));
+        $this->line("wrote {$classSlug}.html");
+    }
+
+    // Static pages that do not depend on a class. All are siblings, so the
+    // same relative asset paths work everywhere.
+    private function exportSitePages(string $out): void
+    {
+        $siteUrl = rtrim((string) config('forever.site_url'), '/');
+        $canonical = fn (string $path) => $siteUrl !== '' ? $siteUrl.$path : null;
+        $classes = $this->classBar('');
+
+        $pages = [
+            ['home', 'index.html', [
+                'classes' => $classes,
+                'title' => 'WoW Forever Tools - Talent Calculator, Raid Comp and BiS',
+                'description' => 'Plan WoW Forever talent builds, check raid buff coverage and find BiS lists. Free, no account, builds shared by URL.',
+                'canonical' => $canonical('/'),
+                'current' => '',
+            ]],
+            ['about', 'about.html', [
+                'title' => 'About - WoW Forever Tools',
+                'description' => 'What WoW Forever Tools is, how the data is sourced and why it is an unofficial fan project.',
+                'canonical' => $canonical('/about.html'),
+                'current' => 'about',
+            ]],
+            ['sources', 'sources.html', [
+                'title' => 'Sources and attribution - WoW Forever Tools',
+                'description' => 'Data sources, icon attribution and the verification status behind WoW Forever Tools.',
+                'canonical' => $canonical('/sources.html'),
+                'current' => '',
+            ]],
+            ['legal.privacy', 'privacy.html', [
+                'title' => 'Privacy - WoW Forever Tools',
+                'description' => 'What WoW Forever Tools stores, what the host logs and how to contact the project.',
+                'canonical' => $canonical('/privacy.html'),
+                'robots' => 'noindex',
+                'current' => '',
+            ]],
+            ['legal.terms', 'terms.html', [
+                'title' => 'Terms of use - WoW Forever Tools',
+                'description' => 'Unofficial fan-site disclaimer, no-warranty notice and acceptable use for WoW Forever Tools.',
+                'canonical' => $canonical('/terms.html'),
+                'robots' => 'noindex',
+                'current' => '',
+            ]],
+            ['legal.contact', 'contact.html', [
+                'title' => 'Contact - WoW Forever Tools',
+                'description' => 'Contact WoW Forever Tools for data corrections, copyright requests or privacy questions.',
+                'canonical' => $canonical('/contact.html'),
+                'robots' => 'noindex',
+                'current' => '',
+            ]],
+            ['raid-comp', 'raid-comp.html', [
+                'title' => 'Raid Comp (in development) - WoW Forever Tools',
+                'description' => 'Raid composition and buff coverage tool for WoW Forever. In development.',
+                'canonical' => $canonical('/raid-comp.html'),
+                'robots' => 'noindex',
+                'current' => 'raid-comp',
+            ]],
+            ['bis', 'bis.html', [
+                'title' => 'BiS Lists (in development) - WoW Forever Tools',
+                'description' => 'Best-in-slot lists by class, spec and phase for WoW Forever. In development.',
+                'canonical' => $canonical('/bis.html'),
+                'robots' => 'noindex',
+                'current' => 'bis',
+            ]],
+            ['errors.404', '404.html', [
+                'title' => 'Page not found - WoW Forever Tools',
+                'description' => 'The requested page does not exist.',
+                'canonical' => null,
+                'robots' => 'noindex',
+                'current' => '',
+            ]],
+        ];
+
+        foreach ($pages as [$view, $file, $data]) {
+            $html = view($view, $data)->render();
+            File::put($out.'/'.$file, $this->relativize($html));
+            $this->line("wrote {$file}");
+        }
+    }
+
+    // Sitemap is only meaningful with a public URL. Set SITE_URL at launch.
+    private function exportSitemap(string $out): void
+    {
+        $siteUrl = rtrim((string) config('forever.site_url'), '/');
+        if ($siteUrl === '') {
+            $this->line('SITE_URL is empty: skipped sitemap.xml');
+            return;
+        }
+
+        $paths = ['/', '/about.html', '/sources.html', '/raid-comp.html', '/bis.html'];
+        foreach (array_keys($this->manifestClasses()) as $slug) {
+            $paths[] = "/{$slug}.html";
+        }
+
+        $lastmod = now()->toDateString();
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+        foreach ($paths as $path) {
+            $loc = htmlspecialchars($siteUrl.$path, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+            $xml .= "  <url><loc>{$loc}</loc><lastmod>{$lastmod}</lastmod></url>\n";
+        }
+        $xml .= "</urlset>\n";
+
+        File::put($out.'/sitemap.xml', $xml);
+        $this->line('wrote sitemap.xml');
+    }
+
+    private function exportRobots(string $out): void
+    {
+        $siteUrl = rtrim((string) config('forever.site_url'), '/');
+        $robots = "User-agent: *\nAllow: /\n";
+        if ($siteUrl !== '') {
+            $robots .= "Sitemap: {$siteUrl}/sitemap.xml\n";
+        }
+
+        File::put($out.'/robots.txt', $robots);
+        $this->line('wrote robots.txt');
+    }
+
+    private function classBar(string $selectedSlug): array
+    {
         $seeded = array_keys($this->manifestClasses());
         $classes = [];
         foreach (config('forever.classes') as $slug => $name) {
@@ -129,26 +282,11 @@ class ForeverExport extends Command
                 'name' => $name,
                 'icon' => "https://sunderarmor.com/WOW/Classes/Old/{$slug}.png",
                 'available' => in_array($slug, $seeded, true),
-                'selected' => $slug === $classSlug,
+                'selected' => $slug === $selectedSlug,
             ];
         }
 
-        $html = view('calculator', ['wowClass' => $wowClass, 'classes' => $classes])->render();
-
-        // Absolute -> relative so any subpath (e.g. user.github.io/repo/) works.
-        // NOTE: replace the full APP_URL prefix, not just '/build/', or the
-        // host and the relative path glue into garbage (localhost:8000./build).
-        $base = rtrim(config('app.url'), '/');
-        if ($base !== '') {
-            $html = str_replace($base.'/build/', './build/', $html);
-        } else {
-            $html = str_replace('/build/', './build/', $html);
-        }
-        $html = preg_replace('#data-api="/api/classes/([a-z]+)"#', 'data-api="./$1.json"', $html);
-        $html = preg_replace('#href="/([a-z]+)"#', 'href="./$1.html"', $html);
-
-        File::put($out."/{$classSlug}.html", $html);
-        $this->line("wrote {$classSlug}.html");
+        return $classes;
     }
 
     private function manifestClasses(): array
@@ -156,24 +294,26 @@ class ForeverExport extends Command
         return json_decode(File::get(base_path('database/data/classes.json')), true)['classes'] ?? [];
     }
 
-    // Minimal landing: class picker (avoids a dead root on static hosts).
-    private function exportIndex(string $out, array $classes): void
+    // Absolute -> relative so any subpath (e.g. user.github.io/repo/) works.
+    // NOTE: replace the full APP_URL prefix, not just '/build/', or the host
+    // and the relative path glue into garbage (localhost:8000./build).
+    private function relativize(string $html): string
     {
-        $links = '';
-        foreach ($classes as $slug => $class) {
-            $links .= "<li style=\"margin:8px 0\"><a style=\"color:#ffd100\" href=\"./{$slug}.html\">{$class['name']}</a></li>";
+        $base = rtrim((string) config('app.url'), '/');
+        if ($base !== '') {
+            $html = str_replace($base.'/build/', './build/', $html);
+        } else {
+            $html = str_replace('/build/', './build/', $html);
         }
-        File::put($out.'/index.html', <<<HTML
-            <!DOCTYPE html>
-            <html lang="en">
-            <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>WoW Forever Tools</title></head>
-            <body style="background:#0a0a12;color:#fff;font-family:sans-serif;padding:2rem">
-            <h1 style="color:#ffd100">WoW Forever Tools</h1>
-            <p>Talent calculators:</p>
-            <ul>{$links}</ul>
-            </body>
-            </html>
-            HTML);
+
+        // Keep favicon and root links relative before the generic page rewrite.
+        $html = str_replace('href="/favicon.svg"', 'href="./favicon.svg"', $html);
+        $html = str_replace('href="/"', 'href="./index.html"', $html);
+
+        // Sibling pages: /about -> ./about.html, /paladin -> ./paladin.html.
+        $html = preg_replace('#href="/([a-z-]+)"#', 'href="./$1.html"', $html);
+        $html = preg_replace('#data-api="/api/classes/([a-z]+)"#', 'data-api="./$1.json"', $html);
+
+        return $html;
     }
 }

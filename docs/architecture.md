@@ -7,8 +7,11 @@ This project has two modes:
 2. **Production**: a static export in `dist/` with HTML, JSON and the Vite
    bundle. No PHP, no database, no server-side requests.
 
-The calculator is the same code in both modes. The only difference is whether it
-fetches `/api/classes/{slug}` or a sibling `{class}.json` file.
+The calculator is the same code in both modes. Static pages inline the class
+payload in `<script type="application/json" id="talent-data">`, so the first
+render does not wait for a request. Laravel dev pages omit it and fetch
+`/api/classes/{slug}` instead. The exporter also writes a sibling
+`{class}.json` for readers that want the same shape as the API.
 
 ## Data flow
 
@@ -25,8 +28,12 @@ SQLite (local only)
         +--> php artisan forever:export dist
                  |
                  +--> {class}.json     same shape, no runtime API
-                 +--> {class}.html     server-rendered view, relative links
-                 +--> index.html       minimal class picker for now
+                 +--> {class}.html     calculator with inlined class JSON
+                 +--> {class}.json     same payload, for API-compatible readers
+                 +--> index.html       home with class grid and tool cards
+                 +--> about/sources/legal/404 pages
+                 +--> robots.txt       sitemap.xml only when SITE_URL is set
+                 +--> favicon.svg      original mark, no third-party art
                  +--> build/           Vite bundle
                  +--> .nojekyll
 ```
@@ -75,9 +82,14 @@ Do not change this format. It is part of the public contract.
 
 ## Static export and URLs
 
-Current output is flat: `paladin.html`, `paladin.json`, and so on. The public
-site phase moves to directory-based URLs (`/paladin/`, `/bis/paladin/holy/`) and
-keeps `{class}.html` stubs so existing links keep working.
+Current output is flat: `paladin.html`, `paladin.json`, and so on. Keeping every
+page as a sibling means one relative-path rule works for the whole site and the
+export is easy to verify. Directory-based URLs (`/paladin/`,
+`/bis/paladin/holy/`) can come later with compatibility stubs; they are not worth
+the redirect complexity before the domain exists.
+
+Canonical URLs and `sitemap.xml` are generated only when `SITE_URL` is set. A
+sitemap pointing at a placeholder domain is worse than no sitemap.
 
 The exporter rewrites absolute asset and data paths to relative ones, because
 the site can live under `user.github.io/repo/`. `data-api` becomes a sibling

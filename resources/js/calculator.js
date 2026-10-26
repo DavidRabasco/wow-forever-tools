@@ -53,13 +53,21 @@ import {
 const apiMount = document.getElementById('trees');
 const API_URL = apiMount?.dataset.api || '/api/classes/paladin';
 const PAGE_CLASS = apiMount?.dataset.class || 'paladin';
-fetch(API_URL)
-// If the API fails (500, 404, network down), response.ok is false: show the
-// error in #trees instead of crashing with "Cannot read properties of undefined".
-.then(response => {
-    if(!response.ok) throw new Error(`API ${API_URL} returned ${response.status}`);
-    return response.json();
-})
+
+// Static pages inline the payload next to the mount. That removes a network
+// request and the layout shift that came with it. Laravel dev pages omit the
+// script and fall back to the API endpoint.
+const inlineData = document.getElementById('talent-data');
+const dataPromise = inlineData
+    ? Promise.resolve().then(() => JSON.parse(inlineData.textContent))
+    : fetch(API_URL).then(response => {
+        // If the API fails (500, 404, network down), response.ok is false:
+        // show the error in #trees instead of crashing later.
+        if(!response.ok) throw new Error(`API ${API_URL} returned ${response.status}`);
+        return response.json();
+    });
+
+dataPromise
 .then(data => {
     // The API must return { trees: [...] }. On an error JSON or parsed HTML,
     // data.trees does not exist: warn on screen instead of failing at data.trees[0].
@@ -155,6 +163,8 @@ fetch(API_URL)
             specImg.src = `https://wow.zamimg.com/images/wow/icons/large/${tree.spec_icon}.jpg`;
             specImg.alt = `${tree.name} specialization`;
             specImg.className = 'w-10 h-10 rounded';
+            specImg.width = 40;
+            specImg.height = 40;
             specImg.style.border = '2px solid #c9b037';
             // Dead icon URL: drop the img, the name still shows.
             specImg.onerror = () => specImg.remove();
@@ -184,7 +194,7 @@ fetch(API_URL)
         const treeReset = document.createElement('button');
         treeReset.type = 'button';
         treeReset.title = `Reset ${tree.name} only`;
-        treeReset.className = 'text-xs px-2 py-0.5 mt-1 rounded border border-neutral-700 bg-black/40 text-neutral-400 hover:text-red-400 hover:border-red-800';
+        treeReset.className = 'text-xs px-2 py-0.5 mt-1 rounded border border-neutral-700 bg-black/40 text-neutral-300 hover:text-red-400 hover:border-red-800';
         treeReset.textContent = 'reset';
         treeReset.addEventListener('click', () => {
             for(const slug of treeSlugs) state[slug] = 0;
@@ -217,11 +227,14 @@ fetch(API_URL)
                 cell.className = 'relative flex items-center justify-center h-16';
                 const iconImage = document.createElement('img');
                 iconImage.alt = talent.name;
+                iconImage.width = 44;
+                iconImage.height = 44;
                 // 2px border colored by updateVisuals(): green = available,
                 // yellow = maxed, gray = locked.
                 iconImage.className = 'w-11 h-11 rounded border-2';
                 iconImage.style.borderStyle = 'solid';
-                const iconSrc = iconUrl(talent, 'medium');
+                // Large source for retina displays; the cell renders it at 44px.
+                const iconSrc = iconUrl(talent, 'large');
                 if(iconSrc){
                     iconImage.src = iconSrc;
                     // Dead icon URL: drop the img, the rank stays as placeholder.
@@ -259,26 +272,64 @@ fetch(API_URL)
             const refreshLabel = () => {
                 const label = cell.querySelector('span');
                 if (label) label.textContent = `${state[talent.slug]}/${talent.max_rank}`;
+                updateCellAria();
             };
-            cell.onclick = (event) => { // Left click spends a point.
-                if(canSpend(talent, tree)){ state[talent.slug]++; pickOrder.push(talent.slug); refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event); }
+            const updateCellAria = () => {
+                cell.setAttribute('aria-label', `${talent.name}, ${state[talent.slug]}/${talent.max_rank}`);
             };
+            const spend = (event) => {
+                if(!canSpend(talent, tree)) return;
+                state[talent.slug]++;
+                pickOrder.push(talent.slug);
+                refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event);
+            };
+            const remove = (event) => {
+                if(!canRemove(talent, tree)) return;
+                state[talent.slug]--;
+                // Drop this talent's most recent pick so the list stays a
+                // valid learn sequence (canRemove guarantees one exists).
+                const lastPick = pickOrder.lastIndexOf(talent.slug);
+                if(lastPick !== -1) pickOrder.splice(lastPick, 1);
+                refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event);
+            };
+            cell.tabIndex = 0;
+            cell.setAttribute('role', 'button');
+            updateCellAria();
+            cell.onclick = (event) => spend(event); // Left click adds a point.
             cell.oncontextmenu = (event) => { // Right click removes a point.
                 event.preventDefault();
-                if(canRemove(talent, tree)){
-                    state[talent.slug]--;
-                    // Drop this talent's most recent pick so the list stays a
-                    // valid learn sequence (canRemove guarantees one exists).
-                    const lastPick = pickOrder.lastIndexOf(talent.slug);
-                    if(lastPick !== -1) pickOrder.splice(lastPick, 1);
-                    refreshLabel(); refreshAll(); syncShareUrl(); refreshTooltip(talent, tree, event);
-                }
+                remove(event);
             };
+            // Keyboard path: Enter/Space add, Delete/Backspace remove. Tab moves
+            // between talents; focus also opens the tooltip for keyboard users.
+            cell.addEventListener('keydown', (event) => {
+                if(event.key === 'Enter' || event.key === ' '){
+                    event.preventDefault();
+                    spend(null);
+                } else if(event.key === 'Delete' || event.key === 'Backspace'){
+                    event.preventDefault();
+                    remove(null);
+                }
+            });
+            cell.addEventListener('focus', () => {
+                cell.style.outline = '2px solid #ffd100';
+                cell.style.outlineOffset = '2px';
+                const rect = cell.getBoundingClientRect();
+                showTooltip({
+                    clientX: rect.left + rect.width / 2,
+                    clientY: rect.top + rect.height / 2,
+                }, talent, tree);
+            });
+            cell.addEventListener('blur', () => {
+                cell.style.outline = 'none';
+                hideTooltip();
+            });
             // Wowhead-style hover: show on enter, follow the mouse, hide on leave.
-            // Talent cells only.
             cell.addEventListener('mouseenter', (event) => showTooltip(event, talent, tree));
             cell.addEventListener('mousemove', placeTooltip);
-            cell.addEventListener('mouseleave', hideTooltip);
+            cell.addEventListener('mouseleave', () => {
+                if(document.activeElement !== cell) hideTooltip();
+            });
             cells[talent.slug] = cell; // Keep the cell to repaint its state in updateVisuals()
             }
             grid.appendChild(cell);
@@ -303,7 +354,10 @@ fetch(API_URL)
         for(const slug of Object.keys(cells)){
             const talent = talentBySlug[slug];
             const label = cells[slug].querySelector('span');
-            if(talent && label) label.textContent = `${state[slug] || 0}/${talent.max_rank}`;
+            if(talent && label){
+                label.textContent = `${state[slug] || 0}/${talent.max_rank}`;
+                cells[slug].setAttribute('aria-label', `${talent.name}, ${state[slug] || 0}/${talent.max_rank}`);
+            }
         }
     }
 
@@ -343,7 +397,7 @@ fetch(API_URL)
         list.innerHTML = '';
         if(pickOrder.length === 0){
             const empty = document.createElement('li');
-            empty.className = 'text-neutral-500 text-sm';
+            empty.className = 'text-neutral-400 text-sm';
             empty.textContent = 'No talents learned yet.';
             list.appendChild(empty);
         }
@@ -568,6 +622,7 @@ fetch(API_URL)
     // Place the tooltip next to the cursor without leaving the viewport (flips
     // to the other side when it does not fit right or below).
     function placeTooltip(event){
+        if(!event || typeof event.clientX !== 'number' || typeof event.clientY !== 'number') return;
         const pad = 16;
         tooltip.style.display = 'block';
         const w = tooltip.offsetWidth, h = tooltip.offsetHeight;

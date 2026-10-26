@@ -4,11 +4,12 @@ Project language: English only (no localization planned). All user-facing
 strings, data, comments and docs are in English.
 
 > Status (2026-10-26): Phase 0 moved the rules and URL codec into
-> `resources/js/calculator/` with Vitest coverage. The current static export is
-> still flat (`{class}.html`); the directory URLs in `docs/brief.md` are Phase 2.
-> This file keeps the historical build notes. `docs/architecture.md` is the
-> current design. Sections are numbered in the order they were added, not in
-> reading order.
+> `resources/js/calculator/` with Vitest coverage. Phase 2 added the shared site
+> layout, home, about, sources, legal drafts and 404. The static export is still
+> flat (`{class}.html`); directory URLs can come later with compatibility
+> redirects. This file keeps the historical build notes.
+> `docs/architecture.md` is the current design. Sections are numbered in the
+> order they were added, not in reading order.
 
 ## 1. Data source (scraping)
 

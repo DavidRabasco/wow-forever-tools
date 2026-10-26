@@ -1,11 +1,29 @@
 # Phase 1 decisions
 
 Date: 2026-10-26
-Status: waiting for owner confirmation
+Status: approved with changes (2026-10-26)
 
 Each decision has a recommended default. The owner can confirm all of them or
-change individual numbers. Phase 2 code starts only after this record is
-approved.
+change individual numbers.
+
+## Owner answers
+
+1. **Hosting/domain:** no domain yet. Keep GitHub Pages for now and defer the
+   domain and Cloudflare migration to launch. The exporter stays host-agnostic.
+2. **Ads:** leave to the end. No ad scripts or slots that load anything yet.
+3. **Analytics:** the owner did not know the term. Decision: no analytics at
+   launch; add a cookieless provider only when it answers a real question.
+   Cloudflare Web Analytics is the preferred option if the site moves to
+   Cloudflare Pages. No Google Analytics.
+4. **Legal identity:** recommended brand "WoW Forever Tools", a dedicated
+   contact email, Spain/EU. The contact address is still pending; the pages use
+   a provisional address and stay `noindex` until launch.
+5. **Artwork/logo:** keep the current artwork and logo. No change.
+6. **Data sources:** no beta access. Use Wowhead Forever, Warcraft Wiki and
+   wowtbc.gg. Two sources before `verified: true`; otherwise mark unverified.
+7. **BiS pilot:** Holy Paladin and Fury Warrior confirmed.
+8. **Launch scope:** 9 calculators + Raid Comp + 2 BiS pilots confirmed. More
+   specs after launch.
 
 ## 1. Hosting and domain
 

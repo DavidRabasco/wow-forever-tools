@@ -351,12 +351,15 @@ until the reviewer signs off.
 
 ## Current state at the time of writing
 
-- Phase 0 is complete on `feat/phase-0-baseline`.
-- The planning docs and agent files are committed.
+- Phase 0 and Phase 1 are complete on `feat/phase-0-baseline`.
+- The Phase 1 decisions are recorded in
+  `docs/decisions/2026-10-26-phase-1-defaults.md`.
+- Phase 2 is complete: shared layout, home, about, sources, legal drafts, 404,
+  favicon, robots, optional sitemap, and inline class JSON for the calculator.
 - The JS rules and URL codec have Vitest coverage; the PHP suite covers all-class
   data integrity and the static export.
-- Next: review `docs/decisions/2026-10-26-phase-1-defaults.md`, confirm the eight
-  decisions, and approve the Phase 1 spec. Phase 2 code starts after that.
+- Next: Phase 3 (talent refresh and data hygiene). Do not apply scraped data
+  without a diff review.
 - `opencode auth list` may show `0 credentials` in a plain terminal even when the
   running session reaches Go through its own profile. Check the log for the real
   model error before changing the configuration.
